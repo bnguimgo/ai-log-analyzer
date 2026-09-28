@@ -1,0 +1,618 @@
+2026-09-16 14:44:48.866 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - PROJET Web application is starting
+2026-09-16 14:44:48.908 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - Loading projet.properties configuration file from the classpath
+2026-09-16 14:44:48.937 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - The active Spring profiles are : active-directory
+2026-09-16 14:44:48.956 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer -  CharacterEncodingFilter registered with UTF-8.
+2026-09-16 14:44:48.971 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-09-16 14:44:58.762 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.config.TaskExecutorFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 14:44:58.775 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 14:44:59.606 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'scheduler' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 14:45:07.597 INFO  [] org.hibernate.Version - HHH000412: Hibernate Core {5.3.36.Final}
+2026-09-16 14:45:07.619 INFO  [] org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2026-09-16 14:45:11.574 WARN  [] org.hibernate.orm.deprecation - HHH020100: The Ehcache second-level cache provider for Hibernate is deprecated.  See https://hibernate.atlassian.net/browse/HHH-12441 for details.
+2026-09-16 14:45:12.028 INFO  [] o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.5.Final}
+2026-09-16 14:45:20.455 INFO  [] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2026-09-16 14:45:26.886 INFO  [] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.3.Final
+2026-09-16 14:45:30.901 INFO  [] org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@dbe3b8] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-09-16 14:45:36.841 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Starting oauth2ClientRestOperations with proxy configuration...
+2026-09-16 14:45:36.853 INFO  [] f.p.m.w.s.c.p.AuthHeaderGenerator - Start proxy config .................
+2026-09-16 14:45:36.853 INFO  [] f.p.m.w.s.c.p.AuthHeaderGenerator - proxyHost : null
+2026-09-16 14:45:36.853 INFO  [] f.p.m.w.s.c.p.AuthHeaderGenerator - proxyPort : 0 
+2026-09-16 14:45:36.853 INFO  [] f.p.m.w.s.c.p.AuthHeaderGenerator - proxyUsername : null
+2026-09-16 14:45:36.874 WARN  [] o.s.w.c.s.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'absenceRepository': Unsatisfied dependency expressed through field 'ressourceRepository'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'ressourceRepository': Unsatisfied dependency expressed through field 'hrService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceService': Unsatisfied dependency expressed through field 'hrOAuthService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceOAuthService' defined in file [C:\Pomona\sources\Manageo\manageo-core\target\classes\fr\pomona\manageo\domain\service\human\ressource\HumanResourceOAuthService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'oauth2ClientRestOperations' defined in fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.web.client.RestTemplate]: Factory method 'oauth2ClientRestOperations' threw exception; nested exception is java.lang.IllegalArgumentException: Host name may not be null
+2026-09-16 14:45:36.971 ERROR [] o.s.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'absenceRepository': Unsatisfied dependency expressed through field 'ressourceRepository'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'ressourceRepository': Unsatisfied dependency expressed through field 'hrService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceService': Unsatisfied dependency expressed through field 'hrOAuthService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceOAuthService' defined in file [C:\Pomona\sources\Manageo\manageo-core\target\classes\fr\pomona\manageo\domain\service\human\ressource\HumanResourceOAuthService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'oauth2ClientRestOperations' defined in fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.web.client.RestTemplate]: Factory method 'oauth2ClientRestOperations' threw exception; nested exception is java.lang.IllegalArgumentException: Host name may not be null
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:713) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:693) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:408) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:932) ~[spring-context-5.3.33.jar:5.3.33]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:591) ~[spring-context-5.3.33.jar:5.3.33]
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:399) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:278) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103) [spring-web-5.3.33.jar:5.3.33]
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4007) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4448) [catalina.jar:9.0.89]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ContainerBase.addChildInternal(ContainerBase.java:599) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ContainerBase.addChild(ContainerBase.java:571) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardHost.addChild(StandardHost.java:603) [catalina.jar:9.0.89]
+	at org.apache.catalina.startup.HostConfig.deployDescriptor(HostConfig.java:680) [catalina.jar:9.0.89]
+	at org.apache.catalina.startup.HostConfig$DeployDescriptor.run(HostConfig.java:1844) [catalina.jar:9.0.89]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511) [na:1.8.0_202]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_202]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-util.jar:9.0.89]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:112) [na:1.8.0_202]
+	at org.apache.catalina.startup.HostConfig.deployDescriptors(HostConfig.java:575) [catalina.jar:9.0.89]
+	at org.apache.catalina.startup.HostConfig.deployApps(HostConfig.java:466) [catalina.jar:9.0.89]
+	at org.apache.catalina.startup.HostConfig.start(HostConfig.java:1584) [catalina.jar:9.0.89]
+	at org.apache.catalina.startup.HostConfig.lifecycleEvent(HostConfig.java:312) [catalina.jar:9.0.89]
+	at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:114) [catalina.jar:9.0.89]
+	at org.apache.catalina.util.LifecycleBase.setStateInternal(LifecycleBase.java:402) [catalina.jar:9.0.89]
+	at org.apache.catalina.util.LifecycleBase.setState(LifecycleBase.java:345) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:776) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:721) [catalina.jar:9.0.89]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193) [catalina.jar:9.0.89]
+	at java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:266) [na:1.8.0_202]
+	at java.util.concurrent.FutureTask.run(FutureTask.java) [na:1.8.0_202]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-util.jar:9.0.89]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:134) [na:1.8.0_202]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:211) [catalina.jar:9.0.89]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415) [catalina.jar:9.0.89]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:878) [catalina.jar:9.0.89]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171) [catalina.jar:9.0.89]
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:735) [catalina.jar:9.0.89]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345) [bootstrap.jar:9.0.89]
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:473) [bootstrap.jar:9.0.89]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'ressourceRepository': Unsatisfied dependency expressed through field 'hrService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceService': Unsatisfied dependency expressed through field 'hrOAuthService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceOAuthService' defined in file [C:\Pomona\sources\Manageo\manageo-core\target\classes\fr\pomona\manageo\domain\service\human\ressource\HumanResourceOAuthService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'oauth2ClientRestOperations' defined in fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.web.client.RestTemplate]: Factory method 'oauth2ClientRestOperations' threw exception; nested exception is java.lang.IllegalArgumentException: Host name may not be null
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:713) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:693) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:408) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:710) ~[spring-beans-5.3.33.jar:5.3.33]
+	... 59 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceService': Unsatisfied dependency expressed through field 'hrOAuthService'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceOAuthService' defined in file [C:\Pomona\sources\Manageo\manageo-core\target\classes\fr\pomona\manageo\domain\service\human\ressource\HumanResourceOAuthService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'oauth2ClientRestOperations' defined in fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.web.client.RestTemplate]: Factory method 'oauth2ClientRestOperations' threw exception; nested exception is java.lang.IllegalArgumentException: Host name may not be null
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:713) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:693) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:408) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1431) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:619) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:710) ~[spring-beans-5.3.33.jar:5.3.33]
+	... 73 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'humanResourceOAuthService' defined in file [C:\Pomona\sources\Manageo\manageo-core\target\classes\fr\pomona\manageo\domain\service\human\ressource\HumanResourceOAuthService.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'oauth2ClientRestOperations' defined in fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.web.client.RestTemplate]: Factory method 'oauth2ClientRestOperations' threw exception; nested exception is java.lang.IllegalArgumentException: Host name may not be null
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:794) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:220) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:710) ~[spring-beans-5.3.33.jar:5.3.33]
+	... 87 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'oauth2ClientRestOperations' defined in fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.web.client.RestTemplate]: Factory method 'oauth2ClientRestOperations' threw exception; nested exception is java.lang.IllegalArgumentException: Host name may not be null
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:646) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:477) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1352) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1195) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:336) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:334) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:209) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1391) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:904) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:781) ~[spring-beans-5.3.33.jar:5.3.33]
+	... 100 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.web.client.RestTemplate]: Factory method 'oauth2ClientRestOperations' threw exception; nested exception is java.lang.IllegalArgumentException: Host name may not be null
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185) ~[spring-beans-5.3.33.jar:5.3.33]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:641) ~[spring-beans-5.3.33.jar:5.3.33]
+	... 114 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Host name may not be null
+	at org.apache.http.util.Args.containsNoBlanks(Args.java:81) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.HttpHost.<init>(HttpHost.java:80) ~[httpcore-4.4.16.jar:4.4.16]
+	at org.apache.http.HttpHost.<init>(HttpHost.java:99) ~[httpcore-4.4.16.jar:4.4.16]
+	at fr.pomona.manageo.web.security.cognito.proxy.AuthHeaderGenerator.createProxyConfiguration(AuthHeaderGenerator.java:62) ~[classes/:na]
+	at fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration.oauth2ClientRestOperations(CognitoSecurityConfiguration.java:120) ~[classes/:na]
+	at fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration$$EnhancerBySpringCGLIB$$e37c8c93.CGLIB$oauth2ClientRestOperations$0(<generated>) ~[classes/:na]
+	at fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration$$EnhancerBySpringCGLIB$$e37c8c93$$FastClassBySpringCGLIB$$6d58439c.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:244) ~[spring-core-5.3.33.jar:5.3.33]
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:331) ~[spring-context-5.3.33.jar:5.3.33]
+	at fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration$$EnhancerBySpringCGLIB$$e37c8c93.oauth2ClientRestOperations(<generated>) ~[classes/:na]
+	at fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration$$FastClassBySpringCGLIB$$ca13229c.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.33.jar:5.3.33]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:792) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:89) ~[spring-aop-5.3.33.jar:5.3.33]
+	at fr.pomona.manageo.domain.service.monitoring.perf.PerformanceProfiler.profile(PerformanceProfiler.java:22) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:634) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:624) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:72) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:762) ~[spring-aop-5.3.33.jar:5.3.33]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:707) ~[spring-aop-5.3.33.jar:5.3.33]
+	at fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration$$EnhancerBySpringCGLIB$$dcafcb14.oauth2ClientRestOperations(<generated>) ~[classes/:na]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:1.8.0_202]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:1.8.0_202]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:1.8.0_202]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[na:1.8.0_202]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154) ~[spring-beans-5.3.33.jar:5.3.33]
+	... 115 common frames omitted
+2026-09-16 19:05:09.082 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - PROJET Web application is starting
+2026-09-16 19:05:09.094 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - Loading projet.properties configuration file from the classpath
+2026-09-16 19:05:09.117 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - The active Spring profiles are : active-directory
+2026-09-16 19:05:09.128 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer -  CharacterEncodingFilter registered with UTF-8.
+2026-09-16 19:05:09.136 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-09-16 19:05:15.432 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.config.TaskExecutorFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:05:15.435 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:05:15.670 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'scheduler' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:05:17.614 INFO  [] org.hibernate.Version - HHH000412: Hibernate Core {5.3.36.Final}
+2026-09-16 19:05:17.624 INFO  [] org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2026-09-16 19:05:18.854 WARN  [] org.hibernate.orm.deprecation - HHH020100: The Ehcache second-level cache provider for Hibernate is deprecated.  See https://hibernate.atlassian.net/browse/HHH-12441 for details.
+2026-09-16 19:05:18.948 INFO  [] o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.5.Final}
+2026-09-16 19:05:21.361 INFO  [] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2026-09-16 19:05:23.872 INFO  [] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.3.Final
+2026-09-16 19:05:26.250 INFO  [] org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@15b12bc5] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-09-16 19:05:29.680 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Start proxy config .................
+2026-09-16 19:05:29.680 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyHost : pomproxy.pomona-fr.grp
+2026-09-16 19:05:29.680 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyPort : 8080 
+2026-09-16 19:05:29.682 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyUsername : redhat
+2026-09-16 19:05:30.427 INFO  [] f.p.m.d.s.i.DataImportBatch - Batch <importFromExternal - importFromExternal> is active on this node
+2026-09-16 19:05:30.512 INFO  [] f.p.m.d.s.m.c.CacheMaintenanceBatch - Batch <cache-maintenance - Maintenance du cache de données> is active on this node
+2026-09-16 19:05:35.392 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Starting oauth2ClientRestOperations with proxy configuration...
+2026-09-16 19:05:36.729 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - oauth2ClientRestOperations configured successfully.
+2026-09-16 19:05:36.742 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring CustomOAuth2AccessTokenResponseClient with custom RestOperations...
+2026-09-16 19:05:36.778 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating OidcUserService
+2026-09-16 19:05:36.885 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating CustomOidcAuthorizationCodeAuthenticationProvider
+2026-09-16 19:05:36.894 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - CustomProvider created: fr.pomona.manageo.web.security.cognito.proxy.oidc.CustomOidcAuthorizationCodeAuthenticationProvider@8109ea8
+2026-09-16 19:05:37.584 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring SecurityFilterChain...
+2026-09-16 19:05:37.633 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring OAuth2UserService...
+2026-09-16 19:05:37.651 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - OAuth2UserService configured successfully.
+2026-09-16 19:05:37.669 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - SecurityFilterChain configured successfully.
+2026-09-16 19:05:37.730 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring Cognito client registration...
+2026-09-16 19:05:38.147 INFO  [] o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2026-09-16 19:05:38.441 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 29305 ms
+2026-09-16 19:05:48.525 INFO  [] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'application'
+2026-09-16 19:05:48.535 INFO  [] o.s.web.servlet.DispatcherServlet - Completed initialization in 10 ms
+2026-09-16 19:05:48.564 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named CSSServlet
+2026-09-16 19:05:48.564 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named CSSServlet
+2026-09-16 19:05:48.793 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 19:05:48.793 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 19:05:49.082 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 19:05:49.120 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 19:05:49.726 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 19:05:49.745 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 1 seconds....
+2026-09-16 19:05:49.745 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named JavascriptServlet
+2026-09-16 19:05:49.745 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named JavascriptServlet
+2026-09-16 19:05:49.767 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 19:05:49.767 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 19:05:49.950 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 19:05:49.951 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 19:05:51.880 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 19:05:51.880 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 2 seconds....
+2026-09-16 19:20:50.311 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - PROJET Web application is starting
+2026-09-16 19:20:50.352 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - Loading projet.properties configuration file from the classpath
+2026-09-16 19:20:50.405 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - The active Spring profiles are : active-directory
+2026-09-16 19:20:50.443 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer -  CharacterEncodingFilter registered with UTF-8.
+2026-09-16 19:20:50.465 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-09-16 19:20:57.434 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.config.TaskExecutorFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:20:57.441 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:20:57.750 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'scheduler' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:21:00.367 INFO  [] org.hibernate.Version - HHH000412: Hibernate Core {5.3.36.Final}
+2026-09-16 19:21:00.377 INFO  [] org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2026-09-16 19:21:01.599 WARN  [] org.hibernate.orm.deprecation - HHH020100: The Ehcache second-level cache provider for Hibernate is deprecated.  See https://hibernate.atlassian.net/browse/HHH-12441 for details.
+2026-09-16 19:21:01.715 INFO  [] o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.5.Final}
+2026-09-16 19:21:04.627 INFO  [] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2026-09-16 19:21:07.897 INFO  [] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.3.Final
+2026-09-16 19:21:10.627 INFO  [] org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4e05911c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-09-16 19:21:15.166 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Start proxy config .................
+2026-09-16 19:21:15.166 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyHost : pomproxy.pomona-fr.grp
+2026-09-16 19:21:15.166 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyPort : 8080 
+2026-09-16 19:21:15.166 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyUsername : redhat
+2026-09-16 19:21:15.166 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - configured proxy successfully .................
+2026-09-16 19:21:15.969 INFO  [] f.p.m.d.s.i.DataImportBatch - Batch <importFromExternal - importFromExternal> is active on this node
+2026-09-16 19:21:16.060 INFO  [] f.p.m.d.s.m.c.CacheMaintenanceBatch - Batch <cache-maintenance - Maintenance du cache de données> is active on this node
+2026-09-16 19:21:21.683 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Starting oauth2ClientRestOperations with proxy configuration...
+2026-09-16 19:21:23.801 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - oauth2ClientRestOperations configured successfully.
+2026-09-16 19:21:23.816 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring CustomOAuth2AccessTokenResponseClient with custom RestOperations...
+2026-09-16 19:21:23.850 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating OidcUserService
+2026-09-16 19:21:24.046 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating CustomOidcAuthorizationCodeAuthenticationProvider
+2026-09-16 19:21:24.058 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - CustomProvider created: fr.pomona.manageo.web.security.cognito.proxy.oidc.CustomOidcAuthorizationCodeAuthenticationProvider@3c2cc2a6
+2026-09-16 19:21:24.846 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring SecurityFilterChain...
+2026-09-16 19:21:24.931 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring OAuth2UserService...
+2026-09-16 19:21:24.957 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - OAuth2UserService configured successfully.
+2026-09-16 19:21:24.988 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - SecurityFilterChain configured successfully.
+2026-09-16 19:21:25.072 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring Cognito client registration...
+2026-09-16 19:21:25.643 INFO  [] o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2026-09-16 19:21:26.138 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 35673 ms
+2026-09-16 19:21:35.427 INFO  [] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'application'
+2026-09-16 19:21:35.440 INFO  [] o.s.web.servlet.DispatcherServlet - Completed initialization in 13 ms
+2026-09-16 19:21:35.473 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named CSSServlet
+2026-09-16 19:21:35.473 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named CSSServlet
+2026-09-16 19:21:35.750 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 19:21:35.750 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 19:21:36.055 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 19:21:36.099 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 19:21:36.751 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 19:21:36.768 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 1 seconds....
+2026-09-16 19:21:36.768 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named JavascriptServlet
+2026-09-16 19:21:36.768 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named JavascriptServlet
+2026-09-16 19:21:36.789 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 19:21:36.789 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 19:21:37.015 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 19:21:37.015 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 19:21:39.153 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 19:21:39.153 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 2 seconds....
+2026-09-16 19:22:22.499 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - PROJET Web application is starting
+2026-09-16 19:22:22.510 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - Loading projet.properties configuration file from the classpath
+2026-09-16 19:22:22.521 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - The active Spring profiles are : active-directory
+2026-09-16 19:22:22.531 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer -  CharacterEncodingFilter registered with UTF-8.
+2026-09-16 19:22:22.542 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-09-16 19:22:27.638 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.config.TaskExecutorFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:22:27.643 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:22:27.896 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'scheduler' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:22:30.116 INFO  [] org.hibernate.Version - HHH000412: Hibernate Core {5.3.36.Final}
+2026-09-16 19:22:30.123 INFO  [] org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2026-09-16 19:22:31.576 WARN  [] org.hibernate.orm.deprecation - HHH020100: The Ehcache second-level cache provider for Hibernate is deprecated.  See https://hibernate.atlassian.net/browse/HHH-12441 for details.
+2026-09-16 19:22:31.675 INFO  [] o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.5.Final}
+2026-09-16 19:22:33.825 INFO  [] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2026-09-16 19:22:36.360 INFO  [] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.3.Final
+2026-09-16 19:22:38.855 INFO  [] org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7ce46a58] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-09-16 19:22:42.315 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Start proxy config .................
+2026-09-16 19:22:42.315 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyHost : pomproxy.pomona-fr.grp
+2026-09-16 19:22:42.315 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyPort : 8080 
+2026-09-16 19:22:42.315 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyUsername : redhat
+2026-09-16 19:22:42.315 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - configured proxy successfully .................
+2026-09-16 19:22:43.131 INFO  [] f.p.m.d.s.i.DataImportBatch - Batch <importFromExternal - importFromExternal> is active on this node
+2026-09-16 19:22:43.247 INFO  [] f.p.m.d.s.m.c.CacheMaintenanceBatch - Batch <cache-maintenance - Maintenance du cache de données> is active on this node
+2026-09-16 19:22:48.621 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Starting oauth2ClientRestOperations with proxy configuration...
+2026-09-16 19:22:50.389 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - oauth2ClientRestOperations configured successfully.
+2026-09-16 19:22:50.402 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring CustomOAuth2AccessTokenResponseClient with custom RestOperations...
+2026-09-16 19:22:50.439 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating OidcUserService
+2026-09-16 19:22:50.656 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating CustomOidcAuthorizationCodeAuthenticationProvider
+2026-09-16 19:22:50.667 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - CustomProvider created: fr.pomona.manageo.web.security.cognito.proxy.oidc.CustomOidcAuthorizationCodeAuthenticationProvider@35eaad5f
+2026-09-16 19:22:51.349 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring SecurityFilterChain...
+2026-09-16 19:22:51.398 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring OAuth2UserService...
+2026-09-16 19:22:51.415 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - OAuth2UserService configured successfully.
+2026-09-16 19:22:51.435 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - SecurityFilterChain configured successfully.
+2026-09-16 19:22:51.489 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring Cognito client registration...
+2026-09-16 19:22:51.882 INFO  [] o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2026-09-16 19:22:52.119 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 29577 ms
+2026-09-16 19:23:03.355 INFO  [] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'application'
+2026-09-16 19:23:03.357 INFO  [] o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2026-09-16 19:23:03.377 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named CSSServlet
+2026-09-16 19:23:03.377 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named CSSServlet
+2026-09-16 19:23:03.598 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 19:23:03.598 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 19:23:03.852 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 19:23:03.898 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 19:23:04.432 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 19:23:04.450 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 1 seconds....
+2026-09-16 19:23:04.450 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named JavascriptServlet
+2026-09-16 19:23:04.450 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named JavascriptServlet
+2026-09-16 19:23:04.475 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 19:23:04.475 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 19:23:04.705 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 19:23:04.712 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 19:23:05.792 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 19:23:05.794 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 1 seconds....
+2026-09-16 19:23:11.127 ERROR [] f.p.m.w.s.CustomHttpResponseErrorHandler - Error occurred during requested resources 400 BAD_REQUEST
+2026-09-16 19:23:56.350 ERROR [] f.p.m.w.s.CustomHttpResponseErrorHandler - Error occurred during requested resources 400 BAD_REQUEST
+2026-09-16 19:37:15.092 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - PROJET Web application is starting
+2026-09-16 19:37:15.105 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - Loading projet.properties configuration file from the classpath
+2026-09-16 19:37:15.120 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - The active Spring profiles are : active-directory
+2026-09-16 19:37:15.129 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer -  CharacterEncodingFilter registered with UTF-8.
+2026-09-16 19:37:15.140 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-09-16 19:37:23.441 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.config.TaskExecutorFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:37:23.450 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:37:24.024 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'scheduler' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 19:37:27.902 INFO  [] org.hibernate.Version - HHH000412: Hibernate Core {5.3.36.Final}
+2026-09-16 19:37:27.907 INFO  [] org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2026-09-16 19:37:30.397 WARN  [] org.hibernate.orm.deprecation - HHH020100: The Ehcache second-level cache provider for Hibernate is deprecated.  See https://hibernate.atlassian.net/browse/HHH-12441 for details.
+2026-09-16 19:37:30.548 INFO  [] o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.5.Final}
+2026-09-16 19:37:34.908 INFO  [] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2026-09-16 19:37:40.135 INFO  [] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.3.Final
+2026-09-16 19:37:45.625 INFO  [] org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6f369bc1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-09-16 19:37:51.053 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Start proxy config .................
+2026-09-16 19:37:51.053 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyHost : pomproxy.pomona-fr.grp
+2026-09-16 19:37:51.053 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyPort : 8080 
+2026-09-16 19:37:51.053 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyUsername : redhat
+2026-09-16 19:37:51.053 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - configured proxy successfully .................
+2026-09-16 19:37:52.274 INFO  [] f.p.m.d.s.i.DataImportBatch - Batch <importFromExternal - importFromExternal> is active on this node
+2026-09-16 19:37:52.493 INFO  [] f.p.m.d.s.m.c.CacheMaintenanceBatch - Batch <cache-maintenance - Maintenance du cache de données> is active on this node
+2026-09-16 19:38:02.324 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Starting oauth2ClientRestOperations with proxy configuration...
+2026-09-16 19:38:04.748 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - oauth2ClientRestOperations configured successfully.
+2026-09-16 19:38:04.782 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring CustomOAuth2AccessTokenResponseClient with custom RestOperations...
+2026-09-16 19:38:04.844 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating OidcUserService
+2026-09-16 19:38:04.993 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating CustomOidcAuthorizationCodeAuthenticationProvider
+2026-09-16 19:38:05.006 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - CustomProvider created: fr.pomona.manageo.web.security.cognito.proxy.oidc.CustomOidcAuthorizationCodeAuthenticationProvider@44962663
+2026-09-16 19:38:05.916 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring SecurityFilterChain...
+2026-09-16 19:38:06.040 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring OAuth2UserService...
+2026-09-16 19:38:06.093 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - OAuth2UserService configured successfully.
+2026-09-16 19:38:06.168 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - SecurityFilterChain configured successfully.
+2026-09-16 19:38:06.294 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring Cognito client registration...
+2026-09-16 19:38:06.724 INFO  [] o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2026-09-16 19:38:07.028 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 51888 ms
+2026-09-16 19:38:20.470 INFO  [] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'application'
+2026-09-16 19:38:20.480 INFO  [] o.s.web.servlet.DispatcherServlet - Completed initialization in 10 ms
+2026-09-16 19:38:20.521 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named CSSServlet
+2026-09-16 19:38:20.521 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named CSSServlet
+2026-09-16 19:38:21.023 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 19:38:21.023 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 19:38:21.686 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 19:38:21.739 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 19:38:22.456 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 19:38:22.505 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 1 seconds....
+2026-09-16 19:38:22.506 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named JavascriptServlet
+2026-09-16 19:38:22.506 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named JavascriptServlet
+2026-09-16 19:38:22.587 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 19:38:22.587 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 19:38:23.171 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 19:38:23.171 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 19:38:24.841 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 19:38:24.841 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 2 seconds....
+2026-09-16 19:49:04.945 ERROR [] f.p.m.w.s.c.ManageoAuthenticationFailureHandler - Error occurred during requested resources
+org.springframework.security.oauth2.core.OAuth2AuthenticationException: [authorization_request_not_found] 
+	at org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.attemptAuthentication(OAuth2LoginAuthenticationFilter.java:170) ~[spring-security-oauth2-client-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:222) ~[spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:212) ~[spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:178) ~[spring-security-oauth2-client-5.5.5.jar:5.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) [spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) [spring-web-5.3.33.jar:5.3.33]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144) [catalina.jar:9.0.89]
+	at net.bull.javamelody.MonitoringFilter.doFilter(MonitoringFilter.java:199) [javamelody-core-1.75.0.jar:1.75.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144) [catalina.jar:9.0.89]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) [catalina.jar:9.0.89]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) [catalina.jar:9.0.89]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [catalina.jar:9.0.89]
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:660) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [catalina.jar:9.0.89]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346) [catalina.jar:9.0.89]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:388) [tomcat-coyote.jar:9.0.89]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) [tomcat-coyote.jar:9.0.89]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) [tomcat-coyote.jar:9.0.89]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) [tomcat-coyote.jar:9.0.89]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-coyote.jar:9.0.89]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) [tomcat-util.jar:9.0.89]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-util.jar:9.0.89]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) [tomcat-util.jar:9.0.89]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+2026-09-16 19:49:07.021 ERROR [] f.p.m.w.s.c.ManageoAuthenticationFailureHandler - Error occurred during requested resources
+org.springframework.security.oauth2.core.OAuth2AuthenticationException: [authorization_request_not_found] 
+	at org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter.attemptAuthentication(OAuth2LoginAuthenticationFilter.java:170) ~[spring-security-oauth2-client-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:222) ~[spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:212) ~[spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter.doFilterInternal(OAuth2AuthorizationRequestRedirectFilter.java:178) ~[spring-security-oauth2-client-5.5.5.jar:5.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) [spring-security-web-5.5.5.jar:5.5.5]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) [spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) [spring-web-5.3.33.jar:5.3.33]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144) [catalina.jar:9.0.89]
+	at net.bull.javamelody.MonitoringFilter.doFilter(MonitoringFilter.java:199) [javamelody-core-1.75.0.jar:1.75.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144) [catalina.jar:9.0.89]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) [spring-web-5.3.33.jar:5.3.33]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.33.jar:5.3.33]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) [catalina.jar:9.0.89]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:481) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130) [catalina.jar:9.0.89]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) [catalina.jar:9.0.89]
+	at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:660) [catalina.jar:9.0.89]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [catalina.jar:9.0.89]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346) [catalina.jar:9.0.89]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:388) [tomcat-coyote.jar:9.0.89]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) [tomcat-coyote.jar:9.0.89]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:928) [tomcat-coyote.jar:9.0.89]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791) [tomcat-coyote.jar:9.0.89]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) [tomcat-coyote.jar:9.0.89]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) [tomcat-util.jar:9.0.89]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-util.jar:9.0.89]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) [tomcat-util.jar:9.0.89]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_202]
+2026-09-16 19:49:15.005 ERROR [] f.p.m.w.s.CustomHttpResponseErrorHandler - Error occurred during requested resources 400 BAD_REQUEST
+2026-09-16 20:00:27.752 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - PROJET Web application is starting
+2026-09-16 20:00:27.761 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - Loading projet.properties configuration file from the classpath
+2026-09-16 20:00:27.774 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - The active Spring profiles are : active-directory
+2026-09-16 20:00:27.782 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer -  CharacterEncodingFilter registered with UTF-8.
+2026-09-16 20:00:27.790 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-09-16 20:00:31.862 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.config.TaskExecutorFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 20:00:31.867 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 20:00:32.062 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'scheduler' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 20:00:33.975 INFO  [] org.hibernate.Version - HHH000412: Hibernate Core {5.3.36.Final}
+2026-09-16 20:00:33.980 INFO  [] org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2026-09-16 20:00:35.162 WARN  [] org.hibernate.orm.deprecation - HHH020100: The Ehcache second-level cache provider for Hibernate is deprecated.  See https://hibernate.atlassian.net/browse/HHH-12441 for details.
+2026-09-16 20:00:35.254 INFO  [] o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.5.Final}
+2026-09-16 20:00:37.370 INFO  [] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2026-09-16 20:00:39.812 INFO  [] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.3.Final
+2026-09-16 20:00:42.486 INFO  [] org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@11a823b3] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-09-16 20:00:47.491 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Start proxy config .................
+2026-09-16 20:00:47.492 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyHost : pomproxy.pomona-fr.grp
+2026-09-16 20:00:47.492 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyPort : 8080 
+2026-09-16 20:00:47.492 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyUsername : redhat
+2026-09-16 20:00:47.492 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - configured proxy successfully .................
+2026-09-16 20:00:48.511 INFO  [] f.p.m.d.s.i.DataImportBatch - Batch <importFromExternal - importFromExternal> is active on this node
+2026-09-16 20:00:48.629 INFO  [] f.p.m.d.s.m.c.CacheMaintenanceBatch - Batch <cache-maintenance - Maintenance du cache de données> is active on this node
+2026-09-16 20:00:53.582 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Starting oauth2ClientRestOperations with proxy configuration...
+2026-09-16 20:00:54.760 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - oauth2ClientRestOperations configured successfully.
+2026-09-16 20:00:54.774 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring CustomOAuth2AccessTokenResponseClient with custom RestOperations...
+2026-09-16 20:00:54.795 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating OidcUserService
+2026-09-16 20:00:54.894 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating CustomOidcAuthorizationCodeAuthenticationProvider
+2026-09-16 20:00:54.899 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - CustomProvider created: fr.pomona.manageo.web.security.cognito.proxy.oidc.CustomOidcAuthorizationCodeAuthenticationProvider@31625256
+2026-09-16 20:00:55.325 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring SecurityFilterChain...
+2026-09-16 20:00:55.369 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring OAuth2UserService...
+2026-09-16 20:00:55.385 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - OAuth2UserService configured successfully.
+2026-09-16 20:00:55.404 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - SecurityFilterChain configured successfully.
+2026-09-16 20:00:55.457 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring Cognito client registration...
+2026-09-16 20:00:55.799 INFO  [] o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2026-09-16 20:00:56.045 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 28254 ms
+2026-09-16 20:01:04.064 INFO  [] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'application'
+2026-09-16 20:01:04.076 INFO  [] o.s.web.servlet.DispatcherServlet - Completed initialization in 12 ms
+2026-09-16 20:01:04.106 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named CSSServlet
+2026-09-16 20:01:04.106 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named CSSServlet
+2026-09-16 20:01:04.322 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 20:01:04.322 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 20:01:04.616 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 20:01:04.654 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 20:01:05.169 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 20:01:05.185 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 1 seconds....
+2026-09-16 20:01:05.185 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named JavascriptServlet
+2026-09-16 20:01:05.185 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named JavascriptServlet
+2026-09-16 20:01:05.210 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 20:01:05.211 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 20:01:05.392 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 20:01:05.394 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 20:01:06.515 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 20:01:06.515 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 1 seconds....
+2026-09-16 20:02:10.675 ERROR [] f.p.m.w.s.CustomHttpResponseErrorHandler - Error occurred during requested resources 400 BAD_REQUEST
+2026-09-16 20:04:57.596 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - PROJET Web application is starting
+2026-09-16 20:04:57.630 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - Loading projet.properties configuration file from the classpath
+2026-09-16 20:04:57.664 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer - The active Spring profiles are : active-directory
+2026-09-16 20:04:57.690 INFO  [] f.p.m.w.c.ProjetWebApplicationInitializer -  CharacterEncodingFilter registered with UTF-8.
+2026-09-16 20:04:57.719 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+2026-09-16 20:05:07.443 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.config.TaskExecutorFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 20:05:07.447 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'executor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 20:05:07.767 INFO  [] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'scheduler' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2026-09-16 20:05:11.937 INFO  [] org.hibernate.Version - HHH000412: Hibernate Core {5.3.36.Final}
+2026-09-16 20:05:11.954 INFO  [] org.hibernate.cfg.Environment - HHH000206: hibernate.properties not found
+2026-09-16 20:05:14.399 WARN  [] org.hibernate.orm.deprecation - HHH020100: The Ehcache second-level cache provider for Hibernate is deprecated.  See https://hibernate.atlassian.net/browse/HHH-12441 for details.
+2026-09-16 20:05:14.688 INFO  [] o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.0.5.Final}
+2026-09-16 20:05:19.695 INFO  [] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2026-09-16 20:05:24.769 INFO  [] o.h.validator.internal.util.Version - HV000001: Hibernate Validator 5.0.3.Final
+2026-09-16 20:05:30.503 INFO  [] org.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7e2e2d7d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-09-16 20:05:36.449 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Start proxy config .................
+2026-09-16 20:05:36.449 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyHost : pomproxy.pomona-fr.grp
+2026-09-16 20:05:36.449 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyPort : 8080 
+2026-09-16 20:05:36.449 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - proxyUsername : redhat
+2026-09-16 20:05:36.449 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - configured proxy successfully .................
+2026-09-16 20:05:37.358 INFO  [] f.p.m.d.s.i.DataImportBatch - Batch <importFromExternal - importFromExternal> is active on this node
+2026-09-16 20:05:37.507 INFO  [] f.p.m.d.s.m.c.CacheMaintenanceBatch - Batch <cache-maintenance - Maintenance du cache de données> is active on this node
+2026-09-16 20:05:44.091 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Starting oauth2ClientRestOperations with proxy configuration...
+2026-09-16 20:05:46.556 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - oauth2ClientRestOperations configured successfully.
+2026-09-16 20:05:46.603 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring CustomOAuth2AccessTokenResponseClient with custom RestOperations...
+2026-09-16 20:05:46.688 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating OidcUserService
+2026-09-16 20:05:46.874 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Creating CustomOidcAuthorizationCodeAuthenticationProvider
+2026-09-16 20:05:46.882 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - CustomProvider created: fr.pomona.manageo.web.security.cognito.proxy.oidc.CustomOidcAuthorizationCodeAuthenticationProvider@36935e16
+2026-09-16 20:05:47.940 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring SecurityFilterChain...
+2026-09-16 20:05:48.081 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring OAuth2UserService...
+2026-09-16 20:05:48.131 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - OAuth2UserService configured successfully.
+2026-09-16 20:05:48.202 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - SecurityFilterChain configured successfully.
+2026-09-16 20:05:48.440 INFO  [] f.p.m.w.s.c.c.CognitoSecurityConfiguration - Configuring Cognito client registration...
+2026-09-16 20:05:48.974 INFO  [] o.s.s.web.DefaultSecurityFilterChain - Will not secure any request
+2026-09-16 20:05:49.304 INFO  [] o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 51585 ms
+2026-09-16 20:06:02.961 INFO  [] o.s.web.servlet.DispatcherServlet - Initializing Servlet 'application'
+2026-09-16 20:06:02.975 INFO  [] o.s.web.servlet.DispatcherServlet - Completed initialization in 14 ms
+2026-09-16 20:06:03.014 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named CSSServlet
+2026-09-16 20:06:03.014 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named CSSServlet
+2026-09-16 20:06:03.480 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 20:06:03.480 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 20:06:04.067 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 20:06:04.168 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 20:06:04.978 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 20:06:05.036 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 2 seconds....
+2026-09-16 20:06:05.038 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for servlet named JavascriptServlet
+2026-09-16 20:06:05.038 INFO  [] n.j.web.servlet.JawrRequestHandler - Initializing jawr config for request handler named JavascriptServlet
+2026-09-16 20:06:05.111 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Building resources handler... 
+2026-09-16 20:06:05.111 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Adding custom bundle definitions. 
+2026-09-16 20:06:05.589 INFO  [] n.j.w.r.b.f.BundlesHandlerFactory - Creating mappings for orphan resources. 
+2026-09-16 20:06:05.592 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - Starting bundle processing
+2026-09-16 20:06:07.100 INFO  [] n.j.w.r.b.h.ResourceBundlesHandler - End of bundle processing
+2026-09-16 20:06:07.101 INFO  [] n.j.web.servlet.JawrRequestHandler - Init method succesful. jawr started in 2 seconds....
+2026-09-16 20:06:33.318 ERROR [] f.p.m.w.s.CustomHttpResponseErrorHandler - Error occurred during requested resources 400 BAD_REQUEST

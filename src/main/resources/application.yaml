@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: ai-log-analyzer
+server:
+  port: 8080
+  servlet:
+    context-path: /ai-log-analyzer
+ai:
+  provider:
+    type: ${AI_PROVIDER:mock}
+    api-key: ${AI_API_KEY:}
+    api-url: ${AI_API_URL:https://api.openai.com/v1/responses}
+    model: ${AI_MODEL:mock-model}

@@ -1,0 +1,532 @@
+16-Sep-2026 14:44:17.167 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.89
+16-Sep-2026 14:44:17.180 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  May 3 2024 20:22:11 UTC
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.89.0
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk1.8.0_202\jre
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      1.8.0_202-b08
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 14:44:17.187 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:51922,suspend=y,server=n
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPort=8080
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyUser=redhat
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPassword=password
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPort=8080
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyUser=redhat
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPassword=password
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\temp
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\logging.properties
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Users\bnguimgo\AppData\Local\JetBrains\IdeaIC2023.3\captureAgent\debugger-agent.jar
+16-Sep-2026 14:44:17.198 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+16-Sep-2026 14:44:17.262 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Chargement de la librairie Apache Tomcat Native [1.3.0] en utilisant APR version [1.7.4]
+16-Sep-2026 14:44:17.262 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Fonctionnalités d'APR : IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true]
+16-Sep-2026 14:44:17.262 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Configuration de APR/OpenSSL : useAprConnector [false], useOpenSSL [true]
+16-Sep-2026 14:44:17.296 INFOS [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL a été initialisé avec succès [OpenSSL 3.0.13 30 Jan 2024]
+16-Sep-2026 14:44:18.242 INFOS [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 14:44:18.313 INFOS [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [2320] millisecondes
+16-Sep-2026 14:44:18.411 INFOS [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+16-Sep-2026 14:44:18.411 INFOS [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.89]
+16-Sep-2026 14:44:18.443 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml]
+16-Sep-2026 14:44:46.666 INFOS [main] org.apache.jasper.servlet.TldScanner.scanJars Au moins un fichier JAR a été analysé pour trouver des TLDs mais il n'en contenait pas, le mode "debug" du journal peut être activé pour obtenir une liste complète de JAR scannés sans succès ; éviter d'analyser des JARs inutilement peut améliorer sensiblement le temps de démarrage et le temps de compilation des JSPs
+16-Sep-2026 14:45:36.982 GRAVE [main] org.apache.catalina.core.StandardContext.startInternal Un ou plusieurs écouteurs n'ont pas pu démarrer, les détails sont dans le fichier de log du conteneur
+16-Sep-2026 14:45:36.982 GRAVE [main] org.apache.catalina.core.StandardContext.startInternal Erreur de démarrage du contexte [/manageo-web] suite aux erreurs précédentes
+16-Sep-2026 14:45:37.338 AVERTISSEMENT [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc L'application web [manageo-web] a enregistré un pilote JDBC [com.mysql.cj.jdbc.Driver], mais ne l'a pas désenregistré avant l'arrêt de l'application.  Pour éviter une fuite de mémoire, le pilote JDBC a été désenregistré de force.
+16-Sep-2026 14:45:37.347 AVERTISSEMENT [main] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads L'application web [manageo-web] semble avoir démarré un thread nommé [mysql-cj-abandoned-connection-cleanup] mais ne l'a pas arrêté, ce qui va probablement créer une fuite de mémoire ; la trace du thread est : 
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:91)
+ java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+ java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+ java.lang.Thread.run(Thread.java:748)
+16-Sep-2026 14:45:37.418 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Le traitement du descripteur de déploiement [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml] a pris [78 968] ms
+16-Sep-2026 14:45:37.434 INFOS [main] org.apache.coyote.AbstractProtocol.start Démarrage du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 14:45:37.561 INFOS [main] org.apache.catalina.startup.Catalina.start Le démarrage du serveur a pris [79256] millisecondes
+16-Sep-2026 14:45:40.408 INFOS [mysql-cj-abandoned-connection-cleanup] org.apache.catalina.loader.WebappClassLoaderBase.checkStateForResourceLoading Impossible de charger [], ce chargeur de classes a déjà été arrêté
+	java.lang.IllegalStateException: Impossible de charger [], ce chargeur de classes a déjà été arrêté
+		at org.apache.catalina.loader.WebappClassLoaderBase.checkStateForResourceLoading(WebappClassLoaderBase.java:1328)
+		at org.apache.catalina.loader.WebappClassLoaderBase.getResource(WebappClassLoaderBase.java:960)
+		at com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.checkThreadContextClassLoader(AbandonedConnectionCleanupThread.java:123)
+		at com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:90)
+		at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+		at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+		at java.lang.Thread.run(Thread.java:748)
+16-Sep-2026 14:52:26.459 INFOS [Thread-5] org.apache.coyote.AbstractProtocol.pause Le gestionnaire de protocole ["http-nio-8080"] est mis en pause
+16-Sep-2026 14:52:27.313 INFOS [Thread-5] org.apache.catalina.core.StandardService.stopInternal Arrêt du service [Catalina]
+16-Sep-2026 14:52:27.321 INFOS [Thread-5] org.apache.coyote.AbstractProtocol.stop Arrêt du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 14:52:27.322 INFOS [Thread-5] org.apache.coyote.AbstractProtocol.destroy Destruction du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:04:21.701 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.89
+16-Sep-2026 19:04:21.715 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  May 3 2024 20:22:11 UTC
+16-Sep-2026 19:04:21.715 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.89.0
+16-Sep-2026 19:04:21.715 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+16-Sep-2026 19:04:21.715 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+16-Sep-2026 19:04:21.715 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+16-Sep-2026 19:04:21.716 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk1.8.0_202\jre
+16-Sep-2026 19:04:21.716 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      1.8.0_202-b08
+16-Sep-2026 19:04:21.716 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+16-Sep-2026 19:04:21.716 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:04:21.716 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:04:21.727 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:62527,suspend=y,server=n
+16-Sep-2026 19:04:21.727 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:04:21.729 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:04:21.729 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:04:21.729 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPort=8080
+16-Sep-2026 19:04:21.729 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyUser=redhat
+16-Sep-2026 19:04:21.729 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPassword=password
+16-Sep-2026 19:04:21.729 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:04:21.729 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPort=8080
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyUser=redhat
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPassword=password
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\temp
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\logging.properties
+16-Sep-2026 19:04:21.730 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Sep-2026 19:04:21.732 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Users\bnguimgo\AppData\Local\JetBrains\IdeaIC2023.3\captureAgent\debugger-agent.jar
+16-Sep-2026 19:04:21.732 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+16-Sep-2026 19:04:21.857 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Chargement de la librairie Apache Tomcat Native [1.3.0] en utilisant APR version [1.7.4]
+16-Sep-2026 19:04:21.857 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Fonctionnalités d'APR : IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true]
+16-Sep-2026 19:04:21.857 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Configuration de APR/OpenSSL : useAprConnector [false], useOpenSSL [true]
+16-Sep-2026 19:04:21.903 INFOS [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL a été initialisé avec succès [OpenSSL 3.0.13 30 Jan 2024]
+16-Sep-2026 19:04:23.027 INFOS [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:04:23.053 GRAVE [main] org.apache.catalina.util.LifecycleBase.handleSubClassException Echec d'initialisation du composant [Connector["http-nio-8080"]]
+	org.apache.catalina.LifecycleException: L'initialisation du gestionnaire de protocole a échoué
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1012)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.core.StandardService.initInternal(StandardService.java:525)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:990)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:686)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:709)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:302)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:472)
+	Caused by: java.net.BindException: Address already in use: bind
+		at sun.nio.ch.Net.bind0(Native Method)
+		at sun.nio.ch.Net.bind(Net.java:433)
+		at sun.nio.ch.Net.bind(Net.java:425)
+		at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+		at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:268)
+		at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:223)
+		at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1355)
+		at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1368)
+		at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:654)
+		at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:75)
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1010)
+		... 13 more
+16-Sep-2026 19:04:23.061 INFOS [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [2103] millisecondes
+16-Sep-2026 19:04:23.164 INFOS [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+16-Sep-2026 19:04:23.164 INFOS [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.89]
+16-Sep-2026 19:04:23.192 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml]
+16-Sep-2026 19:04:47.853 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.89
+16-Sep-2026 19:04:47.863 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  May 3 2024 20:22:11 UTC
+16-Sep-2026 19:04:47.863 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.89.0
+16-Sep-2026 19:04:47.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+16-Sep-2026 19:04:47.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+16-Sep-2026 19:04:47.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+16-Sep-2026 19:04:47.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk1.8.0_202\jre
+16-Sep-2026 19:04:47.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      1.8.0_202-b08
+16-Sep-2026 19:04:47.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+16-Sep-2026 19:04:47.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:04:47.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:62588,suspend=y,server=n
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPort=8080
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyUser=redhat
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPassword=password
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPort=8080
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyUser=redhat
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPassword=password
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:04:47.873 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:04:47.877 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:04:47.877 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:04:47.877 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\temp
+16-Sep-2026 19:04:47.878 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\logging.properties
+16-Sep-2026 19:04:47.878 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Sep-2026 19:04:47.878 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Users\bnguimgo\AppData\Local\JetBrains\IdeaIC2023.3\captureAgent\debugger-agent.jar
+16-Sep-2026 19:04:47.878 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+16-Sep-2026 19:04:47.884 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Chargement de la librairie Apache Tomcat Native [1.3.0] en utilisant APR version [1.7.4]
+16-Sep-2026 19:04:47.884 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Fonctionnalités d'APR : IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true]
+16-Sep-2026 19:04:47.884 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Configuration de APR/OpenSSL : useAprConnector [false], useOpenSSL [true]
+16-Sep-2026 19:04:47.920 INFOS [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL a été initialisé avec succès [OpenSSL 3.0.13 30 Jan 2024]
+16-Sep-2026 19:04:48.853 INFOS [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:04:48.887 GRAVE [main] org.apache.catalina.util.LifecycleBase.handleSubClassException Echec d'initialisation du composant [Connector["http-nio-8080"]]
+	org.apache.catalina.LifecycleException: L'initialisation du gestionnaire de protocole a échoué
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1012)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.core.StandardService.initInternal(StandardService.java:525)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:990)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:686)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:709)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:302)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:472)
+	Caused by: java.net.BindException: Address already in use: bind
+		at sun.nio.ch.Net.bind0(Native Method)
+		at sun.nio.ch.Net.bind(Net.java:433)
+		at sun.nio.ch.Net.bind(Net.java:425)
+		at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+		at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:268)
+		at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:223)
+		at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1355)
+		at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1368)
+		at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:654)
+		at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:75)
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1010)
+		... 13 more
+16-Sep-2026 19:04:48.887 INFOS [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [1480] millisecondes
+16-Sep-2026 19:04:49.005 INFOS [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+16-Sep-2026 19:04:49.005 INFOS [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.89]
+16-Sep-2026 19:04:49.035 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml]
+16-Sep-2026 19:05:08.082 INFOS [main] org.apache.jasper.servlet.TldScanner.scanJars Au moins un fichier JAR a été analysé pour trouver des TLDs mais il n'en contenait pas, le mode "debug" du journal peut être activé pour obtenir une liste complète de JAR scannés sans succès ; éviter d'analyser des JARs inutilement peut améliorer sensiblement le temps de démarrage et le temps de compilation des JSPs
+16-Sep-2026 19:05:51.911 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Le traitement du descripteur de déploiement [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml] a pris [62 866] ms
+16-Sep-2026 19:05:51.916 INFOS [main] org.apache.catalina.startup.Catalina.start Le démarrage du serveur a pris [63024] millisecondes
+16-Sep-2026 19:17:52.765 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.pause Le gestionnaire de protocole ["http-nio-8080"] est mis en pause
+16-Sep-2026 19:17:52.776 INFOS [Thread-6] org.apache.catalina.core.StandardService.stopInternal Arrêt du service [Catalina]
+16-Sep-2026 19:17:53.506 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc L'application web [manageo-web] a enregistré un pilote JDBC [com.mysql.cj.jdbc.Driver], mais ne l'a pas désenregistré avant l'arrêt de l'application.  Pour éviter une fuite de mémoire, le pilote JDBC a été désenregistré de force.
+16-Sep-2026 19:17:53.509 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads L'application web [manageo-web] semble avoir démarré un thread nommé [mysql-cj-abandoned-connection-cleanup] mais ne l'a pas arrêté, ce qui va probablement créer une fuite de mémoire ; la trace du thread est : 
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:91)
+ java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+ java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+ java.lang.Thread.run(Thread.java:748)
+16-Sep-2026 19:17:53.556 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.stop Arrêt du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:17:53.560 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destruction du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:19:57.828 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.89
+16-Sep-2026 19:19:57.845 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  May 3 2024 20:22:11 UTC
+16-Sep-2026 19:19:57.846 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.89.0
+16-Sep-2026 19:19:57.846 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+16-Sep-2026 19:19:57.847 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+16-Sep-2026 19:19:57.847 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+16-Sep-2026 19:19:57.847 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk1.8.0_202\jre
+16-Sep-2026 19:19:57.848 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      1.8.0_202-b08
+16-Sep-2026 19:19:57.849 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+16-Sep-2026 19:19:57.849 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:19:57.850 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:19:57.864 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:53174,suspend=y,server=n
+16-Sep-2026 19:19:57.864 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:19:57.864 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:19:57.864 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:19:57.864 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPort=8080
+16-Sep-2026 19:19:57.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyUser=redhat
+16-Sep-2026 19:19:57.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPassword=password
+16-Sep-2026 19:19:57.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:19:57.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPort=8080
+16-Sep-2026 19:19:57.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyUser=redhat
+16-Sep-2026 19:19:57.865 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPassword=password
+16-Sep-2026 19:19:57.866 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:19:57.867 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:19:57.867 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:19:57.868 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:19:57.868 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:19:57.868 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:19:57.868 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\temp
+16-Sep-2026 19:19:57.868 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\logging.properties
+16-Sep-2026 19:19:57.869 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Sep-2026 19:19:57.870 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Users\bnguimgo\AppData\Local\JetBrains\IdeaIC2023.3\captureAgent\debugger-agent.jar
+16-Sep-2026 19:19:57.870 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+16-Sep-2026 19:19:57.902 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Chargement de la librairie Apache Tomcat Native [1.3.0] en utilisant APR version [1.7.4]
+16-Sep-2026 19:19:57.902 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Fonctionnalités d'APR : IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true]
+16-Sep-2026 19:19:57.902 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Configuration de APR/OpenSSL : useAprConnector [false], useOpenSSL [true]
+16-Sep-2026 19:19:57.993 INFOS [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL a été initialisé avec succès [OpenSSL 3.0.13 30 Jan 2024]
+16-Sep-2026 19:20:00.175 INFOS [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:20:00.240 GRAVE [main] org.apache.catalina.util.LifecycleBase.handleSubClassException Echec d'initialisation du composant [Connector["http-nio-8080"]]
+	org.apache.catalina.LifecycleException: L'initialisation du gestionnaire de protocole a échoué
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1012)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.core.StandardService.initInternal(StandardService.java:525)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.core.StandardServer.initInternal(StandardServer.java:990)
+		at org.apache.catalina.util.LifecycleBase.init(LifecycleBase.java:127)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:686)
+		at org.apache.catalina.startup.Catalina.load(Catalina.java:709)
+		at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+		at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+		at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+		at java.lang.reflect.Method.invoke(Method.java:498)
+		at org.apache.catalina.startup.Bootstrap.load(Bootstrap.java:302)
+		at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:472)
+	Caused by: java.net.BindException: Address already in use: bind
+		at sun.nio.ch.Net.bind0(Native Method)
+		at sun.nio.ch.Net.bind(Net.java:433)
+		at sun.nio.ch.Net.bind(Net.java:425)
+		at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+		at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:268)
+		at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:223)
+		at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1355)
+		at org.apache.tomcat.util.net.AbstractEndpoint.init(AbstractEndpoint.java:1368)
+		at org.apache.coyote.AbstractProtocol.init(AbstractProtocol.java:654)
+		at org.apache.coyote.http11.AbstractHttp11Protocol.init(AbstractHttp11Protocol.java:75)
+		at org.apache.catalina.connector.Connector.initInternal(Connector.java:1010)
+		... 13 more
+16-Sep-2026 19:20:00.247 INFOS [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [3466] millisecondes
+16-Sep-2026 19:20:00.525 INFOS [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+16-Sep-2026 19:20:00.526 INFOS [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.89]
+16-Sep-2026 19:20:00.621 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml]
+16-Sep-2026 19:20:48.905 INFOS [main] org.apache.jasper.servlet.TldScanner.scanJars Au moins un fichier JAR a été analysé pour trouver des TLDs mais il n'en contenait pas, le mode "debug" du journal peut être activé pour obtenir une liste complète de JAR scannés sans succès ; éviter d'analyser des JARs inutilement peut améliorer sensiblement le temps de démarrage et le temps de compilation des JSPs
+16-Sep-2026 19:21:39.184 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Le traitement du descripteur de déploiement [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml] a pris [98 565] ms
+16-Sep-2026 19:21:39.184 INFOS [main] org.apache.catalina.startup.Catalina.start Le démarrage du serveur a pris [98944] millisecondes
+16-Sep-2026 19:21:56.567 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.pause Le gestionnaire de protocole ["http-nio-8080"] est mis en pause
+16-Sep-2026 19:21:56.567 INFOS [Thread-6] org.apache.catalina.core.StandardService.stopInternal Arrêt du service [Catalina]
+16-Sep-2026 19:21:57.297 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc L'application web [manageo-web] a enregistré un pilote JDBC [com.mysql.cj.jdbc.Driver], mais ne l'a pas désenregistré avant l'arrêt de l'application.  Pour éviter une fuite de mémoire, le pilote JDBC a été désenregistré de force.
+16-Sep-2026 19:21:57.297 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads L'application web [manageo-web] semble avoir démarré un thread nommé [mysql-cj-abandoned-connection-cleanup] mais ne l'a pas arrêté, ce qui va probablement créer une fuite de mémoire ; la trace du thread est : 
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:91)
+ java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+ java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+ java.lang.Thread.run(Thread.java:748)
+16-Sep-2026 19:21:57.338 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.stop Arrêt du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:21:57.338 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destruction du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:22:04.718 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.89
+16-Sep-2026 19:22:04.737 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  May 3 2024 20:22:11 UTC
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.89.0
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk1.8.0_202\jre
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      1.8.0_202-b08
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:54972,suspend=y,server=n
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPort=8080
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyUser=redhat
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPassword=password
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPort=8080
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyUser=redhat
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPassword=password
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:22:04.740 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:22:04.748 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:22:04.748 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:22:04.748 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\temp
+16-Sep-2026 19:22:04.748 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\logging.properties
+16-Sep-2026 19:22:04.748 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Sep-2026 19:22:04.748 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Users\bnguimgo\AppData\Local\JetBrains\IdeaIC2023.3\captureAgent\debugger-agent.jar
+16-Sep-2026 19:22:04.748 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+16-Sep-2026 19:22:04.771 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Chargement de la librairie Apache Tomcat Native [1.3.0] en utilisant APR version [1.7.4]
+16-Sep-2026 19:22:04.771 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Fonctionnalités d'APR : IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true]
+16-Sep-2026 19:22:04.771 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Configuration de APR/OpenSSL : useAprConnector [false], useOpenSSL [true]
+16-Sep-2026 19:22:04.802 INFOS [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL a été initialisé avec succès [OpenSSL 3.0.13 30 Jan 2024]
+16-Sep-2026 19:22:05.638 INFOS [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:22:05.720 INFOS [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [1445] millisecondes
+16-Sep-2026 19:22:05.816 INFOS [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+16-Sep-2026 19:22:05.816 INFOS [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.89]
+16-Sep-2026 19:22:05.837 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml]
+16-Sep-2026 19:22:21.477 INFOS [main] org.apache.jasper.servlet.TldScanner.scanJars Au moins un fichier JAR a été analysé pour trouver des TLDs mais il n'en contenait pas, le mode "debug" du journal peut être activé pour obtenir une liste complète de JAR scannés sans succès ; éviter d'analyser des JARs inutilement peut améliorer sensiblement le temps de démarrage et le temps de compilation des JSPs
+16-Sep-2026 19:23:05.827 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Le traitement du descripteur de déploiement [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml] a pris [59 988] ms
+16-Sep-2026 19:23:05.835 INFOS [main] org.apache.coyote.AbstractProtocol.start Démarrage du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:23:05.866 INFOS [main] org.apache.catalina.startup.Catalina.start Le démarrage du serveur a pris [60145] millisecondes
+16-Sep-2026 19:24:23.629 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.pause Le gestionnaire de protocole ["http-nio-8080"] est mis en pause
+16-Sep-2026 19:24:24.416 INFOS [Thread-6] org.apache.catalina.core.StandardService.stopInternal Arrêt du service [Catalina]
+16-Sep-2026 19:24:25.126 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc L'application web [manageo-web] a enregistré un pilote JDBC [com.mysql.cj.jdbc.Driver], mais ne l'a pas désenregistré avant l'arrêt de l'application.  Pour éviter une fuite de mémoire, le pilote JDBC a été désenregistré de force.
+16-Sep-2026 19:24:25.126 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads L'application web [manageo-web] semble avoir démarré un thread nommé [mysql-cj-abandoned-connection-cleanup] mais ne l'a pas arrêté, ce qui va probablement créer une fuite de mémoire ; la trace du thread est : 
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:91)
+ java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+ java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+ java.lang.Thread.run(Thread.java:748)
+16-Sep-2026 19:24:25.148 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.stop Arrêt du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:24:25.160 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destruction du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:36:59.307 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.89
+16-Sep-2026 19:36:59.319 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  May 3 2024 20:22:11 UTC
+16-Sep-2026 19:36:59.319 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.89.0
+16-Sep-2026 19:36:59.319 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+16-Sep-2026 19:36:59.319 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+16-Sep-2026 19:36:59.321 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+16-Sep-2026 19:36:59.321 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk1.8.0_202\jre
+16-Sep-2026 19:36:59.321 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      1.8.0_202-b08
+16-Sep-2026 19:36:59.321 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+16-Sep-2026 19:36:59.321 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:36:59.321 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:52098,suspend=y,server=n
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPort=8080
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyUser=redhat
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPassword=password
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPort=8080
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyUser=redhat
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPassword=password
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\temp
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\logging.properties
+16-Sep-2026 19:36:59.322 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Sep-2026 19:36:59.337 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Users\bnguimgo\AppData\Local\JetBrains\IdeaIC2023.3\captureAgent\debugger-agent.jar
+16-Sep-2026 19:36:59.337 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+16-Sep-2026 19:36:59.360 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Chargement de la librairie Apache Tomcat Native [1.3.0] en utilisant APR version [1.7.4]
+16-Sep-2026 19:36:59.362 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Fonctionnalités d'APR : IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true]
+16-Sep-2026 19:36:59.362 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Configuration de APR/OpenSSL : useAprConnector [false], useOpenSSL [true]
+16-Sep-2026 19:36:59.396 INFOS [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL a été initialisé avec succès [OpenSSL 3.0.13 30 Jan 2024]
+16-Sep-2026 19:37:00.277 INFOS [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:37:00.366 INFOS [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [1974] millisecondes
+16-Sep-2026 19:37:00.482 INFOS [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+16-Sep-2026 19:37:00.482 INFOS [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.89]
+16-Sep-2026 19:37:00.512 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml]
+16-Sep-2026 19:37:14.081 INFOS [main] org.apache.jasper.servlet.TldScanner.scanJars Au moins un fichier JAR a été analysé pour trouver des TLDs mais il n'en contenait pas, le mode "debug" du journal peut être activé pour obtenir une liste complète de JAR scannés sans succès ; éviter d'analyser des JARs inutilement peut améliorer sensiblement le temps de démarrage et le temps de compilation des JSPs
+16-Sep-2026 19:38:24.949 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Le traitement du descripteur de déploiement [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml] a pris [84 437] ms
+16-Sep-2026 19:38:24.970 INFOS [main] org.apache.coyote.AbstractProtocol.start Démarrage du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:38:25.033 INFOS [main] org.apache.catalina.startup.Catalina.start Le démarrage du serveur a pris [84671] millisecondes
+16-Sep-2026 19:59:48.491 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.pause Le gestionnaire de protocole ["http-nio-8080"] est mis en pause
+16-Sep-2026 19:59:49.236 INFOS [Thread-6] org.apache.catalina.core.StandardService.stopInternal Arrêt du service [Catalina]
+16-Sep-2026 19:59:50.035 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc L'application web [manageo-web] a enregistré un pilote JDBC [com.mysql.cj.jdbc.Driver], mais ne l'a pas désenregistré avant l'arrêt de l'application.  Pour éviter une fuite de mémoire, le pilote JDBC a été désenregistré de force.
+16-Sep-2026 19:59:50.036 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads L'application web [manageo-web] semble avoir démarré un thread nommé [mysql-cj-abandoned-connection-cleanup] mais ne l'a pas arrêté, ce qui va probablement créer une fuite de mémoire ; la trace du thread est : 
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:91)
+ java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+ java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+ java.lang.Thread.run(Thread.java:748)
+16-Sep-2026 19:59:50.098 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.stop Arrêt du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 19:59:50.117 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destruction du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 20:00:07.136 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.89
+16-Sep-2026 20:00:07.150 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  May 3 2024 20:22:11 UTC
+16-Sep-2026 20:00:07.151 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.89.0
+16-Sep-2026 20:00:07.151 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+16-Sep-2026 20:00:07.151 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+16-Sep-2026 20:00:07.151 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+16-Sep-2026 20:00:07.151 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk1.8.0_202\jre
+16-Sep-2026 20:00:07.152 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      1.8.0_202-b08
+16-Sep-2026 20:00:07.152 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+16-Sep-2026 20:00:07.152 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 20:00:07.152 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 20:00:07.161 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:57256,suspend=y,server=n
+16-Sep-2026 20:00:07.161 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 20:00:07.161 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 20:00:07.162 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 20:00:07.162 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPort=8080
+16-Sep-2026 20:00:07.162 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyUser=redhat
+16-Sep-2026 20:00:07.162 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPassword=password
+16-Sep-2026 20:00:07.162 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 20:00:07.163 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPort=8080
+16-Sep-2026 20:00:07.163 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyUser=redhat
+16-Sep-2026 20:00:07.163 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPassword=password
+16-Sep-2026 20:00:07.163 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 20:00:07.163 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 20:00:07.163 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 20:00:07.164 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 20:00:07.164 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 20:00:07.164 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 20:00:07.164 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\temp
+16-Sep-2026 20:00:07.164 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\logging.properties
+16-Sep-2026 20:00:07.164 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Sep-2026 20:00:07.165 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Users\bnguimgo\AppData\Local\JetBrains\IdeaIC2023.3\captureAgent\debugger-agent.jar
+16-Sep-2026 20:00:07.165 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+16-Sep-2026 20:00:07.182 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Chargement de la librairie Apache Tomcat Native [1.3.0] en utilisant APR version [1.7.4]
+16-Sep-2026 20:00:07.182 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Fonctionnalités d'APR : IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true]
+16-Sep-2026 20:00:07.182 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Configuration de APR/OpenSSL : useAprConnector [false], useOpenSSL [true]
+16-Sep-2026 20:00:07.228 INFOS [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL a été initialisé avec succès [OpenSSL 3.0.13 30 Jan 2024]
+16-Sep-2026 20:00:08.396 INFOS [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 20:00:08.503 INFOS [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [1877] millisecondes
+16-Sep-2026 20:00:08.632 INFOS [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+16-Sep-2026 20:00:08.632 INFOS [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.89]
+16-Sep-2026 20:00:08.670 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml]
+16-Sep-2026 20:00:26.814 INFOS [main] org.apache.jasper.servlet.TldScanner.scanJars Au moins un fichier JAR a été analysé pour trouver des TLDs mais il n'en contenait pas, le mode "debug" du journal peut être activé pour obtenir une liste complète de JAR scannés sans succès ; éviter d'analyser des JARs inutilement peut améliorer sensiblement le temps de démarrage et le temps de compilation des JSPs
+16-Sep-2026 20:01:06.558 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Le traitement du descripteur de déploiement [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml] a pris [57 887] ms
+16-Sep-2026 20:01:06.564 INFOS [main] org.apache.coyote.AbstractProtocol.start Démarrage du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 20:01:06.597 INFOS [main] org.apache.catalina.startup.Catalina.start Le démarrage du serveur a pris [58092] millisecondes
+16-Sep-2026 20:02:30.734 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.pause Le gestionnaire de protocole ["http-nio-8080"] est mis en pause
+16-Sep-2026 20:02:31.423 INFOS [Thread-6] org.apache.catalina.core.StandardService.stopInternal Arrêt du service [Catalina]
+16-Sep-2026 20:02:32.096 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesJdbc L'application web [manageo-web] a enregistré un pilote JDBC [com.mysql.cj.jdbc.Driver], mais ne l'a pas désenregistré avant l'arrêt de l'application.  Pour éviter une fuite de mémoire, le pilote JDBC a été désenregistré de force.
+16-Sep-2026 20:02:32.104 AVERTISSEMENT [Thread-6] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads L'application web [manageo-web] semble avoir démarré un thread nommé [mysql-cj-abandoned-connection-cleanup] mais ne l'a pas arrêté, ce qui va probablement créer une fuite de mémoire ; la trace du thread est : 
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:144)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:91)
+ java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+ java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+ java.lang.Thread.run(Thread.java:748)
+16-Sep-2026 20:02:32.106 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.stop Arrêt du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 20:02:32.119 INFOS [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destruction du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 20:04:21.307 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom version serveur :              Apache Tomcat/9.0.89
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Serveur compilé :                  May 3 2024 20:22:11 UTC
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version du serveur :               9.0.89.0
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Nom de l'OS :                      Windows 10
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version OS :                       10.0
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture :                     amd64
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home :                        C:\Program Files\Java\jdk1.8.0_202\jre
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Version JVM :                      1.8.0_202-b08
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Fournisseur de la JVM :            Oracle Corporation
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE :                    C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 20:04:21.316 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME :                    C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -agentlib:jdwp=transport=dt_socket,address=127.0.0.1:54923,suspend=y,server=n
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.nonProxyHosts=localhost|127.0.0.1|10.98.*
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPort=8080
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyUser=redhat
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttp.proxyPassword=password
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyHost=pomproxy.pomona-fr.grp
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPort=8080
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyUser=redhat
+16-Sep-2026 20:04:21.323 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dhttps.proxyPassword=password
+16-Sep-2026 20:04:21.324 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 20:04:21.324 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.http.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 20:04:21.324 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.tunneling.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 20:04:21.324 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djdk.https.auth.proxying.disabledSchemes=Basic,Digest,Kerberos,Negotiate
+16-Sep-2026 20:04:21.326 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.home=C:\Pomona\servers\apache-tomcat-9.0.89
+16-Sep-2026 20:04:21.326 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dcatalina.base=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web
+16-Sep-2026 20:04:21.326 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.io.tmpdir=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\temp
+16-Sep-2026 20:04:21.326 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.config.file=C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\logging.properties
+16-Sep-2026 20:04:21.326 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+16-Sep-2026 20:04:21.326 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -javaagent:C:\Users\bnguimgo\AppData\Local\JetBrains\IdeaIC2023.3\captureAgent\debugger-agent.jar
+16-Sep-2026 20:04:21.328 INFOS [main] org.apache.catalina.startup.VersionLoggerListener.log Argument de la ligne de commande : -Dfile.encoding=UTF-8
+16-Sep-2026 20:04:21.339 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Chargement de la librairie Apache Tomcat Native [1.3.0] en utilisant APR version [1.7.4]
+16-Sep-2026 20:04:21.339 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Fonctionnalités d'APR : IPv6 [true], sendfile [true], accept filters [false], random [true], UDS [true]
+16-Sep-2026 20:04:21.339 INFOS [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent Configuration de APR/OpenSSL : useAprConnector [false], useOpenSSL [true]
+16-Sep-2026 20:04:21.364 INFOS [main] org.apache.catalina.core.AprLifecycleListener.initializeSSL OpenSSL a été initialisé avec succès [OpenSSL 3.0.13 30 Jan 2024]
+16-Sep-2026 20:04:22.273 INFOS [main] org.apache.coyote.AbstractProtocol.init Initialisation du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 20:04:22.351 INFOS [main] org.apache.catalina.startup.Catalina.load L'initialisation du serveur a pris [1443] millisecondes
+16-Sep-2026 20:04:22.447 INFOS [main] org.apache.catalina.core.StandardService.startInternal Démarrage du service [Catalina]
+16-Sep-2026 20:04:22.447 INFOS [main] org.apache.catalina.core.StandardEngine.startInternal Démarrage du moteur de Servlets : [Apache Tomcat/9.0.89]
+16-Sep-2026 20:04:22.474 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Déploiement du descripteur de configuration [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml]
+16-Sep-2026 20:04:55.740 INFOS [main] org.apache.jasper.servlet.TldScanner.scanJars Au moins un fichier JAR a été analysé pour trouver des TLDs mais il n'en contenait pas, le mode "debug" du journal peut être activé pour obtenir une liste complète de JAR scannés sans succès ; éviter d'analyser des JARs inutilement peut améliorer sensiblement le temps de démarrage et le temps de compilation des JSPs
+16-Sep-2026 20:06:07.200 INFOS [main] org.apache.catalina.startup.HostConfig.deployDescriptor Le traitement du descripteur de déploiement [C:\Users\bnguimgo\.SmartTomcat\Manageo\manageo-web\conf\Catalina\localhost\manageo-web.xml] a pris [104 722] ms
+16-Sep-2026 20:06:07.218 INFOS [main] org.apache.coyote.AbstractProtocol.start Démarrage du gestionnaire de protocole ["http-nio-8080"]
+16-Sep-2026 20:06:07.300 INFOS [main] org.apache.catalina.startup.Catalina.start Le démarrage du serveur a pris [104947] millisecondes
