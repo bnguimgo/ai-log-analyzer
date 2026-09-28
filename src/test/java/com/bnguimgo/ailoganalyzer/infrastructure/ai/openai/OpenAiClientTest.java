@@ -16,6 +16,8 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.http.HttpClient;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +25,7 @@ class OpenAiClientTest {
 
     private HttpServer server;
     private String receivedAuthorization;
-    private String receivedBody;
+    private final List<String> receivedBodies = new ArrayList<>();
     private int requestCount;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -37,6 +39,7 @@ class OpenAiClientTest {
         server.start();
 
         requestCount = 0;
+        receivedBodies.clear();
     }
 
     @AfterEach
@@ -180,11 +183,13 @@ class OpenAiClientTest {
                 exchange.getRequestHeaders()
                         .getFirst("Authorization");
 
-        receivedBody =
+        String requestBody =
                 new String(
                         exchange.getRequestBody().readAllBytes(),
                         StandardCharsets.UTF_8
                 );
+
+        receivedBodies.add(requestBody);
 
         byte[] responseBody = getBytesResponse();
 
@@ -208,7 +213,7 @@ class OpenAiClientTest {
 
     private void assertRequestContainsToolDefinition() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode root = objectMapper.readTree( receivedBody );
+        JsonNode root = objectMapper.readTree(receivedBodies.get(0));
         assertEquals( "test-model", root.path("model").asText() );
         assertEquals( "Analyse cet incident", root.path("input").asText() );
         JsonNode tools = root.path("tools");
@@ -224,7 +229,7 @@ class OpenAiClientTest {
     }
 
     private void assertSecondRequestContainsFunctionCallOutput() throws Exception {
-        JsonNode root = objectMapper.readTree( receivedBody );
+        JsonNode root = objectMapper.readTree(receivedBodies.get(1));
         assertEquals(
                 "resp_123",
                 root.path("previous_response_id").asText()
@@ -241,11 +246,9 @@ class OpenAiClientTest {
 
     private byte[] getBytesResponse() throws IOException {
 
-        JsonNode request =
-                objectMapper.readTree(receivedBody);
+        JsonNode request = objectMapper.readTree(receivedBodies.get(receivedBodies.size() - 1));
 
-        JsonNode input =
-                request.path("input");
+        JsonNode input = request.path("input");
 
         /*
          * Deuxième appel :
