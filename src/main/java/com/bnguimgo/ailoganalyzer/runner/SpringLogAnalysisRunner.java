@@ -35,11 +35,11 @@ public class SpringLogAnalysisRunner {
 
             LogAnalysisReport report = analysisService.analyze(logFile);
 
-            reportPrinter.print(report.getAnalysisResult());
+            reportPrinter.print(report.analysisResult());
 
             System.out.println();
             System.out.println(
-                    "Analyse IA : " + report.getAiAnalysisResponse().getSummary());
+                    "Analyse IA : " + report.aiAnalysisResponse().getSummary());
 
         } catch (IOException e) {
             throw new RuntimeException(e);

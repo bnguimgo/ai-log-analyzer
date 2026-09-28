@@ -346,4 +346,40 @@ class OpenAiClientTest {
         );
     }
 
+    @Test
+    void shouldRejectToolResultWithDifferentCallId() {
+
+        AiResponse functionCall = new AiResponse();
+
+        functionCall.setType(AiResponse.Type.FUNCTION_CALL);
+        functionCall.setResponseId("resp_123");
+        functionCall.setCallId("call_123");
+        functionCall.setFunctionName("search_log");
+        functionCall.setArguments("{\"searchTerm\":\"test\"}");
+
+        ToolExecutionResult toolResult =
+                new ToolExecutionResult(
+                        "call_456",
+                        "result"
+                );
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> openAiClient.continueAnalysis(
+                        functionCall,
+                        toolResult,
+                        "test-model"
+                )
+        );
+
+        assertEquals(
+                "functionCall.callId and toolResult.callId must match",
+                exception.getMessage()
+        );
+
+        assertEquals(
+                0,
+                requestCount
+        );
+    }
 }

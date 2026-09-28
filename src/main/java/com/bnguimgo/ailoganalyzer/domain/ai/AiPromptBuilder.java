@@ -141,10 +141,10 @@ public class AiPromptBuilder {
         prompt.append("4. Propose des recommandations concrètes.\n");
         prompt.append("5. Signale explicitement les incertitudes.\n");
 
-        prompt.append("\n=== TEST TOOL CALLING ===\n");
+        /*prompt.append("\n=== TEST TOOL CALLING ===\n");
         prompt.append("Pour cette analyse, tu dois obligatoirement utiliser l'outil search_log au moins une fois. ");
         prompt.append("Utilise-le pour rechercher exactement le texte suivant dans le fichier de log : ");
-        prompt.append("\"Host name may not be null\".\n");
+        prompt.append("\"Host name may not be null\".\n");*/
 
         return prompt.toString();
     }

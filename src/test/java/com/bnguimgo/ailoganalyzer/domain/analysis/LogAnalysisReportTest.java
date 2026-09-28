@@ -41,14 +41,14 @@ public class LogAnalysisReportTest {
 
         assertSame(
                 analysisResult,
-                report.getAnalysisResult());
+                report.analysisResult());
 
         assertSame(
                 context,
-                report.getStructuredContext());
+                report.structuredContext());
 
         assertSame(
                 aiResponse,
-                report.getAiAnalysisResponse());
+                report.aiAnalysisResponse());
     }
 }

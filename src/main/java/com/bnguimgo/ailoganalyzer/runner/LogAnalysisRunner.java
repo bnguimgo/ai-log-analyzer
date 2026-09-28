@@ -61,7 +61,7 @@ public class LogAnalysisRunner {
                 analysisService.analyze(logFile);
 
         reportPrinter.print(
-                report.getAnalysisResult()
+                report.analysisResult()
         );
     }
 

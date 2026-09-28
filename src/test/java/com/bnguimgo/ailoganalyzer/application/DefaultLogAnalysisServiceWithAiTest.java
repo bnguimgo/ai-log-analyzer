@@ -35,11 +35,11 @@ class DefaultLogAnalysisServiceWithAiTest {
         LogAnalysisReport report = service.analyze(LOG_FILE_PATH);
 
         assertNotNull(report);
-        assertNotNull(report.getAnalysisResult());
-        assertNotNull(report.getStructuredContext());
+        assertNotNull(report.analysisResult());
+        assertNotNull(report.structuredContext());
 
         AiAnalysisResponse response =
-                report.getAiAnalysisResponse();
+                report.aiAnalysisResponse();
 
         assertNotNull(response);
         assertEquals(

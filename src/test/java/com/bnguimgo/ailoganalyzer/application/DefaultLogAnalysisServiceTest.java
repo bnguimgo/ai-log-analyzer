@@ -131,20 +131,20 @@ class DefaultLogAnalysisServiceTest {
 
         assertNotNull(result);
 
-        assertNotNull(result.getAnalysisResult());
+        assertNotNull(result.analysisResult());
 
         assertEquals(
                 groupedIncidents,
-                result.getAnalysisResult().incidents()
+                result.analysisResult().incidents()
         );
 
         assertEquals(
                 relations,
-                result.getAnalysisResult().relations()
+                result.analysisResult().relations()
         );
 
-        assertSame(context, result.getStructuredContext());
-        assertSame(aiResponse, result.getAiAnalysisResponse());
+        assertSame(context, result.structuredContext());
+        assertSame(aiResponse, result.aiAnalysisResponse());
 
         InOrder inOrder = inOrder(
                 logReader,
