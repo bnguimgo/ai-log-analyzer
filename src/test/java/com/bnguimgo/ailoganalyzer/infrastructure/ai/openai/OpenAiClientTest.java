@@ -28,6 +28,7 @@ class OpenAiClientTest {
     private final List<String> receivedBodies = new ArrayList<>();
     private int requestCount;
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private OpenAiClient openAiClient;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -37,6 +38,12 @@ class OpenAiClientTest {
         server.createContext("/v1/responses", this::handleRequest);
 
         server.start();
+
+        openAiClient = new OpenAiClient(
+                "test-api-key",
+                "http://localhost:" + server.getAddress().getPort() + "/v1/responses",
+                HttpClient.newHttpClient(),
+                objectMapper );
 
         requestCount = 0;
         receivedBodies.clear();
@@ -53,18 +60,8 @@ class OpenAiClientTest {
     @Test
     void shouldCallResponsesApiAndExtractText() throws Exception {
 
-        OpenAiClient client =
-                new OpenAiClient(
-                        "test-api-key",
-                        "http://localhost:"
-                                + server.getAddress().getPort()
-                                + "/v1/responses",
-                        HttpClient.newHttpClient(),
-                        objectMapper
-                );
-
         AiResponse result =
-                client.generateAnalysis(
+                openAiClient.generateAnalysis(
                         "Analyse cet incident",
                         "test-model"
                 );
@@ -86,8 +83,7 @@ class OpenAiClientTest {
         properties.setApiKey( "test-api-key" );
         properties.setApiUrl( "http://localhost:" + server.getAddress().getPort() + "/v1/responses" );
         properties.setModel( "test-model" );
-        OpenAiClient client = new OpenAiClient( properties, new ObjectMapper() );
-        AiResponse result = client.generateAnalysis( "Analyse cet incident", properties.getModel() );
+        AiResponse result = openAiClient.generateAnalysis( "Analyse cet incident", properties.getModel() );
         assertEquals( AiResponse.Type.TEXT, result.getType() );
         assertEquals( "Analyse terminée", result.getText() );
         assertEquals( "Bearer test-api-key", receivedAuthorization );
@@ -95,17 +91,13 @@ class OpenAiClientTest {
     }
 
     @Test void shouldExecuteTwoStepFunctionCallFlow() throws Exception {
-        OpenAiClient client = new OpenAiClient(
-                "test-api-key",
-                "http://localhost:" + server.getAddress().getPort() + "/v1/responses",
-                HttpClient.newHttpClient(),
-                objectMapper );
+
 
         /* * Premier appel :
-        * utilisateur → OpenAI
+        * utilisateur - OpenAI
         * OpenAI répond avec un function_call.
         */
-        AiResponse functionCall = client.generateAnalysis( "Recherche l'erreur dans le log", "test-model" );
+        AiResponse functionCall = openAiClient.generateAnalysis( "Recherche l'erreur dans le log", "test-model" );
         assertEquals( AiResponse.Type.FUNCTION_CALL, functionCall.getType() );
         assertEquals(
                 "resp_123",
@@ -123,7 +115,7 @@ class OpenAiClientTest {
         *ToolExecutor → OpenAI * * avec function_call_output.
         * */
         AiResponse finalResponse =
-                client.continueAnalysis( functionCall, toolResult, "test-model" );
+                openAiClient.continueAnalysis( functionCall, toolResult, "test-model" );
         assertEquals( AiResponse.Type.TEXT, finalResponse.getType() );
         assertEquals( "Analyse terminée après exécution du tool", finalResponse.getText() );
 
@@ -138,17 +130,9 @@ class OpenAiClientTest {
     @Test
     void shouldRejectEmptyPrompt() {
 
-        OpenAiClient client =
-                new OpenAiClient(
-                        "test-api-key",
-                        "http://localhost",
-                        HttpClient.newHttpClient(),
-                        objectMapper
-                );
-
         assertThrows(
                 IllegalArgumentException.class,
-                () -> client.generateAnalysis(
+                () -> openAiClient.generateAnalysis(
                         "",
                         "test-model"
                 )
@@ -158,17 +142,9 @@ class OpenAiClientTest {
     @Test
     void shouldRejectEmptyModel() {
 
-        OpenAiClient client =
-                new OpenAiClient(
-                        "test-api-key",
-                        "http://localhost",
-                        HttpClient.newHttpClient(),
-                        objectMapper
-                );
-
         assertThrows(
                 IllegalArgumentException.class,
-                () -> client.generateAnalysis(
+                () -> openAiClient.generateAnalysis(
                         "Analyse cet incident",
                         ""
                 )
@@ -213,7 +189,7 @@ class OpenAiClientTest {
 
     private void assertRequestContainsToolDefinition() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode root = objectMapper.readTree(receivedBodies.get(0));
+        JsonNode root = objectMapper.readTree(receivedBodies.getFirst());
         assertEquals( "test-model", root.path("model").asText() );
         assertEquals( "Analyse cet incident", root.path("input").asText() );
         JsonNode tools = root.path("tools");
@@ -246,7 +222,7 @@ class OpenAiClientTest {
 
     private byte[] getBytesResponse() throws IOException {
 
-        JsonNode request = objectMapper.readTree(receivedBodies.get(receivedBodies.size() - 1));
+        JsonNode request = objectMapper.readTree(receivedBodies.getLast());
 
         JsonNode input = request.path("input");
 
@@ -312,6 +288,62 @@ class OpenAiClientTest {
               ]
             }
             """.getBytes(StandardCharsets.UTF_8);
+    }
+
+    @Test
+    void shouldRejectFunctionCallWithoutResponseId() {
+        AiResponse functionCall = new AiResponse();
+
+        functionCall.setType(AiResponse.Type.FUNCTION_CALL);
+        functionCall.setResponseId(null);
+        functionCall.setCallId("call_123");
+        functionCall.setFunctionName("search_log");
+        functionCall.setArguments("{\"searchTerm\":\"test\"}");
+
+        ToolExecutionResult toolResult =
+                new ToolExecutionResult("call_123", "result");
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> openAiClient.continueAnalysis(
+                        functionCall,
+                        toolResult,
+                        "test-model"
+                )
+        );
+
+        assertEquals(
+                "functionCall.responseId must not be null or empty",
+                exception.getMessage()
+        );
+    }
+
+    @Test
+    void shouldRejectFunctionCallWithoutCallId() {
+        AiResponse functionCall = new AiResponse();
+
+        functionCall.setType(AiResponse.Type.FUNCTION_CALL);
+        functionCall.setResponseId("resp_123");
+        functionCall.setCallId(null);
+        functionCall.setFunctionName("search_log");
+        functionCall.setArguments("{\"searchTerm\":\"test\"}");
+
+        ToolExecutionResult toolResult =
+                new ToolExecutionResult("call_123", "result");
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> openAiClient.continueAnalysis(
+                        functionCall,
+                        toolResult,
+                        "test-model"
+                )
+        );
+
+        assertEquals(
+                "functionCall.callId must not be null or empty",
+                exception.getMessage()
+        );
     }
 
 }

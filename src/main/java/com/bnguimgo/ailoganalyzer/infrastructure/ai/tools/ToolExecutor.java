@@ -42,6 +42,10 @@ public class ToolExecutor {
             AiResponse aiResponse,
             Path logFile) throws IOException {
 
+        if (logFile == null) {
+            throw new IllegalArgumentException("logFile must not be null");
+        }
+
         if (aiResponse == null) {
             throw new IllegalArgumentException(
                     "aiResponse must not be null"

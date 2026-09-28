@@ -13,6 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class ToolExecutorTest {
 
     private static final Path LOG_FILE_PATH = Paths.get("src/test/resources/logs/manageo-cognito.log");
+    private static final ToolExecutor toolExecutor = new ToolExecutor(
+            new DefaultLogSearchTool(),
+            new ObjectMapper() );
 
     @Test
     void shouldExecuteSearchLogFunctionCall()
@@ -247,9 +250,6 @@ class ToolExecutorTest {
 
     @Test
     void shouldRejectMissingSearchTerm() {
-        ToolExecutor executor = new ToolExecutor(
-                new DefaultLogSearchTool(),
-                new ObjectMapper() );
 
         AiResponse aiResponse = new AiResponse();
         aiResponse.setType( AiResponse.Type.FUNCTION_CALL );
@@ -257,20 +257,35 @@ class ToolExecutorTest {
         aiResponse.setArguments( "{}" );
 
         assertThrows( IllegalArgumentException.class,
-                () -> executor.execute( aiResponse, LOG_FILE_PATH ) );
+                () -> toolExecutor.execute( aiResponse, LOG_FILE_PATH ) );
 
     }
 
     @Test void shouldRejectBlankSearchTerm() {
-        ToolExecutor executor = new ToolExecutor(
-                new DefaultLogSearchTool(),
-                new ObjectMapper() );
 
         AiResponse aiResponse = new AiResponse();
         aiResponse.setType( AiResponse.Type.FUNCTION_CALL );
         aiResponse.setFunctionName( "search_log" );
         aiResponse.setArguments( "{\"searchTerm\":\" \"}" );
         assertThrows( IllegalArgumentException.class,
-                () -> executor.execute( aiResponse, LOG_FILE_PATH ));
+                () -> toolExecutor.execute( aiResponse, LOG_FILE_PATH ));
+    }
+
+    @Test
+    void shouldRejectNullLogFile() {
+        AiResponse response = new AiResponse();
+
+        response.setType(AiResponse.Type.FUNCTION_CALL);
+        response.setResponseId("resp_123");
+        response.setCallId("call_123");
+        response.setFunctionName("search_log");
+        response.setArguments("{\"searchTerm\":\"Host name may not be null\"}");
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> toolExecutor.execute(response, null)
+        );
+
+        assertEquals("logFile must not be null", exception.getMessage());
     }
 }

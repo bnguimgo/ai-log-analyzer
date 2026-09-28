@@ -198,8 +198,7 @@ public class OpenAiClient implements AiClient {
             );
         }
 
-        if (functionCall.getType()
-                != AiResponse.Type.FUNCTION_CALL) {
+        if (functionCall.getType() != AiResponse.Type.FUNCTION_CALL) {
 
             throw new IllegalArgumentException(
                     "functionCall must be a FUNCTION_CALL"
@@ -209,6 +208,27 @@ public class OpenAiClient implements AiClient {
         if (toolResult == null) {
             throw new IllegalArgumentException(
                     "toolResult must not be null"
+            );
+        }
+
+        if (functionCall.getResponseId() == null
+                || functionCall.getResponseId().trim().isEmpty()) {
+            throw new IllegalArgumentException("functionCall.responseId must not be null or empty");
+        }
+
+        if (functionCall.getCallId() == null
+                || functionCall.getCallId().trim().isEmpty()) {
+            throw new IllegalArgumentException("functionCall.callId must not be null or empty");
+        }
+
+        if (toolResult.callId() == null
+                || toolResult.callId().trim().isEmpty()) {
+            throw new IllegalArgumentException("toolResult.callId must not be null or empty");
+        }
+
+        if (!functionCall.getCallId().equals(toolResult.callId())) {
+            throw new IllegalArgumentException(
+                    "functionCall.callId and toolResult.callId must match"
             );
         }
 

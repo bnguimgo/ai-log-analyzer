@@ -253,6 +253,18 @@ class DefaultAiAnalyzerTest {
                 );
     }
 
+    @Test
+    void shouldRejectToolExecutionResultWhenCallIdIsMissing() {
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new ToolExecutionResult(
+                        null,
+                        "Host name may not be null"
+                )
+        );
+    }
+
     @ParameterizedTest
     @ValueSource(strings = { "responseId", "callId", "functionName", "arguments" })
     void shouldRejectFunctionCallWhenRequiredFieldIsMissing(String missingField) {
