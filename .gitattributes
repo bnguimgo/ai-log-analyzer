@@ -1,2 +1,16 @@
+# Unix shell script
 /mvnw text eol=lf
+
+# Windows scripts
 *.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Source and configuration files
+*.java text eol=lf
+*.xml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.properties text eol=lf
+*.md text eol=lf
+*.gitignore text eol=lf
+*.gitattributes text eol=lf
