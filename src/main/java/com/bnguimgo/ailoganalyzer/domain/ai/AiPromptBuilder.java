@@ -45,6 +45,61 @@ public class AiPromptBuilder {
                 .append("réponse HTTP, confirmer un enchaînement d'événements, ")
                 .append("ou rechercher un élément nécessaire pour étayer une hypothèse.\n");
 
+        prompt.append("Chaque recherche doit avoir un objectif de diagnostic précis : ")
+                .append("avant d'appeler search_log, identifie explicitement ce que ")
+                .append("tu cherches à démontrer ou à réfuter. Choisis ensuite un terme ")
+                .append("de recherche aussi discriminant que possible par rapport à ")
+                .append("cette hypothèse.\n");
+
+        prompt.append("Évite les recherches génériques ou trop larges lorsqu'un terme ")
+                .append("plus précis est disponible. Par exemple, privilégie le nom ")
+                .append("d'une exception, d'une classe, d'une méthode, d'un message ")
+                .append("d'erreur ou d'un élément technique directement lié à ")
+                .append("l'hypothèse plutôt qu'un terme générique comme le nom d'un ")
+                .append("framework, d'une bibliothèque, d'un composant ou d'une classe ")
+                .append("très fréquente dans le log.\n");
+
+        prompt.append("Après chaque recherche, évalue explicitement le résultat ")
+                .append("par rapport à l'hypothèse : ")
+                .append("CONFIRMÉE, INFIRMÉE ou INSUFFISANTE. ")
+                .append("Si une preuve suffisante est obtenue, arrête les recherches ")
+                .append("liées à cette hypothèse. ")
+                .append("Si elle est infirmée, réévalue le diagnostic avant de lancer ")
+                .append("une nouvelle recherche.\n");
+
+        prompt.append("Une recherche doit toujours avoir un objectif de diagnostic précis. ")
+                .append("Après avoir obtenu son résultat, détermine explicitement si ")
+                .append("ce résultat apporte une preuve suffisante pour répondre à cet objectif.\n");
+
+        prompt.append("Considère qu'une hypothèse est suffisamment étayée lorsqu'une ")
+                .append("preuve directe présente dans le contexte ou dans les résultats ")
+                .append("de search_log permet de la confirmer avec un niveau de confiance ")
+                .append("raisonnable et qu'aucune information supplémentaire identifiable ")
+                .append("dans le log n'est nécessaire pour établir la conclusion.\n");
+
+        prompt.append("Si la preuve est suffisante, arrête les recherches liées à cette ")
+                .append("hypothèse et passe à la conclusion.\n");
+
+        prompt.append("Avant toute nouvelle recherche, compare le résultat obtenu ")
+                .append("à ta conclusion actuelle. N'effectue une nouvelle recherche ")
+                .append("que si tu peux identifier une information précise dont ")
+                .append("l'absence empêche encore de confirmer ou d'infirmer la conclusion ")
+                .append("et si cette information pourrait réellement modifier le diagnostic.\n");
+
+        prompt.append("Si le résultat d'une recherche est insuffisant ou vide et qu'aucune ")
+                .append("information précise supplémentaire susceptible de modifier le ")
+                .append("diagnostic ne peut être identifiée, arrête les recherches.\n");
+
+        prompt.append("Ne lance pas une nouvelle recherche uniquement parce qu'un terme ")
+                .append("technique semble pertinent ou parce qu'il pourrait apporter ")
+                .append("davantage de contexte. Une recherche supplémentaire doit avoir ")
+                .append("un impact potentiel explicite sur la conclusion.\n");
+
+        prompt.append("Si les preuves disponibles permettent déjà d'établir la conclusion ")
+                .append("principale, arrête les recherches même si certaines informations ")
+                .append("secondaires restent inconnues. Indique alors explicitement ces ")
+                .append("informations comme des limites du diagnostic.\n");
+
         prompt.append("Si les informations disponibles sont suffisantes pour établir ")
                 .append("une conclusion, n'utilise pas search_log inutilement.\n\n");
 
@@ -175,11 +230,6 @@ public class AiPromptBuilder {
         prompt.append("3. Donne les éléments de preuve associés.\n");
         prompt.append("4. Propose des recommandations concrètes.\n");
         prompt.append("5. Signale explicitement les incertitudes.\n");
-
-        /*prompt.append("\n=== TEST TOOL CALLING ===\n");
-        prompt.append("Pour cette analyse, tu dois obligatoirement utiliser l'outil search_log au moins une fois. ");
-        prompt.append("Utilise-le pour rechercher exactement le texte suivant dans le fichier de log : ");
-        prompt.append("\"Host name may not be null\".\n");*/
 
         return prompt.toString();
     }

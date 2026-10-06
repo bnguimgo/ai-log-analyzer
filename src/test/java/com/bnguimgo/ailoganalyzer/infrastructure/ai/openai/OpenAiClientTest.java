@@ -190,7 +190,7 @@ class OpenAiClientTest {
     }
 
     private void assertRequestContainsToolDefinition() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
+
         JsonNode root = objectMapper.readTree(receivedBodies.getFirst());
         assertEquals( "test-model", root.path("model").asText() );
         assertEquals( "Analyse cet incident", root.path("input").asText() );
@@ -380,6 +380,44 @@ class OpenAiClientTest {
               "call_id": "call_456",
               "name": "search_log",
               "arguments": "{\\"searchTerm\\":\\"CustomHttpResponseException\\"}"
+            }
+          ]
+        }
+        """.getBytes(StandardCharsets.UTF_8);
+        }
+
+        if ("Réponse avec message puis function calls".equals(input.asText())) {
+
+            return """
+        {
+          "id": "resp_message_then_calls",
+          "output": [
+            {
+              "type": "message",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Je vais effectuer des recherches dans les logs."
+                }
+              ]
+            },
+            {
+              "type": "function_call",
+              "call_id": "call_1",
+              "name": "search_log",
+              "arguments": "{\\"searchTerm\\":\\"CustomHttpResponseErrorHandler\\"}"
+            },
+            {
+              "type": "function_call",
+              "call_id": "call_2",
+              "name": "search_log",
+              "arguments": "{\\"searchTerm\\":\\"httpStatus=400 BAD_REQUEST\\"}"
+            },
+            {
+              "type": "function_call",
+              "call_id": "call_3",
+              "name": "search_log",
+              "arguments": "{\\"searchTerm\\":\\"Cognito\\"}"
             }
           ]
         }
@@ -730,6 +768,81 @@ class OpenAiClientTest {
     }
 
     @Test
+    void shouldExtractFunctionCallsWhenMessageAppearsBeforeFunctionCalls() {
+
+        /*
+         * OpenAI peut retourner un message avant les function_call.
+         *
+         * Le parser doit parcourir l'ensemble du tableau "output"
+         * avant de déterminer le type de réponse.
+         */
+        AiResponse response =
+                openAiClient.generateAnalysis(
+                        "Réponse avec message puis function calls",
+                        "test-model"
+                );
+
+        assertEquals(
+                AiResponse.Type.FUNCTION_CALL,
+                response.getType()
+        );
+
+        assertEquals(
+                "resp_message_then_calls",
+                response.getResponseId()
+        );
+
+        assertEquals(
+                3,
+                response.getFunctionCalls().size()
+        );
+
+        AiFunctionCall firstCall =
+                response.getFunctionCalls().getFirst();
+
+        assertEquals(
+                "call_1",
+                firstCall.getCallId()
+        );
+
+        assertEquals(
+                "search_log",
+                firstCall.getFunctionName()
+        );
+
+        assertEquals(
+                "{\"searchTerm\":\"CustomHttpResponseErrorHandler\"}",
+                firstCall.getArguments()
+        );
+
+        AiFunctionCall secondCall =
+                response.getFunctionCalls().get(1);
+
+        assertEquals(
+                "call_2",
+                secondCall.getCallId()
+        );
+
+        assertEquals(
+                "{\"searchTerm\":\"httpStatus=400 BAD_REQUEST\"}",
+                secondCall.getArguments()
+        );
+
+        AiFunctionCall thirdCall =
+                response.getFunctionCalls().get(2);
+
+        assertEquals(
+                "call_3",
+                thirdCall.getCallId()
+        );
+
+        assertEquals(
+                "{\"searchTerm\":\"Cognito\"}",
+                thirdCall.getArguments()
+        );
+    }
+
+    @Test
     void shouldExecuteMultipleFunctionCallsInSameResponse() throws Exception {
 
         /*
@@ -904,6 +1017,54 @@ class OpenAiClientTest {
         assertEquals(
                 "Résultat recherche erreur 2",
                 secondOutput.path("output").asText()
+        );
+    }
+
+    @Test
+    void shouldDisableParallelToolCallsWhenGenerateAnalysis() throws Exception {
+
+        openAiClient.generateAnalysis(
+                "Analyse ce log",
+                "test-model"
+        );
+
+        String requestBody = receivedBodies.getFirst();
+
+        JsonNode request = objectMapper.readTree(requestBody);
+
+        assertTrue(request.has("parallel_tool_calls"));
+        assertFalse(request.get("parallel_tool_calls").asBoolean());
+    }
+
+    @Test
+    void shouldDisableParallelToolCallsWhenContinueAnalysis() throws Exception {
+
+        AiResponse functionCall = openAiClient.generateAnalysis(
+                "Recherche l'erreur dans le log",
+                "test-model"
+        );
+
+        ToolExecutionResult toolResult =
+                new ToolExecutionResult(
+                        functionCall.getFunctionCalls()
+                                .getFirst()
+                                .getCallId(),
+                        "Résultat de recherche"
+                );
+
+        openAiClient.continueAnalysis(
+                functionCall,
+                List.of(toolResult),
+                "test-model"
+        );
+
+        String requestBody = receivedBodies.getLast();
+
+        JsonNode request = objectMapper.readTree(requestBody);
+
+        assertTrue(request.has("parallel_tool_calls"));
+        assertFalse(
+                request.get("parallel_tool_calls").asBoolean()
         );
     }
 }

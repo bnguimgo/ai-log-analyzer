@@ -106,6 +106,7 @@ public class OpenAiClient implements AiClient {
                     objectMapper.createObjectNode()
                             .put("model", model)
                             .put("input", prompt)
+                            .put("parallel_tool_calls", false)
                             .set(
                                     "tools",
                                     objectMapper.valueToTree(
@@ -231,31 +232,7 @@ public class OpenAiClient implements AiClient {
             );
         }
 
-        List<AiFunctionCall> functionCalls =
-                functionCall.getFunctionCalls();
-
-        if (functionCalls == null || functionCalls.isEmpty()) {
-            throw new IllegalArgumentException(
-                    "functionCall must contain at least one function call"
-            );
-        }
-
-        for (AiFunctionCall aiFunctionCall : functionCalls) {
-
-            if (aiFunctionCall == null) {
-                throw new IllegalArgumentException(
-                        "functionCall must not contain null elements"
-                );
-            }
-
-            if (aiFunctionCall.getCallId() == null
-                    || aiFunctionCall.getCallId().trim().isEmpty()) {
-
-                throw new IllegalArgumentException(
-                        "functionCall.callId must not be null or empty"
-                );
-            }
-        }
+        List<AiFunctionCall> functionCalls = getAiFunctionCalls(functionCall);
 
         for (ToolExecutionResult toolResult : toolResults) {
 
@@ -327,6 +304,11 @@ public class OpenAiClient implements AiClient {
         requestNode.put(
                 "previous_response_id",
                 functionCall.getResponseId()
+        );
+
+        requestNode.put(
+                "parallel_tool_calls",
+                false
         );
 
         requestNode.set(
@@ -432,22 +414,44 @@ public class OpenAiClient implements AiClient {
         }
     }
 
+    private static List<AiFunctionCall> getAiFunctionCalls(AiResponse functionCall) {
+
+        List<AiFunctionCall> functionCalls = functionCall.getFunctionCalls();
+
+        if (functionCalls == null || functionCalls.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "functionCall must contain at least one function call"
+            );
+        }
+
+        for (AiFunctionCall aiFunctionCall : functionCalls) {
+
+            if (aiFunctionCall == null) {
+                throw new IllegalArgumentException(
+                        "functionCall must not contain null elements"
+                );
+            }
+
+            if (aiFunctionCall.getCallId() == null
+                    || aiFunctionCall.getCallId().trim().isEmpty()) {
+
+                throw new IllegalArgumentException(
+                        "functionCall.callId must not be null or empty"
+                );
+            }
+        }
+        return functionCalls;
+    }
+
     private AiResponse extractResponse(String responseBody) throws IOException {
 
-        logger.debug(
-                "Parsing OpenAI Responses API response"
-        );
+        JsonNode root = objectMapper.readTree(responseBody);
 
-        JsonNode root =
-                objectMapper.readTree(responseBody);
-
-        String responseId =
-                root.path("id").asText(null);
-
-        JsonNode output =
-                root.path("output");
+        String responseId = root.path("id").asText(null);
+        JsonNode output = root.path("output");
 
         List<AiFunctionCall> functionCalls = new ArrayList<>();
+        String outputText = null;
 
         for (JsonNode outputItem : output) {
 
@@ -457,39 +461,16 @@ public class OpenAiClient implements AiClient {
 
                 AiFunctionCall functionCall = new AiFunctionCall();
 
-                String callId =
-                        outputItem
-                                .path("call_id")
-                                .asText();
-
-                if (callId == null || callId.trim().isEmpty()) {
-                    throw new IllegalArgumentException(
-                            "functionCall.callId must not be null or empty"
-                    );
-                }
-
-                String functionName =
-                        outputItem
-                                .path("name")
-                                .asText();
-
-                String arguments =
-                        outputItem
-                                .path("arguments")
-                                .asText();
-
-                functionCall.setCallId(callId);
-
-                functionCall.setFunctionName(
-                        functionName
+                functionCall.setCallId(
+                        outputItem.path("call_id").asText(null)
                 );
 
-                functionCall.setArguments(arguments);
+                functionCall.setFunctionName(
+                        outputItem.path("name").asText(null)
+                );
 
-                logger.info(
-                        "OpenAI requested function '{}' - callId={}",
-                        functionName,
-                        callId
+                functionCall.setArguments(
+                        outputItem.path("arguments").asText(null)
                 );
 
                 functionCalls.add(functionCall);
@@ -497,48 +478,44 @@ public class OpenAiClient implements AiClient {
 
             if ("message".equals(type)) {
 
-                JsonNode content =
-                        outputItem.path("content");
+                JsonNode content = outputItem.path("content");
 
                 for (JsonNode contentItem : content) {
 
                     if ("output_text".equals(
-                            contentItem
-                                    .path("type")
-                                    .asText())) {
+                            contentItem.path("type").asText())) {
+
+                        outputText = contentItem.path("text").asText();
 
                         logger.info(
                                 "OpenAI returned final text response"
                         );
-
-                        AiResponse response =
-                                new AiResponse();
-
-                        response.setType(
-                                AiResponse.Type.TEXT
-                        );
-
-                        response.setText(
-                                contentItem
-                                        .path("text")
-                                        .asText()
-                        );
-
-                        return response;
                     }
                 }
             }
         }
 
+        /*
+         * Les function calls sont prioritaires :
+         * OpenAI peut retourner un message avant les function calls.
+         */
         if (!functionCalls.isEmpty()) {
 
             AiResponse response = new AiResponse();
 
             response.setType(AiResponse.Type.FUNCTION_CALL);
-
             response.setResponseId(responseId);
-
             response.setFunctionCalls(functionCalls);
+
+            return response;
+        }
+
+        if (outputText != null) {
+
+            AiResponse response = new AiResponse();
+
+            response.setType(AiResponse.Type.TEXT);
+            response.setText(outputText);
 
             return response;
         }

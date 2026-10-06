@@ -103,20 +103,7 @@ class AiPromptBuilderTest {
         LogIncident target = new LogIncident();
         target.setType(IncidentType.HTTP_ERROR);
 
-        IncidentRelation relation =
-                new IncidentRelation(
-                        source,
-                        target,
-                        IncidentRelationType.TEMPORALLY_RELATED,
-                        "Les deux incidents sont proches dans le temps."
-                );
-
-        StructuredContext context =
-                new StructuredContext(
-                        Arrays.asList(source, target),
-                        Collections.singletonList(relation),
-                        LOG_FILE_PATH
-                );
+        StructuredContext context = getStructuredContext(source, target);
 
         AiPromptBuilder builder =
                 new AiPromptBuilder();
@@ -127,6 +114,22 @@ class AiPromptBuilderTest {
         assertTrue(prompt.contains(
                 "Les deux incidents sont proches dans le temps."
         ));
+    }
+
+    private static StructuredContext getStructuredContext(LogIncident source, LogIncident target) {
+        IncidentRelation relation =
+                new IncidentRelation(
+                        source,
+                        target,
+                        IncidentRelationType.TEMPORALLY_RELATED,
+                        "Les deux incidents sont proches dans le temps."
+                );
+
+        return new StructuredContext(
+                        Arrays.asList(source, target),
+                        Collections.singletonList(relation),
+                        LOG_FILE_PATH
+                );
     }
 
     @Test
@@ -140,4 +143,84 @@ class AiPromptBuilderTest {
                 () -> builder.build(null)
         );
     }
+
+    @Test
+    void shouldInstructAiToEvaluateSearchResultBeforeContinuing() {
+
+        StructuredContext context = new StructuredContext(
+                Collections.emptyList(),
+                Collections.emptyList(),
+                LOG_FILE_PATH
+        );
+
+        AiPromptBuilder builder = new AiPromptBuilder();
+
+        String prompt = builder.build(context);
+
+        assertTrue(prompt.contains("CONFIRMÉE"));
+        assertTrue(prompt.contains("INFIRMÉE"));
+        assertTrue(prompt.contains("INSUFFISANTE"));
+
+        assertTrue(prompt.contains("Après chaque recherche"));
+        assertTrue(prompt.contains("évalue"));
+        assertTrue(prompt.contains("arrête les recherches"));
+        assertTrue(prompt.contains("réévalue le diagnostic"));
+    }
+
+/*    @Test
+    void shouldIncludeEvidenceStoppingRule() {
+        StructuredContext context = new StructuredContext(
+                Collections.emptyList(),
+                Collections.emptyList(),
+                LOG_FILE_PATH
+        );
+
+        AiPromptBuilder builder = new AiPromptBuilder();
+
+        String prompt = builder.build(context);
+
+        assertTrue(prompt.contains(
+                "Si la preuve est suffisante, arrête les recherches"
+        ));
+
+        assertTrue(prompt.contains(
+                "Si aucune recherche supplémentaire précise et utile ne peut être identifiée"
+        ));
+
+        assertTrue(prompt.contains(
+                "la preuve disponible dans le log est insuffisante"
+        ));
+    }*/
+
+/*    @Test
+    void shouldRequireNewSearchToBePotentiallyDiagnostic() {
+
+        StructuredContext context = new StructuredContext(
+                Collections.emptyList(),
+                Collections.emptyList(),
+                LOG_FILE_PATH
+        );
+
+        AiPromptBuilder aiPromptBuilder = new AiPromptBuilder();
+
+        String prompt = aiPromptBuilder.build(context);
+
+        assertTrue(
+                prompt.contains(
+                        "Avant toute nouvelle recherche, compare le résultat obtenu à ta conclusion actuelle"
+                )
+        );
+
+        assertTrue(
+                prompt.contains(
+                        "cette information pourrait réellement modifier le diagnostic"
+                )
+        );
+
+        assertTrue(
+                prompt.contains(
+                        "considère cette piste comme épuisée"
+                )
+        );
+    }*/
 }
