@@ -1,10 +1,7 @@
 package com.bnguimgo.ailoganalyzer.domain.ai.analyzer;
 
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
-import com.bnguimgo.ailoganalyzer.domain.ai.AiAnalysisResponse;
-import com.bnguimgo.ailoganalyzer.domain.ai.AiPromptBuilder;
-import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
-import com.bnguimgo.ailoganalyzer.domain.ai.StructuredContext;
+import com.bnguimgo.ailoganalyzer.domain.ai.*;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.AiClient;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutor;
@@ -12,13 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class DefaultAiAnalyzer implements AiAnalyzer {
 
-    private static final Logger logger =
-            LoggerFactory.getLogger(DefaultAiAnalyzer.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(DefaultAiAnalyzer.class);
+    private static final int MAX_TOOL_CALLS = 10;
     private final AiClient aiClient;
     private final AiPromptBuilder aiPromptBuilder;
     private final AiProviderProperties properties;
@@ -38,7 +37,7 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
 
     @Override
     public AiAnalysisResponse analyze(
-            StructuredContext context) {
+            StructuredContext context) throws IOException {
 
         if (context == null) {
             throw new IllegalArgumentException(
@@ -56,113 +55,140 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
 
         logger.debug("Calling AI for initial analysis");
 
-        //Premier appel de l'IA
         AiResponse aiResponse =
                 aiClient.generateAnalysis(
                         prompt,
                         properties.getModel()
                 );
 
-        if (aiResponse.getType() == AiResponse.Type.TEXT) {
+        int executedToolCalls = 0;
 
-            logger.info(
-                    "AI returned final response without tool execution"
-            );
+        while (aiResponse.getType() == AiResponse.Type.FUNCTION_CALL) {
 
-            return createResponse(
-                    aiResponse.getText()
-            );
-        }
+            List<AiFunctionCall> functionCalls =
+                    aiResponse.getFunctionCalls();
 
-        if (aiResponse.getType() != AiResponse.Type.FUNCTION_CALL) {
-            throw new IllegalStateException(
-                    "Unsupported AI response type: "
-                            + aiResponse.getType()
-            );
-        }
+            if (functionCalls == null || functionCalls.isEmpty()) {
+                throw new IllegalStateException(
+                        "AI function call response contains no function calls"
+                );
+            }
 
-        validateFunctionCall(aiResponse);
+            if (executedToolCalls + functionCalls.size() > MAX_TOOL_CALLS) {
+                throw new IllegalStateException(
+                        "Maximum number of AI tool calls exceeded"
+                );
+            }
 
-        logger.info(
-                "AI requested tool execution - function={}, callId={}",
-                aiResponse.getFunctionName(),
-                aiResponse.getCallId()
-        );
-
-        ToolExecutionResult toolResult;
-
-        try {
-
-            logger.info(
-                    "Executing tool '{}' - callId={}",
-                    aiResponse.getFunctionName(),
-                    aiResponse.getCallId()
-            );
-
-            toolResult =
-                    toolExecutor.execute(
+            List<ToolExecutionResult> toolResults =
+                    executeToolCalls(
                             aiResponse,
                             context.logFile()
                     );
 
-        } catch (IOException e) {
+            executedToolCalls += toolResults.size();
 
-            logger.error(
-                    "Tool execution failed - function={}, callId={}",
-                    aiResponse.getFunctionName(),
-                    aiResponse.getCallId(),
-                    e
+            logger.info(
+                    "Calling AI for continuation after tool executions - " +
+                            "toolCount={}, totalToolCalls={}, model={}",
+                    toolResults.size(),
+                    executedToolCalls,
+                    properties.getModel()
             );
 
-            throw new IllegalStateException(
-                    "Unable to execute AI tool",
-                    e
+            aiResponse =
+                    aiClient.continueAnalysis(
+                            aiResponse,
+                            toolResults,
+                            properties.getModel()
+                    );
+
+            logger.info(
+                    "AI continuation response received - " +
+                            "toolCount={}, totalToolCalls={}, responseType={}",
+                    toolResults.size(),
+                    executedToolCalls,
+                    aiResponse.getType()
             );
         }
 
-        logger.info(
-                "Tool execution completed - function={}, callId={}",
-                aiResponse.getFunctionName(),
-                aiResponse.getCallId()
-        );
+        return createResponse(aiResponse.getText());
+    }
 
-        /*
-         * Deuxième appel à l'IA :
-         * on transmet le résultat du tool pour permettre
-         * à l'IA de poursuivre son analyse.
-         */
-        logger.info(
-                "Calling AI for final analysis after tool execution - " +
-                        "callId={}, model={}",
-                toolResult.callId(),
-                properties.getModel()
-        );
+    private List<ToolExecutionResult> executeToolCalls(
+            AiResponse aiResponse,
+            Path logFile) {
 
-        AiResponse finalResponse =
-                aiClient.continueAnalysis(
-                        aiResponse,
-                        toolResult,
-                        properties.getModel()
+        if (aiResponse.getResponseId() == null
+                || aiResponse.getResponseId().trim().isEmpty()) {
+
+            throw new IllegalStateException(
+                    "AI function call response is missing responseId"
+            );
+        }
+
+        List<AiFunctionCall> functionCalls =
+                aiResponse.getFunctionCalls();
+
+        if (functionCalls == null
+                || functionCalls.isEmpty()) {
+
+            throw new IllegalStateException(
+                    "AI function call response contains no function calls"
+            );
+        }
+
+        List<ToolExecutionResult> toolResults = new ArrayList<>();
+
+        for (AiFunctionCall functionCall : functionCalls) {
+
+            validateFunctionCall(functionCall);
+
+            logger.info(
+                    "AI requested tool execution - function={}, callId={}",
+                    functionCall.getFunctionName(),
+                    functionCall.getCallId()
+            );
+
+            try {
+
+                logger.info(
+                        "Executing tool '{}' - callId={}",
+                        functionCall.getFunctionName(),
+                        functionCall.getCallId()
                 );
 
-        logger.info(
-                "AI final response received after tool execution - " +
-                        "callId={}, responseType={}",
-                toolResult.callId(),
-                finalResponse.getType()
-        );
+                ToolExecutionResult toolResult =
+                        toolExecutor.execute(
+                                functionCall,
+                                logFile
+                        );
 
-        if (finalResponse.getType()
-                != AiResponse.Type.TEXT) {
+                toolResults.add(toolResult);
 
-            throw new IllegalStateException(
-                    "AI did not return a final text response"
-            );
+                logger.info(
+                        "Tool execution completed - function={}, callId={}",
+                        functionCall.getFunctionName(),
+                        functionCall.getCallId()
+                );
+
+            } catch (IOException e) {
+
+                logger.error(
+                        "Tool execution failed - function={}, callId={}",
+                        functionCall.getFunctionName(),
+                        functionCall.getCallId(),
+                        e
+                );
+
+                throw new IllegalStateException(
+                        "Unable to execute AI tool",
+                        e
+                );
+            }
         }
 
-        return createResponse(
-                finalResponse.getText()
-        );
+        return toolResults;
     }
 
     private AiAnalysisResponse createResponse(
@@ -188,34 +214,32 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
         return response;
     }
 
-    private void validateFunctionCall(AiResponse aiResponse) {
+    private void validateFunctionCall(AiFunctionCall functionCall) {
 
-        if (aiResponse.getResponseId() == null
-                || aiResponse.getResponseId().trim().isEmpty()) {
-
+        if (functionCall == null) {
             throw new IllegalStateException(
-                    "AI function call is missing responseId"
+                    "AI function call must not be null"
             );
         }
 
-        if (aiResponse.getCallId() == null
-                || aiResponse.getCallId().trim().isEmpty()) {
+        if (functionCall.getCallId() == null
+                || functionCall.getCallId().trim().isEmpty()) {
 
             throw new IllegalStateException(
                     "AI function call is missing callId"
             );
         }
 
-        if (aiResponse.getFunctionName() == null
-                || aiResponse.getFunctionName().trim().isEmpty()) {
+        if (functionCall.getFunctionName() == null
+                || functionCall.getFunctionName().trim().isEmpty()) {
 
             throw new IllegalStateException(
                     "AI function call is missing functionName"
             );
         }
 
-        if (aiResponse.getArguments() == null
-                || aiResponse.getArguments().trim().isEmpty()) {
+        if (functionCall.getArguments() == null
+                || functionCall.getArguments().trim().isEmpty()) {
 
             throw new IllegalStateException(
                     "AI function call is missing arguments"

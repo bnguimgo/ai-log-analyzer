@@ -1,5 +1,7 @@
 package com.bnguimgo.ailoganalyzer.domain.ai;
 
+import java.util.List;
+
 public class AiResponse {
 
     public enum Type {
@@ -13,6 +15,8 @@ public class AiResponse {
     private String callId;
     private String functionName;
     private String arguments;
+
+    private List<AiFunctionCall> functionCalls;
 
     public Type getType() {
         return type;
@@ -56,5 +60,13 @@ public class AiResponse {
 
     public void setArguments(String arguments) {
         this.arguments = arguments;
+    }
+
+    public List<AiFunctionCall> getFunctionCalls() {
+        return functionCalls;
+    }
+
+    public void setFunctionCalls(List<AiFunctionCall> functionCalls) {
+        this.functionCalls = functionCalls;
     }
 }

@@ -4,6 +4,8 @@ import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -80,7 +82,7 @@ class MockAiClientTest {
         AiResponse response =
                 client.continueAnalysis(
                         functionCall,
-                        toolResult,
+                        List.of(toolResult),
                         "mock-model"
                 );
 
@@ -90,8 +92,7 @@ class MockAiClientTest {
         );
 
         assertEquals(
-                "Analyse IA simulée après exécution du tool : "
-                        + "Ligne 42 : Host name may not be null",
+                "Analyse IA simulée après exécution des tools : 1",
                 response.getText()
         );
     }
@@ -109,7 +110,7 @@ class MockAiClientTest {
                 IllegalArgumentException.class,
                 () -> client.continueAnalysis(
                         null,
-                        toolResult,
+                        List.of(toolResult),
                         "mock-model"
                 )
         );
@@ -135,7 +136,7 @@ class MockAiClientTest {
                 IllegalArgumentException.class,
                 () -> client.continueAnalysis(
                         response,
-                        toolResult,
+                        List.of(toolResult),
                         "mock-model"
                 )
         );
@@ -181,7 +182,7 @@ class MockAiClientTest {
                 IllegalArgumentException.class,
                 () -> client.continueAnalysis(
                         functionCall,
-                        toolResult,
+                        List.of(toolResult),
                         ""
                 )
         );

@@ -1,6 +1,7 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.openai;
 
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
+import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -103,19 +104,20 @@ class OpenAiClientTest {
                 "resp_123",
                 functionCall.getResponseId()
         );
-        assertEquals( "call_123", functionCall.getCallId() );
-        assertEquals( "search_log", functionCall.getFunctionName() );
-        assertEquals( "{\"searchTerm\":\"Host name may not be null\"}", functionCall.getArguments() );
+        AiFunctionCall aiFunctionCall = functionCall.getFunctionCalls().getFirst();
+        assertEquals( "call_123", aiFunctionCall.getCallId() );
+        assertEquals( "search_log", aiFunctionCall.getFunctionName() );
+        assertEquals( "{\"searchTerm\":\"Host name may not be null\"}", aiFunctionCall.getArguments() );
 
         //Résultat produit par notre ToolExecutor.
         ToolExecutionResult toolResult =
-                new ToolExecutionResult( functionCall.getCallId(), "Ligne 42 : Host name may not be null" );
+                new ToolExecutionResult( aiFunctionCall.getCallId(), "Ligne 42 : Host name may not be null" );
 
         /* * Deuxième appel :
         *ToolExecutor → OpenAI * * avec function_call_output.
         * */
         AiResponse finalResponse =
-                openAiClient.continueAnalysis( functionCall, toolResult, "test-model" );
+                openAiClient.continueAnalysis( functionCall, List.of(toolResult), "test-model" );
         assertEquals( AiResponse.Type.TEXT, finalResponse.getType() );
         assertEquals( "Analyse terminée après exécution du tool", finalResponse.getText() );
 
@@ -197,7 +199,12 @@ class OpenAiClientTest {
         JsonNode tool = tools.get(0);
         assertEquals( "function", tool.path("type").asText() );
         assertEquals( "search_log", tool.path("name").asText() );
-        assertEquals( "Recherche un texte dans le fichier de log.", tool.path("description").asText() );
+
+        String expectedDescription = "Recherche un texte dans le fichier de log. "
+                + "Utilise cet outil lorsque tu dois vérifier la présence "
+                + "d'un message, d'une exception ou d'un autre élément "
+                + "dans le log afin d'obtenir des éléments de preuve.";
+        assertEquals( expectedDescription, tool.path("description").asText() );
         JsonNode parameters = tool.path("parameters");
         assertEquals( "object", parameters.path("type").asText() );
         JsonNode searchTerm = parameters .path("properties") .path("searchTerm");
@@ -232,28 +239,97 @@ class OpenAiClientTest {
          */
         if (input.isArray()) {
 
-            return """
+            String firstInput = objectMapper
+                    .readTree(receivedBodies.getFirst())
+                    .path("input")
+                    .asText();
+
+            if ("Recherche plusieurs erreurs dans le log".equals(firstInput)
+                    && requestCount == 2) {
+
+                return """
+            {
+              "id": "resp_2",
+              "output": [
                 {
-                  "output": [
+                  "type": "function_call",
+                  "call_id": "call_2",
+                  "name": "search_log",
+                  "arguments": "{\\"searchTerm\\":\\"CustomHttpResponseException\\"}"
+                }
+              ]
+            }
+            """.getBytes(StandardCharsets.UTF_8);
+            }
+
+            if ("Recherche plusieurs erreurs dans le log".equals(firstInput)
+                    && requestCount == 3) {
+
+                return """
+            {
+              "id": "resp_3",
+              "output": [
+                {
+                  "type": "message",
+                  "content": [
                     {
-                      "type": "message",
-                      "content": [
-                        {
-                          "type": "output_text",
-                          "text": "Analyse terminée après exécution du tool"
-                        }
-                      ]
+                      "type": "output_text",
+                      "text": "Analyse terminée après deux tool calls"
                     }
                   ]
                 }
-                """.getBytes(StandardCharsets.UTF_8);
+              ]
+            }
+            """.getBytes(StandardCharsets.UTF_8);
+            }
+
+            // Ancien scénario : deuxième appel → TEXT
+            // Scénario : deux function calls dans une même réponse
+        if ("Recherche deux erreurs dans le log".equals(firstInput)
+            && requestCount == 2) {
+
+        return """
+        {
+          "output": [
+            {
+              "type": "message",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Analyse terminée après deux function calls"
+                }
+              ]
+            }
+          ]
         }
+        """.getBytes(StandardCharsets.UTF_8);
+                    }
+
+        // Ancien scénario : un function call → résultat du tool → TEXT
+        if (requestCount == 2) {
+
+        return """
+        {
+          "output": [
+            {
+              "type": "message",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Analyse terminée après exécution du tool"
+                }
+              ]
+            }
+          ]
+        }
+        """.getBytes(StandardCharsets.UTF_8);
+                    }
+                }
 
         /*
          * Appel demandant explicitement une recherche.
          */
-        if ("Recherche l'erreur dans le log"
-                .equals(input.asText())) {
+        if ("Recherche l'erreur dans le log".equals(input.asText())) {
 
             return """
                 {
@@ -268,6 +344,46 @@ class OpenAiClientTest {
                   ]
                 }
                 """.getBytes(StandardCharsets.UTF_8);
+        }
+
+        if ("Recherche plusieurs erreurs dans le log".equals(input.asText())) {
+
+            return """
+        {
+          "id": "resp_1",
+          "output": [
+            {
+              "type": "function_call",
+              "call_id": "call_1",
+              "name": "search_log",
+              "arguments": "{\\"searchTerm\\":\\"Host name may not be null\\"}"
+            }
+          ]
+        }
+        """.getBytes(StandardCharsets.UTF_8);
+        }
+
+        if ("Recherche deux erreurs dans le log".equals(input.asText())) {
+
+            return """
+        {
+          "id": "resp_multi",
+          "output": [
+            {
+              "type": "function_call",
+              "call_id": "call_123",
+              "name": "search_log",
+              "arguments": "{\\"searchTerm\\":\\"Host name may not be null\\"}"
+            },
+            {
+              "type": "function_call",
+              "call_id": "call_456",
+              "name": "search_log",
+              "arguments": "{\\"searchTerm\\":\\"CustomHttpResponseException\\"}"
+            }
+          ]
+        }
+        """.getBytes(StandardCharsets.UTF_8);
         }
 
         /*
@@ -307,7 +423,7 @@ class OpenAiClientTest {
                 IllegalArgumentException.class,
                 () -> openAiClient.continueAnalysis(
                         functionCall,
-                        toolResult,
+                        List.of(toolResult),
                         "test-model"
                 )
         );
@@ -324,9 +440,11 @@ class OpenAiClientTest {
 
         functionCall.setType(AiResponse.Type.FUNCTION_CALL);
         functionCall.setResponseId("resp_123");
-        functionCall.setCallId(null);
-        functionCall.setFunctionName("search_log");
-        functionCall.setArguments("{\"searchTerm\":\"test\"}");
+        AiFunctionCall aiFunctionCall = new AiFunctionCall();
+        aiFunctionCall.setCallId(null);
+        aiFunctionCall.setFunctionName("search_log");
+        aiFunctionCall.setArguments("{\"searchTerm\":\"test\"}");
+        functionCall.setFunctionCalls(List.of(aiFunctionCall));
 
         ToolExecutionResult toolResult =
                 new ToolExecutionResult("call_123", "result");
@@ -335,7 +453,7 @@ class OpenAiClientTest {
                 IllegalArgumentException.class,
                 () -> openAiClient.continueAnalysis(
                         functionCall,
-                        toolResult,
+                        List.of(toolResult),
                         "test-model"
                 )
         );
@@ -353,9 +471,12 @@ class OpenAiClientTest {
 
         functionCall.setType(AiResponse.Type.FUNCTION_CALL);
         functionCall.setResponseId("resp_123");
-        functionCall.setCallId("call_123");
-        functionCall.setFunctionName("search_log");
-        functionCall.setArguments("{\"searchTerm\":\"test\"}");
+        AiFunctionCall aiFunctionCall = new AiFunctionCall();
+        aiFunctionCall.setCallId("call_123");
+        aiFunctionCall.setFunctionName("search_log");
+        aiFunctionCall.setArguments("{\"searchTerm\":\"test\"}");
+
+        functionCall.setFunctionCalls(List.of(aiFunctionCall));
 
         ToolExecutionResult toolResult =
                 new ToolExecutionResult(
@@ -367,7 +488,7 @@ class OpenAiClientTest {
                 IllegalArgumentException.class,
                 () -> openAiClient.continueAnalysis(
                         functionCall,
-                        toolResult,
+                        List.of(toolResult),
                         "test-model"
                 )
         );
@@ -382,4 +503,408 @@ class OpenAiClientTest {
                 requestCount
         );
     }
+
+    @Test
+    void shouldExecuteMultipleFunctionCallFlow() throws Exception {
+
+        /*
+         * Premier appel :
+         * application → OpenAI
+         * OpenAI → FUNCTION_CALL call_1
+         */
+        AiResponse firstFunctionCall =
+                openAiClient.generateAnalysis(
+                        "Recherche plusieurs erreurs dans le log",
+                        "test-model"
+                );
+
+        assertEquals(
+                AiResponse.Type.FUNCTION_CALL,
+                firstFunctionCall.getType()
+        );
+
+        assertEquals(
+                "resp_1",
+                firstFunctionCall.getResponseId()
+        );
+
+        AiFunctionCall aiFunctionCall = firstFunctionCall.getFunctionCalls().getFirst();
+        assertEquals(
+                "call_1",
+                aiFunctionCall.getCallId()
+        );
+
+        assertEquals(
+                "search_log",
+                aiFunctionCall.getFunctionName()
+        );
+
+        /*
+         * Résultat du premier tool.
+         */
+        ToolExecutionResult firstToolResult =
+                new ToolExecutionResult(
+                        aiFunctionCall.getCallId(),
+                        "Résultat recherche erreur 1"
+                );
+
+        /*
+         * Deuxième appel :
+         * application → OpenAI
+         * OpenAI → FUNCTION_CALL call_2
+         */
+        AiResponse secondFunctionCall =
+                openAiClient.continueAnalysis(
+                        firstFunctionCall,
+                        List.of(firstToolResult),
+                        "test-model"
+                );
+
+        assertEquals(
+                AiResponse.Type.FUNCTION_CALL,
+                secondFunctionCall.getType()
+        );
+
+        assertEquals(
+                "resp_2",
+                secondFunctionCall.getResponseId()
+        );
+
+        AiFunctionCall aiFunctionCall_2 = secondFunctionCall.getFunctionCalls().getFirst();
+        assertEquals(
+                "call_2",
+                aiFunctionCall_2.getCallId()
+        );
+
+        assertEquals(
+                "search_log",
+                aiFunctionCall_2.getFunctionName()
+        );
+
+        /*
+         * Résultat du deuxième tool.
+         */
+        ToolExecutionResult secondToolResult =
+                new ToolExecutionResult(
+                        aiFunctionCall_2.getCallId(),
+                        "Résultat recherche erreur 2"
+                );
+
+        /*
+         * Troisième appel :
+         * application → OpenAI
+         * OpenAI → TEXT
+         */
+        AiResponse finalResponse =
+                openAiClient.continueAnalysis(
+                        secondFunctionCall,
+                        List.of(secondToolResult),
+                        "test-model"
+                );
+
+        assertEquals(
+                AiResponse.Type.TEXT,
+                finalResponse.getType()
+        );
+
+        assertEquals(
+                "Analyse terminée après deux tool calls",
+                finalResponse.getText()
+        );
+
+        /*
+         * Trois appels HTTP au total :
+         *
+         * 1. generateAnalysis()
+         * 2. continueAnalysis(call_1)
+         * 3. continueAnalysis(call_2)
+         */
+        assertEquals(
+                3,
+                requestCount
+        );
+
+        /*
+         * Vérification du deuxième appel HTTP :
+         * function_call_output du call_1
+         */
+        JsonNode secondRequest =
+                objectMapper.readTree(
+                        receivedBodies.get(1)
+                );
+
+        JsonNode secondTools = secondRequest.path("tools");
+
+        assertEquals(
+                1,
+                secondTools.size()
+        );
+
+        assertEquals(
+                "function",
+                secondTools.get(0).path("type").asText()
+        );
+
+        assertEquals(
+                "search_log",
+                secondTools.get(0).path("name").asText()
+        );
+
+        assertEquals(
+                "resp_1",
+                secondRequest
+                        .path("previous_response_id")
+                        .asText()
+        );
+
+        JsonNode secondInput =
+                secondRequest.path("input");
+
+        assertEquals(
+                "function_call_output",
+                secondInput
+                        .get(0)
+                        .path("type")
+                        .asText()
+        );
+
+        assertEquals(
+                "call_1",
+                secondInput
+                        .get(0)
+                        .path("call_id")
+                        .asText()
+        );
+
+        /*
+         * Vérification du troisième appel HTTP :
+         * function_call_output du call_2
+         */
+        JsonNode thirdRequest =
+                objectMapper.readTree(
+                        receivedBodies.get(2)
+                );
+
+        JsonNode thirdTools = thirdRequest.path("tools");
+
+        assertEquals(
+                1,
+                thirdTools.size()
+        );
+
+        assertEquals(
+                "function",
+                thirdTools.get(0).path("type").asText()
+        );
+
+        assertEquals(
+                "search_log",
+                thirdTools.get(0).path("name").asText()
+        );
+
+        assertEquals(
+                "resp_2",
+                thirdRequest
+                        .path("previous_response_id")
+                        .asText()
+        );
+
+        JsonNode thirdInput =
+                thirdRequest.path("input");
+
+        assertEquals(
+                "function_call_output",
+                thirdInput
+                        .get(0)
+                        .path("type")
+                        .asText()
+        );
+
+        assertEquals(
+                "call_2",
+                thirdInput
+                        .get(0)
+                        .path("call_id")
+                        .asText()
+        );
+    }
+
+    @Test
+    void shouldExecuteMultipleFunctionCallsInSameResponse() throws Exception {
+
+        /*
+         * Premier appel :
+         * application → OpenAI
+         * OpenAI → deux FUNCTION_CALL
+         */
+        AiResponse functionCall =
+                openAiClient.generateAnalysis(
+                        "Recherche deux erreurs dans le log",
+                        "test-model"
+                );
+
+        assertEquals(
+                AiResponse.Type.FUNCTION_CALL,
+                functionCall.getType()
+        );
+
+        assertEquals(
+                "resp_multi",
+                functionCall.getResponseId()
+        );
+
+        assertEquals(
+                2,
+                functionCall.getFunctionCalls().size()
+        );
+
+        AiFunctionCall firstFunctionCall =
+                functionCall.getFunctionCalls().get(0);
+
+        AiFunctionCall secondFunctionCall =
+                functionCall.getFunctionCalls().get(1);
+
+        assertEquals(
+                "call_123",
+                firstFunctionCall.getCallId()
+        );
+
+        assertEquals(
+                "call_456",
+                secondFunctionCall.getCallId()
+        );
+
+        /*
+         * Résultats produits par les deux tools.
+         */
+        ToolExecutionResult firstToolResult =
+                new ToolExecutionResult(
+                        "call_123",
+                        "Résultat recherche erreur 1"
+                );
+
+        ToolExecutionResult secondToolResult =
+                new ToolExecutionResult(
+                        "call_456",
+                        "Résultat recherche erreur 2"
+                );
+
+        /*
+         * Deuxième appel :
+         * application → OpenAI
+         *
+         * avec DEUX function_call_output.
+         */
+        AiResponse finalResponse =
+                openAiClient.continueAnalysis(
+                        functionCall,
+                        List.of(
+                                firstToolResult,
+                                secondToolResult
+                        ),
+                        "test-model"
+                );
+
+        assertEquals(
+                AiResponse.Type.TEXT,
+                finalResponse.getType()
+        );
+
+        assertEquals(
+                "Analyse terminée après deux function calls",
+                finalResponse.getText()
+        );
+
+        /*
+         * Deux appels HTTP au total.
+         */
+        assertEquals(
+                2,
+                requestCount
+        );
+
+        /*
+         * Vérification du deuxième appel HTTP.
+         */
+        JsonNode secondRequest =
+                objectMapper.readTree(
+                        receivedBodies.get(1)
+                );
+
+        JsonNode tools =
+                secondRequest.path("tools");
+
+        assertEquals(
+                1,
+                tools.size()
+        );
+
+        assertEquals(
+                "function",
+                tools.get(0).path("type").asText()
+        );
+
+        assertEquals(
+                "search_log",
+                tools.get(0).path("name").asText()
+        );
+
+        assertEquals(
+                "resp_multi",
+                secondRequest
+                        .path("previous_response_id")
+                        .asText()
+        );
+
+        JsonNode input =
+                secondRequest.path("input");
+
+        assertTrue(input.isArray());
+
+        assertEquals(
+                2,
+                input.size()
+        );
+
+        /*
+         * Premier function_call_output.
+         */
+        JsonNode firstOutput = input.get(0);
+
+        assertEquals(
+                "function_call_output",
+                firstOutput.path("type").asText()
+        );
+
+        assertEquals(
+                "call_123",
+                firstOutput.path("call_id").asText()
+        );
+
+        assertEquals(
+                "Résultat recherche erreur 1",
+                firstOutput.path("output").asText()
+        );
+
+        /*
+         * Deuxième function_call_output.
+         */
+        JsonNode secondOutput = input.get(1);
+
+        assertEquals(
+                "function_call_output",
+                secondOutput.path("type").asText()
+        );
+
+        assertEquals(
+                "call_456",
+                secondOutput.path("call_id").asText()
+        );
+
+        assertEquals(
+                "Résultat recherche erreur 2",
+                secondOutput.path("output").asText()
+        );
+    }
 }
+

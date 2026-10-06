@@ -1,0 +1,830 @@
+2026-10-01T18:48:03.078+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.runner.SpringLogAnalysisRunner     : Starting SpringLogAnalysisRunner using Java 21.0.10 with PID 17976 (C:\Pomona\perso\veille\ai-log-analyzer\target\classes started by bnguimgo in C:\Pomona\perso\veille\ai-log-analyzer)
+2026-10-01T18:48:03.086+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.runner.SpringLogAnalysisRunner     : No active profile set, falling back to 1 default profile: "default"
+2026-10-01T18:48:03.250+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-10-01T18:48:06.201+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.runner.SpringLogAnalysisRunner     : Started SpringLogAnalysisRunner in 4.12 seconds (process running for 5.272)
+2026-10-01T18:48:06.266+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Starting AI log analysis - logFile=src\test\resources\logs\manageo-cognito.log
+2026-10-01T18:48:06.268+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : Calling OpenAI Responses API - model=gpt-5-mini
+2026-10-01T18:48:15.937+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI Responses API returned HTTP 200
+2026-10-01T18:48:15.938+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI response body: {
+  "id": "resp_02cc5b90b0ecfab2006abe8ec7db4487d2a0415fcb64191d5d",
+  "object": "response",
+  "created_at": 1790873287,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1790873293,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "model": "gpt-5-mini-2025-08-07",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_02cc5b90b0ecfab2006abe8ec8951087d29613265b665a3880",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvo7PKCBna1uLmlFNmweEze2JnWdHh_BfM0ZrsFP2yhW07CLlu-gLL7LF-nNWVUtnzItYshtH7njv4sDDOQb1EIkW39oAw5wbaSfd3C87qgtidvZIFGI2WV7EEUdun3iqtla6xsRpXW6fdxJ7fhi_TafBqIxGPQ9u_5nqL1HUsxJYmWnDl0WeiNFOyOA5fPzRHEpVNB1PHQbMe3L-cc_JRdexO2QX8wN6DL0Ihe_JZhoaMiANf-nld6Y7R6LZ7HUFX6XjZWz-FXbbxv2K97l-v4XnqHXX2z58AALSXCURvVhRjPokF8eDSq1KaDu3cwPcPx-R-mW3Ey7lXrVbUAfnl0LkAyRC1qqD5ILd4JVqZMNz_bW8hWU3353VFsOgjjLsmwB95g8lhrhi5ItaZkHr1bllF_G6OTVJpPxLl7PWnqqwauZk-rend7i3vWw4y6oQbq6OUexgjRY9q40b8DdA9doPLQbchaP249sVpr2BE4T1x5CbzRK7LiTsHGf-sJSAGtS04lfNNKM7uuxju_N1TZ_XV8iGsn0EEKHngKqh1mIq4KEd6TCdSiHZw1hMKsfNchw8e6ZJsGaOjMj0cxVDC9XOlA9cWbuB2ZPhW0gsH0eDi8Hl7CLyziKFiES80VVQSzryRMrErCpV8H07-SV14HM8wZo_jqI3JywV8LJ743zMGYhmt6YIWHvQI00KXw5i8Y569eCtw6mdJeJMrcAZCF9b0ovlQggpRmZnQIbDYvM_4TO0EbWktX84VI7jVoAF-3yJKcSy3xn7ogeE7tvUFSr6ycLHU-0EK7YJc1EVTB6bPzxkyKW2QIfUSun8abPT3cEgSS1hMUC3BU66MowoYGmmdRavToKutNt7swShV7X9yyg3L3i-IsSaMWVe8cl4ZiDstAnOBi6Zn25q_eYoVHkw9XUsX8GbrNZwOU_-r3rhy4GByJoeZojCKH6ANMI_J54r7-mbOpd7Rywg4X7Bme2OJXraW6HmD3c608ayfDGA8IgRMGwdmIcojEncRbqQWXq9x_taDft87oheaeEgxgnCaVJ3lQIq3JX5w4YVwUkjVnr3N8Ta3gpe7GB35XAxSdb2RXPWDAKvW7sDk_hKg6iSVE78IHizorECUinx2AKxZunrANCp-x4L9RtZyin0R7NzZvfb29yFOuuUGD4e-yDBu3cp4pfI1eL0fJWMJque2iEg-iR1Yorwi_5RvmlHL6AkgpTKyFak1tp4uD0cariN-pp-srhN76XWbNpdYqT2_PdxlXrKSpOteZe27ZaFg7VWfk2NFfxobmEF8oGfGpv9OieJKgOjl4bNEUYf-z736o-5jCyuw2A6tCrGUVdC2OrxWHRhLUB5GoNCskHxEN7FImpPE1k7v0V5XM-c0HvK_tr0Gcf-E1QjRNafat2BUt6GQN4bmEDVQe9_F02og8N87KS_aFWKmXfe-pG9yR-eYq4O3dl144hP9YjX0UEJIUVraVcSPi0fc2Y5GnVfJGRYj2KJheGsDolg8nOV52UI7hTvXCKu5aRvRv-32d6cZxHCyULEMhSvj2D_g7fr15GNn_FknQQNeX6kHQEyCadKy3l_9V52Foysa0RVG9wqj6N0-rhCRNWC8YlpxIF0ECPr9fAQW5BGiD-_R7uc1H2Tg_jzxl1MNwbjeoidajjpoYuWXem4F0VWGnfAB-3naY-ClrQWo4KaIhK5mbMVe8zAj-J3p0Qs02kC1QEVtJNq5vePFNDzcz90f0kWbJbugeLdEBX5WeI-HkLXUVshgwtH5LpzKfIlXfdWseE03qwtXyGi3Uzgeb_-U3gDMwLSYJeUuJ1FGWLY4_lkLhU-x5WknEW-V64KkKSywQGK44ovurn2hIi6EoskUGeL81BCt8vwTfzjXloop0VtsJydo8CVUg_uoscuZsw4b8_ZvuydryEBKhaTwpHFinf3jnSj2SkBUk-CBhYRyBWuCimDMAcx7IOFp43ldDwVS1sJ7zSJ4cVVe8Xs63mUIEXIBlLEHZ4Z3156VrbM2l4L9cHHwMJo1p2N8CHtYKSSoH7CaqmpFg9zLekgGlbWKliodeHG-zh8JX0WE5ZdBw-lLRN5t60P22SP4WqXJMd6-tFAVQT-Gu0v-TTlk6G4nepa6Zg1zCiuzRgCkC2oLBvw9wjgfGLYqx_RVrNv1-zu_qqGS1opg2dNjcxg-p0XYiU3o9BCoMIT4m9zlE34fM0MMMgacS8vwVTGXDMqYFu1JymS6_Ju5m-bdr4L6OlSljf0SvcL0qjBwTPD1YccIkHEV19jGHLM35joinktJmiHgXxorw3TKss-lyfW367MPfUDkMH7MFKgqETzOoq2CWZvuf9WdVT-t_vsZHt3e1aHhnqbFwsXFS0Nz2dtzK-DoM_brFqp-2wMMelZefc0fgyum02EiJgbYfpYlxTu7C-OWq_G0zyOrSOzbdxX--9rrD5oACs26ORM0mjFXiO1pP1nKqUc4cLtuFPT44b4AWurn-3xRrwWhv2rTvf2ovRDFMsuN_rT1j25MVNL6_JbxyDrCNOPMkruwDtD7mchExrLGnuCQf7l9Ou5DqSrzlODVZ7IzxR4UQgTpzNpAqAooTDlDgAqksi9x3VnoWxT1mdZPBeeTM8fKdMW1NPY-wDzJIfnt5CLQINoiy-w4U0ggB7hLwjQc4emFvXaElHOndQnOW1Ucr27VRZ3qQayWQrDDXZx4ZXKMzGKrsudYBwfQTeeuxdRvphDOczteUMlvqaPmGSset1xPiqu8bzaFe5HhnhW-g4YqfRlnE8Eh0JSfBhVSwLe1AXpkvJWtE_3JfeXb1T2kEMv8SzfoNZ10o3cDs9iey1E7HIYWPwXyhIcLw_ScdbiOI7DmoD2gjSsW--bx7OaXvnUD5Mt37U8OJKRt0Yjt8LhsJIEnuFK1WKeAw4ALpE9d-nqT_uE3O8DbBLUUviAO57MyJqW0yqDLXqykW0XEHx6hZsqOryL75Q6rK0FrbkXqU4QSvBvYYYk-y9bJdmCwY9i4Ng-k-NVfV9h6AXIS3T7BHEYAzgl80masguok8iXLwcoP8jbW6BIio_HZaoghtneaKdrE4AwlfFlnpE6N86_J4IRzW1YSHzi6xEq28rbSqOrdfGAEnqzu0dwJ2cs02MMDWvjDXtITRLONRUVxDFtdNrgF_OzBuI5NV3KWYY5siXqpNA2jyC9q2Z1ZpzABeuV6x2vwKcScjxXQYWUcBzuzK8uinWxSai3X_nm236XyaJBiViz93iONAjiSg_jKelpCjP1p_nHe4ze2u5Mf1tZyFL_VHfSWarN3Bnn0kyhIaNbBrkyNtU2qjw7Z85fllnYW0-z3d7rs21nO0Kuqu_EdMUFN5XRJAJlnOsyTmGxZsjMKLx55ypSjruV7Mj588Pnc-O4c3vfxnhXoG9YLJgWBta48efjweKhTp8yKJl62LDzQzATtW19-9TjNdVpmvdsc27H",
+      "summary": []
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ecc3a1c87d28a22840a21ca7463",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"CustomHttpResponseException\"}",
+      "call_id": "call_LBA27QUJkhbUMUnqpiwvnl64",
+      "name": "search_log"
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ecc3a2c87d2a14f09d31dc429c0",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"Cognito\"}",
+      "call_id": "call_UDJkuXmc1oJ5gDA3ALGuysl8",
+      "name": "search_log"
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ecc3a3487d2bd81946fea9f2e6d",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"oauth2ClientRestOperations\"}",
+      "call_id": "call_MB7LEmhwGGcvL4j1k12oklXh",
+      "name": "search_log"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": null,
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "in_memory",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "description": "Recherche un texte dans le fichier de log. Utilise cet outil lorsque tu dois v\u00e9rifier la pr\u00e9sence d'un message, d'une exception ou d'un autre \u00e9l\u00e9ment dans le log afin d'obtenir des \u00e9l\u00e9ments de preuve.",
+      "name": "search_log",
+      "output_schema": null,
+      "parameters": {
+        "required": [
+          "searchTerm"
+        ],
+        "type": "object",
+        "properties": {
+          "searchTerm": {
+            "description": "Texte \u00e0 rechercher dans le log.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 1.0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 1012,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 426,
+    "output_tokens_details": {
+      "reasoning_tokens": 320
+    },
+    "total_tokens": 1438
+  },
+  "user": null,
+  "metadata": {}
+}
+2026-10-01T18:48:15.943+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_LBA27QUJkhbUMUnqpiwvnl64
+2026-10-01T18:48:15.943+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_UDJkuXmc1oJ5gDA3ALGuysl8
+2026-10-01T18:48:15.943+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_MB7LEmhwGGcvL4j1k12oklXh
+2026-10-01T18:48:15.945+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_LBA27QUJkhbUMUnqpiwvnl64
+2026-10-01T18:48:15.946+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_LBA27QUJkhbUMUnqpiwvnl64
+2026-10-01T18:48:15.946+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_LBA27QUJkhbUMUnqpiwvnl64
+2026-10-01T18:48:15.949+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_LBA27QUJkhbUMUnqpiwvnl64, resultCount=5
+2026-10-01T18:48:15.949+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_LBA27QUJkhbUMUnqpiwvnl64
+2026-10-01T18:48:15.949+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_UDJkuXmc1oJ5gDA3ALGuysl8
+2026-10-01T18:48:15.949+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_UDJkuXmc1oJ5gDA3ALGuysl8
+2026-10-01T18:48:15.950+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_UDJkuXmc1oJ5gDA3ALGuysl8
+2026-10-01T18:48:15.952+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_UDJkuXmc1oJ5gDA3ALGuysl8, resultCount=11
+2026-10-01T18:48:15.953+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_UDJkuXmc1oJ5gDA3ALGuysl8
+2026-10-01T18:48:15.953+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_MB7LEmhwGGcvL4j1k12oklXh
+2026-10-01T18:48:15.953+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_MB7LEmhwGGcvL4j1k12oklXh
+2026-10-01T18:48:15.953+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_MB7LEmhwGGcvL4j1k12oklXh
+2026-10-01T18:48:15.956+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_MB7LEmhwGGcvL4j1k12oklXh, resultCount=10
+2026-10-01T18:48:15.957+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_MB7LEmhwGGcvL4j1k12oklXh
+2026-10-01T18:48:15.957+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Calling AI for continuation after tool executions - toolCount=3, totalToolCalls=3, model=gpt-5-mini
+2026-10-01T18:48:15.959+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : Calling OpenAI Responses API with tool outputs - toolCount=3, previousResponseId=resp_02cc5b90b0ecfab2006abe8ec7db4487d2a0415fcb64191d5d
+2026-10-01T18:48:23.740+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI Responses API continuation returned HTTP 200
+2026-10-01T18:48:23.741+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI continuation response body: {
+  "id": "resp_02cc5b90b0ecfab2006abe8ed0639887d2ba9b35219defe78b",
+  "object": "response",
+  "created_at": 1790873296,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1790873302,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "model": "gpt-5-mini-2025-08-07",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_02cc5b90b0ecfab2006abe8ed11cb487d2b69a98f4b2c62281",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvo7XHz-DrcynDCMYsn6pDKxLyLZa9EggMXf-DpFFpwUQGKcrlPXU_8ysX_1s13XrwjshEUknwPVJUwVhWteNjJgjxkzmU5BUPqTupwgjnUV9yZqLNEB538B1CUn9EnQONwB92hlStOPx0bnHkwFR3cw_Ln68Ni00Z3AEKXyN0tqoiipmW78UbyFsLuHJNmcW76uc_ZrLU2sxcBNvndLx5Cgt-ToPZbrDuEdEdJYXOLTYFbjHhDcWg_ILiFuE1vqhysIlcB8NjdO-3-fZ0SbGXPizE51CTG1b2AWkxfBHKsy-Z4QhuFzkXY7MqeOinWHPbSutJoUxXJInHXTNDnfHhdEBiHKGT-j7PBrPn0QCBeBkVXGv8xd-tC_erpi4f12XmnxtjFD19STtFFvWhMYNtM1CSSPiCiJ_ygIHqfirBXn6BdCXshT_tarstDNh5-EO4V4Q1tvu2uqkjFwyUS2mKkKDuxg_06KM5AgxTJpPK2v11p7wcWUXD4FAhU-FGZp9xUdMHoRmtavhBu8MezaRKizQ06YNrhFcGbcs1n1QUwGV-KMQFibzVBd35pBiFg2lgHXGOAdliOzyCUaEd31NvsKIrqEWGZFme8qqcmxEjBaUkkE4kW5zTZzuQKqsAmRvRRKsFGrb1dDkMbdkaRt6-eHZrBhQKKlTJsqejTSv-Qh-qBIU1Uq_Kt0suNfACIL8G_BlH3lfhcw4dDUy48YA10dg_qMXuomVAlPWqx8c0MeRLHoFlZr3jPxuhSyHsd3zun3EBDLIsJ2nuiz7ccJAaHginrXdGEAWmgcjWump1sb8Zyu9y7QFhJL0vx2GttpBV1BztHVF3cPBhM0GNjEs-OrKnwa1QZPXDJfKHI4kiCSiBIofcWMwW5pMf4FoTI1G6gWDfb8A62HZybOLgYATvcM8vUccdYiCGkV4onNaCwaXYwwOgZ5SmbJLdKems4-qq4chg2i8u53iP71eR0AwtNMgZYd6rEUY_9mW-MQHAlq8eO6twBmzWwRIKdv8SccW3qx4VQBSAHz_bWYpBHg1Y9eh9raLcru-AP7ArFTTO2nXG-g32qZVdF4mBV2JgV7tPtr7PVfAXoyGpQdIbm_DQsvUmUrA-rUjR7X69oF50cWNgeNHRtI40tAEZjZgi8lTrmSK_3-T93tcq7sLlrVFVFojJF3vcDJZusgb3TvdJUzVmRkBbpMWFysGzqK-OdEKdUyqJo-RQP8vG6L7UTwZLXXAj9uoc8OvTI8PhmSG1y1tyvtQcuA-y8ZcMV_X0stDWjQy8iYkJUHlAEUBcGrUVNKiKdRLkk4nY4iduG-CEnvAPCBHYECbCdFOmJBWvCPsaFkvU-4VhydfEqvrH961bOecDzWSrdV_YrM1q3wvPRNn4MPrX0FtQVVWc5JVW9YkS18jTqEfmHE1Px0bEmP9cXE71FpBJkTppt0m3r57lf4BBfrQvuqYrNSPj_HeHjJP5fH8KMxP6IKEeGrOznHGqEUCH6y0KZPGkT5CodHUVLLCK6PSabKFmGUJ2erb4CEqluEZa2Fkn0Fjkp-4FjNbZ7TtM78Rz2mhJW_e3yodQLAhPZjiiGj8361gyY3EUREjeR7Rk0_XHFaLbnGSudca_GJBkdizh8B9bovW4ZPG9cY5EmqxEEd66EmpWaEanKycpLmfRMFbwbDz-HypexA9t1sB4TR7iTL3b3t0qGb_NBe-DSWMbxSwcIxAw28ZAqEIji-jo5kRZDDVaEs0VVsuGxaNKvoqOdyZgqYQYTK1cZYt8-s-UzKoIIjkZ7vIONq5Pw2tKewABdoAWDeO_31-xLf9rBtfnywSprvuJTpAlWK1lgiSa5nhPDSiHcrVEh6SkGc9OmzKRpcOkGFdZUb1Zs02wXN7KnksaItBBnyWxZ096M-pEaPsssmwwJlg9DBxx1vccth1PWu4EaT6Q-658XzSACKlBI0gPDw8Yy61fHhWpv93HJZNZgM96ncMT5N1Sy6fnmVaL0u3yx4Em2jzZZc9OijRiiQSQCaUVTdo_VvSCkB-76VZKNtrd59lihpisQR5BUVT8XiG5LW3lY67pv8FsJN3pDISmX_I-tk5aRYaiGGGjglL_vsc7m45-hVyEcDJqA5iim82rXbCtjHmYp6rtsBvRPwHERS3IgUU9H7lvY2RmWhdOrqKqbJ4NTeyZkN1zmgtB5DoQRHbp1kcQJkRHPQ3Kxmznl6L_TNZD7b-93H6rBxqKxD0tkG36YueP-fqN4cYpwSgzSQZmtQmo0IGl8HHS-3AK4FogniFRpaRDilhK9wl0Hio7yl2rET3lZBKfjXZ7gylw5QVF1dRwEComYTWvc1RA4P6Z9y516heypXIvPiT00SXjMP2w1XW9coK7XWH2mqmZ1T7rAdIn-r1v3xmZTpysYJKdLMBUc42wHcTt1Jx_c4b286lEc-mL_fcALexuIKuUML-i7j4q6mbQ3plKr1p_zzN-MOjdsR_AeI8gwXRQ9IVp5mXyv8ffJ4U6SE1MwBCZoraD5yvb46AJOGhQCLO_25MvUZBwyrAwN9Ab4mDpj833hO-6meeS2LzwJSfD3aSdUDDtcetn2AVzMCruOCpXIN0E0qtYikuVreJMmOVSKwF-Xec22xk3620xVsopLnRnf4YzPVhpWd195WYvXK1t-UmljI_ycHy3w366CQ2W3lKjpNlT659qVJrdZwdycr892tas1m_4m8spQu4KA7rg-d0_rG2hx6-iRdGH1DulmlW7Ah02touADSasHfB9jHweFT1wE8bSfSwsvGRzo8F8v2oUyuRTNsQe1qwHn1n3L404BYcTIFmiRrXk6IsQ_BXxtsiXRBINZh0s8BUk570td83VtLpFE84o1ekV3PeSbEcPDcs6clvRXayyuFD3iVkvfOYBc-857BXmhsHq8NOtParEDNtQ94zEdRl2lIsBuCX5iwID07FvIONYGRbjnWHram4rUC5URb8Sb-qYelXIIDW6KTDWYHS7OujmTRnMJJOgqIImWIc5yGlcLhtWzJm6xDD3DUjR3uf_41BOElmM13kVt-Mluq_POAjW8MO0mF2wP7lscHte_un850FaVeREGY7mmf2UzY60viu-78kFPzQeOPClnEQEq1Qz2n6FEYi9BrJryqEh_cG-CaeNy_Frr9jaJ346E8zh-Hwv5Igk4LMsrwKxbiOraEO25he-d6ZGSbU8rZEd5MPv7Wsaas-N30MpxN925onylM0YstfZ5axF1MyVpav_JuMlytxOWb4bdaaDYCMm1yiEG6ZiYC_h-A7OeD_gM5e2AHsiY1-FQU3IB-qvKiyEs_Ig3HyooRn2DCZhX6Om2Bz9igFZ0i4jV3_CmuapKhV35PDtrgIApH3nPdqKq2j2rEwvjaUwSl5_-e4Msb41SIByQpbP8kOiTSMdUJ2Ui-JPU67P4TervGaAlvgvonXRbQsqo9-7uqLch0g-uLdfRcccEHFkLghB0y-aZmaHMG3jcXvxc1CuAtbONExSVSRbAU695YppNDcSHZ0j2Lwz5iHQ1UqmtDMSX-Eym_g6FuHmPJNp_LFmR285Ttyn9YmEjKubaGbV7Ut51XyU8PTDFUnAsvGjedU1A5oLlyTBClS2rB202G8xcOLfj_ZiUMb9gRclm6H1s56S903hSsxhw2C0VA3HsFTtRXKrF4ft4wDX3-Ymp7pj8ByERHP6ou7a-06oS8PWhuoC2O4SfwvRMCwZmmxDoogjo4yYw8Ezn3LdKRaZRVD05ChKkURRbLiDP-RSJfy32eL6YmnUOcVg5NbCEPOtcPeAQQsV85d9-L4J3lbo_S1jTJR-vYWvtqrUG70ytyZpjoWOunfwvQy0uyG75MFnfwwsZ7kikWJqMlnB4YKYMsuqF4dZKhTbG2YSd014MWyLrbw55VAImw_huMJUiSC0o9w4iqOdBgScfqEHvgrR9XHfH0cnJrn5jMHf9Il58snX0qi-7HTf740dqgXVTEYHYKYpijNe-YczAOLuwLTX89OuOjd47u4rEVkwiwX5S4-FuuI-IZqv2uVMf7C4dlD_jbVGwfarjDFB3S_DQtcPAyuq8QkDZBhv8Jps5H3x9M35ZC0PTnLlcmL5fBqXioJL8INFS7t9TamyDKOpz3G5io4ptGSfNKZaoXU_q0FBYKFEBkDEvnE4FgovxWwru8dcONOzfzYBIw6jMV5uU32QCOiNTR7yRc7f4drpphK9b3_BqWNiWkbpXf8azfvLWqOCc4uSg7M-Sfos76ituUPLZGCW-nYrDCOeSePukuR7qe0FP_bOE3MaNxwg4U-e9dQMi5n9VOfORzTRu1CMA==",
+      "summary": []
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ed6abd487d2b374f0ce71337b9f",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"CustomHttpResponseErrorHandler\"}",
+      "call_id": "call_5alWCLzNBrdhYeevYzYjdvbX",
+      "name": "search_log"
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ed6abe887d28f1dd5f3cff1a723",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"handleError(\"}",
+      "call_id": "call_U02pPITVJX7zQOl3s8IX3Fcx",
+      "name": "search_log"
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ed6abf087d285b65808a93ed0c5",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"http-nio-8080-exec-7\"}",
+      "call_id": "call_ZUmrVWhnJuiYzDvywfz4iWKH",
+      "name": "search_log"
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ed6abf487d2b207cedc636ef097",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"HumanResourceOAuthService\"}",
+      "call_id": "call_gC17xkpEcFYG7Uyo3IOf3yDc",
+      "name": "search_log"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": "resp_02cc5b90b0ecfab2006abe8ec7db4487d2a0415fcb64191d5d",
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "in_memory",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "description": "Recherche un texte dans le fichier de log. Utilise cet outil lorsque tu dois v\u00e9rifier la pr\u00e9sence d'un message, d'une exception ou d'un autre \u00e9l\u00e9ment dans le log afin d'obtenir des \u00e9l\u00e9ments de preuve.",
+      "name": "search_log",
+      "output_schema": null,
+      "parameters": {
+        "required": [
+          "searchTerm"
+        ],
+        "type": "object",
+        "properties": {
+          "searchTerm": {
+            "description": "Texte \u00e0 rechercher dans le log.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 1.0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 4165,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 0
+    },
+    "output_tokens": 584,
+    "output_tokens_details": {
+      "reasoning_tokens": 448
+    },
+    "total_tokens": 4749
+  },
+  "user": null,
+  "metadata": {}
+}
+2026-10-01T18:48:23.742+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_5alWCLzNBrdhYeevYzYjdvbX
+2026-10-01T18:48:23.742+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_U02pPITVJX7zQOl3s8IX3Fcx
+2026-10-01T18:48:23.742+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_ZUmrVWhnJuiYzDvywfz4iWKH
+2026-10-01T18:48:23.742+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_gC17xkpEcFYG7Uyo3IOf3yDc
+2026-10-01T18:48:23.742+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI continuation response received - toolCount=3, totalToolCalls=3, responseType=FUNCTION_CALL
+2026-10-01T18:48:23.742+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_5alWCLzNBrdhYeevYzYjdvbX
+2026-10-01T18:48:23.742+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_5alWCLzNBrdhYeevYzYjdvbX
+2026-10-01T18:48:23.742+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_5alWCLzNBrdhYeevYzYjdvbX
+2026-10-01T18:48:23.745+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_5alWCLzNBrdhYeevYzYjdvbX, resultCount=5
+2026-10-01T18:48:23.745+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_5alWCLzNBrdhYeevYzYjdvbX
+2026-10-01T18:48:23.745+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_U02pPITVJX7zQOl3s8IX3Fcx
+2026-10-01T18:48:23.746+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_U02pPITVJX7zQOl3s8IX3Fcx
+2026-10-01T18:48:23.746+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_U02pPITVJX7zQOl3s8IX3Fcx
+2026-10-01T18:48:23.749+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_U02pPITVJX7zQOl3s8IX3Fcx, resultCount=10
+2026-10-01T18:48:23.749+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_U02pPITVJX7zQOl3s8IX3Fcx
+2026-10-01T18:48:23.749+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_ZUmrVWhnJuiYzDvywfz4iWKH
+2026-10-01T18:48:23.749+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_ZUmrVWhnJuiYzDvywfz4iWKH
+2026-10-01T18:48:23.749+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_ZUmrVWhnJuiYzDvywfz4iWKH
+2026-10-01T18:48:23.752+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_ZUmrVWhnJuiYzDvywfz4iWKH, resultCount=1
+2026-10-01T18:48:23.752+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_ZUmrVWhnJuiYzDvywfz4iWKH
+2026-10-01T18:48:23.752+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_gC17xkpEcFYG7Uyo3IOf3yDc
+2026-10-01T18:48:23.752+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_gC17xkpEcFYG7Uyo3IOf3yDc
+2026-10-01T18:48:23.752+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_gC17xkpEcFYG7Uyo3IOf3yDc
+2026-10-01T18:48:23.754+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_gC17xkpEcFYG7Uyo3IOf3yDc, resultCount=4
+2026-10-01T18:48:23.754+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_gC17xkpEcFYG7Uyo3IOf3yDc
+2026-10-01T18:48:23.754+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Calling AI for continuation after tool executions - toolCount=4, totalToolCalls=7, model=gpt-5-mini
+2026-10-01T18:48:23.755+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : Calling OpenAI Responses API with tool outputs - toolCount=4, previousResponseId=resp_02cc5b90b0ecfab2006abe8ed0639887d2ba9b35219defe78b
+2026-10-01T18:48:29.296+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI Responses API continuation returned HTTP 200
+2026-10-01T18:48:29.297+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI continuation response body: {
+  "id": "resp_02cc5b90b0ecfab2006abe8ed7f50487d2936639a99543a16d",
+  "object": "response",
+  "created_at": 1790873304,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1790873308,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "model": "gpt-5-mini-2025-08-07",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_02cc5b90b0ecfab2006abe8ed90dac87d2900a135830a503c8",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvo7dKpl0qBw7cuaVzvUX0JVSfHffLiGottJa_xDQNQ3zsj6dXLhXBFO6rCCWXs_RRrzBF9slDSSj2fpPofrzkRfUqVDDa9DV1CU3ijXQ52OqTXL-ge6RbxlMEtyEC9uUxZX_9zTZ7XbxYoL1bsAfNhcM5z_7XZUcx0BRP3FbjWDbiq8bWB69hzX96HcjhwxnnWFDki5A1QFZ4ZyMBWi6b2yuDEpNtixDpPjuC6rKvFZxtbA8NcD0_U3Jk8svaD5CeVGXwnUVNyxNtLcQNdi5asoy3DvigCYXpCrH8lEZegkLHSofwW99Jw7_K3eF08Y3VtSY-kTu7Y9EYCfa1OJtd52ykAd4opQdDgaT0rqfRb4plu-OWfCPLBGLonmUET3z8M0f1Dxi_qyZ_b65iW_vaee8029R-9Fmrvhx2cS0mk5U8L_LyTf5lOrkWOFjBeaa1ULNUXvCwCq2AiJoAgStZCSJBI0df57IOBN7aJPvP1DKlRBF3Q5hit1YrT_NF5w1vnIru8M4_tsgzdU_z6rR8C946dC7ANl3RLb7AVvvNUkQoKLKg-hPH8mW3wn6ezaTq3nCkX8m-iIRuzv6Q4eqTvK8Q82rYvQ-9Pfv_fdwfqnuczz_UjO2bYdlP5a5r8VbEe8RZfM0hVYWlMrSjXDTKAjo_EzDLLNTChccj-pP-JgEdmDkQhrOwuX3fbQGBDo4kr4AY4_QUWVEYz_S3H4AVosTNpgWcgqNVy2C1rtWT52YQnOM6apDCmHnLD7LaHHVwyMewaMOhUi1GXs3tzrMoJEUalcSz3sfVQcN7_5IgIjNG2icfnuXS1ovDPtt7TU00yNwF7QsGHRHmF_TuH1F3ohsxBaV2_C8I8Ehal1TsbSSGKF1O4JJgBUUBV40NRc2jyNJAFgraxbsW4ZMf1O42uq3Pgmg4tafFfG3Mi-ETFamJNaUk8xSipQxYFhi9-igutUdt1rl5YF_m9sbkzx4ihYS3eMjgajxgWkWGO8E8a1wC7ebi76mDPOSGhOzLhkpjYf31oGHgkawAJ9VCNcjjD33_PL9M8eml75dnjHoAynEE6ENwQACvKnBeU-hqMS29ZmbX1bFMP_MhSMrDzqc9BtMs6QRr7HTb8P2aYAMlX5mwf__xPNquVcdnL-oIQRjfFjHiNeJGjVhdX8sRvIa2EqPB8lXX8tdnGDfUeEjYbPCwIMZO-v2uO9bYo3XEEus3ooU5z_QFYJc1sGYzL3mchtoz9hymZTFE9UvGkFxcREUhHhlK41tFo8mc3EFxUv7PY9snLjunthYOw53KFkrUZZv9Ej7a3H36M1uRIt_hPqLFIELD5qP3ZReSDe4cd9kUgMRgulrOukhOJF5hR4IqIcSbq8WMw6yJONw_fbhma5HwOXkz_5cy0AqFYD2NkLAO0xXGltBCTOk1emXz29tFoH2C9gfzVJABxeqiOmNvEslNEoLYVdg0KUZWoJm8cSsNgP7-2M7GTX0_lwvSYdSmvVX81__C5MvhX9YOOXOYftSWIFIaiWtohz6XTWxZFF5F_FbZqfbEYAQoZ7ggnbNxYauaLjdF-nRMLEZvTh85BgUG1xx_bIiR1s-EJ2_mmwHoZ_X8_HrAz_btQP2tpsHLQVZluUmBdMjd0TG6grpqNcfUFFaL9C71R63S1Kszz4WSp9lYqZT10E9sLXzWmhQiBR33IE62dGuvIXbAiWwTdYbYk1Svi71elroNm9hhxBPc7ejd2dre5RtTO4-0umsbamgQf5Du_s7DjgsvJJ1H1WIAm6MtyHkDeBc1LeAKgKe2D_nnZHaSzF3jBmTEcKfRpcksdVvz7SxGl7xvCcEBJVhwKgwk9a3GrHuCnGCgtYdRXEyKizOd7AkLHIHdx-QitLtoQ1oWurScT0ihpubtnsN_MPr_hDTTNAguGyaLKtWsPalyDNmgkmIXaqsdBtrsYyC-4XJPcwQ3nX1CnHV0sgcB-5clXFh0Trnzj6y2f12J5i39wTMf3LdSLfFBGoeSNDtCAp5D-z2SQ0hkUUgn4r7YU6-YMMXCbjr4Nz1gFPkapKWwe6bobqYdpJFzzI40r54nTau3Ru_VPeg_O23POLeHWxBTaAEj6YUM6w5JVKYyUvHM16A13mn6BZOMrC2LUuo_zOVOqAo87iQxorupOmPoUd6yzm_1LSQHs6WwCKrt0K0OVGOqevJaWaY5vm1OzrFIJBBMtM-phnBJgaqFYLjPHt_XJ5tvfZmFBJ9hW5NmDO0GT6HTGHhTI3Yrzfb8h3TRWbaoILW-GxX8jMVCWy5qow6uKvUGAqwEeNA5zL0i1jJ3EQda3cF1_su_GvliaKZRy_4w7TC25L_hpBU4kUmQ3O2iiGHU1478hXb4HrJj7D3w24kAsfOLKZoE4mHKhBRfbzn_u5nI3qIXFF7Yvg6njPWtsQHeu6Wu9lpM2N3i6wf2L2ie508f9bbHpJR1P0VUmJqxLbPAfOgTMT0U-iMCckjU2XO8Nh5Omza977Bb6xcpY4MzJ4zS78yTHwDNDmLU7nINonU_1ZTJEh8tWbeA4utNeLVFmC_E4Ae4ewZ6jA3kJQP4IhnyZcPnSK2OVMiYYnRPF8diR4HoDBxeiA28-W03_afJqkXRPepZ1JP9a7awcOSuxT58vX0eDNXEUE0egYX-Uyqe3W4AXwZUaUlGsP6RN4xdYI_Kl6kKtq4qi51Sd9CN5TubYtJCHWJpd-f2YlPeQl3VXOK03sTKk_5tqvH7lMjimnsCFQOeCOHvgHmsnHLoqZlQs19HAf7RCMYUCJy0dBOM67phm6L67GgjHUnYiPW7FOm-zmrrro29MFkb8CBIsk1vFGYPGnlk5BMINCH9KsH1RXhLCUC_w9EGGGdW4Evf_hfsxKiPWkLGtxEUMat_zNsQuhlRlN1cGYn10Yp2i1zARpdVIPq2jSbxUP6BbvtWFhy27cMQdpMARicTtLj-3JLKcg5xjeMBIgveia090xXqK9C0dwvn0-8Cf7mZjat9WCIJdrxkPJzy015JuxWfb9w-zMFTefKcuKsTPBfPrqymnhaf5RpFvV-RgCkSkA0U8CFg7LIIfEJzUmmqT1aCWsKIjl_SYtFKBfG3rFAHSUxtn2WKvOxgEO20GZcnWcGOTPYzxAr9NufVOBjHKarGAwSzsN6qQyBb9pm7Km8_VI6hlXrL0Wsf4tQ0K3a1GqzgxNuHdHuNFHZf4S7lvF-6GuOx_jlLdeZiKZ6GWLaEiB8_7N4iqy_bzNorizui1-rAfDvACcrhuhVC1FEMquXa5nxiB3pl-3yALdDfw1SsgfXTAGc9bMoJQj37s2JFr9mOCHsGa87tyC2dn0d839jO1mp_bRZ_tvY8SFmLVe8PoANJxYXdCKs_AHido37ihmPlDjxo8cjJy9auJjIzb7RmmtDzYtvMZgprd0KXcxdU0JBgRFdslhy91t8tm2OlViMqKuDaAVGYf1ONOt46Nn0SUHwq0uYLbIs2KDOk-ig3rKRaJgvAXMbVanLmgKNC5ibCrHJEZUGJEReP4f4v9_H_UAlbAp6mU1cF1Qz7C62_DY8Opr2HosK2kLwx0c9PfjSZ4DR98RYS-bcj2Z6",
+      "summary": []
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8edc225c87d29886e74d6c8701d3",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"RestTemplate\"}",
+      "call_id": "call_onWIE8fmnOl6CDTOs5OUwHyk",
+      "name": "search_log"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": "resp_02cc5b90b0ecfab2006abe8ed0639887d2ba9b35219defe78b",
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "in_memory",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "description": "Recherche un texte dans le fichier de log. Utilise cet outil lorsque tu dois v\u00e9rifier la pr\u00e9sence d'un message, d'une exception ou d'un autre \u00e9l\u00e9ment dans le log afin d'obtenir des \u00e9l\u00e9ments de preuve.",
+      "name": "search_log",
+      "output_schema": null,
+      "parameters": {
+        "required": [
+          "searchTerm"
+        ],
+        "type": "object",
+        "properties": {
+          "searchTerm": {
+            "description": "Texte \u00e0 rechercher dans le log.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 1.0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 6192,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 4608
+    },
+    "output_tokens": 391,
+    "output_tokens_details": {
+      "reasoning_tokens": 320
+    },
+    "total_tokens": 6583
+  },
+  "user": null,
+  "metadata": {}
+}
+2026-10-01T18:48:29.298+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_onWIE8fmnOl6CDTOs5OUwHyk
+2026-10-01T18:48:29.298+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI continuation response received - toolCount=4, totalToolCalls=7, responseType=FUNCTION_CALL
+2026-10-01T18:48:29.298+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_onWIE8fmnOl6CDTOs5OUwHyk
+2026-10-01T18:48:29.298+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_onWIE8fmnOl6CDTOs5OUwHyk
+2026-10-01T18:48:29.298+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_onWIE8fmnOl6CDTOs5OUwHyk
+2026-10-01T18:48:29.302+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_onWIE8fmnOl6CDTOs5OUwHyk, resultCount=21
+2026-10-01T18:48:29.302+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_onWIE8fmnOl6CDTOs5OUwHyk
+2026-10-01T18:48:29.302+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Calling AI for continuation after tool executions - toolCount=1, totalToolCalls=8, model=gpt-5-mini
+2026-10-01T18:48:29.303+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : Calling OpenAI Responses API with tool outputs - toolCount=1, previousResponseId=resp_02cc5b90b0ecfab2006abe8ed7f50487d2936639a99543a16d
+2026-10-01T18:48:35.713+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI Responses API continuation returned HTTP 200
+2026-10-01T18:48:35.713+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI continuation response body: {
+  "id": "resp_02cc5b90b0ecfab2006abe8edd75f487d2bfda7d69fba44295",
+  "object": "response",
+  "created_at": 1790873310,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1790873313,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "model": "gpt-5-mini-2025-08-07",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_02cc5b90b0ecfab2006abe8edfee2c87d2a8c3ace0fe4c1603",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvo7jB6G4kx-hsEceVRZbBckPWqUyqQzeeegkkEmFRSI8bsQBq2DBUrKCt9qvgigQ0eXALpfZJZAsK9mJino6GsNqMxwwESkH-78AULNAGO-3FBazWZoMcDpfcVlWLKbk6fpeBjwLpolmN3_DlAe5fvpGx0S8GRXYyjuBM7K4GMrXvt6DulcwVHlL1hL6SYL0ADqmfe4xe8fmQamWPy7d7q9XkOeSWtbh5tx20IuFtjhn5-Py8tdqDTXzyleoRvIbMoIZ0Csw_0H7YJ9DXSQgGQGzNpqdHpYk-9QOoe2NzaHRs7ONYyjC_395lRpc2UcL7-Ngr99qDV05VkuNlAqgucFUsqANCFzNTcS6B7OlpCuSjkxBoFpHITxDUwFemzNzcv2ZlTF0waoZmDKr5mPGpYWUVr72FfFF-RB4Pqne5beRpGfnvt3FIgM8EV4lWjxHVwUJE9gRX2s6jkswxSn4pxlYKDOrHREulRaV-LtZdMQG0eiaUhJ-uDZKF2j0qLP9ZpymmiLII5Mt7VSRbsG-YMtOSRu4gRD9fbCfIQtXSDgw5rL2-ufRMkbrVVGIV0rnD3k0FvUdBtuww0ZUnhFagdhF0PqbgQEVfm4BwF2yJV8XzmNMUJnUEmHd85KvHMmIOd30_iptJIWWmR8XR0xdzo1HO6CG_l09CJTzkuEnUye1JiMLWMo06eX79SNopzmgKHjB_9XIZcPony9uA_1Kt3w2pJCwx7PrqNHybVCdODa13KSGyBXGSkyBNU8P-vly3C0NJ4_Y9D8tTtp2GaDw5QHRXh2zQ8FxdK5in8_71tXRNUj_CDuvLkb_N_VMUT_a4oBTs83mcgOPnfxjfsJ7gZnZZydDhUp5tHAFQofL9j5_w-_jAOK9YYaCtxVF95veDk7uVjlIOcNGbvcfbrhffYcsIYYol1_EJh_IRXAoDxBfpC7P-AN2pmCaHWWpd574bA0OKyBB4BspYq4TWQpbYVz-DcR-0sX8ZQ9Thb2k_Ppq8gDpAs02BvdRvCRpcMz0I6-y8erFUGyRfDIe0a1rT7vSmAwGIaidCUflF5Etjz1P5Pl55n5JpLTpyT6hIZnl0cEht4cT-BUatS9HNSP3sJROt_jOoWZQgvoQa3LPaWUtMaJYFf2UcihWEmomIoOPG8IggV8LxkJzPJCDSBSJVZh2712B34lEzZq2KOe78t0hh5s8j2VWTfRcxcEOM5V5dR-ztUap74ksdsiRubeC9D_hQ9FvDs11ZOl1djvgUZq4Z_3oofxlYgfoczUDXmJtox-WLA2Tp7yodi6UqWh6_bqImEYH5QVuN1NRQoRvQymVC8jn6eFapnSW28EzkYI_kVNrU3541B_7pKd7sq9RdihNyfn2HZY0SoxTl1qmLR0aiMP01ElUlFiTX6ex-u0XHPT54TgiLJdxasWJtsgrlIdGpid41CuYxrBKktWSwo8EQ6EO6sHrIotkjkIT7tq6SvQ9rd9MQC9zRV-PLrFoqUgD1WH16UV3C7-GRLKDOM247GlYWPGBpcrFicZ-DJOm3vZlhLX3_RGyGMugtrVboGz8MIudgPiwFqn5laMgdpCpEBGNUXRobTYzbDxeXEFajI0SI3cEDZ2FWV1bs8sy-egRJhzVgLGJEqCqKlGXDUS_hNRueJ3n20qfrEpEpscXwnPFGsNH9SiVT9a-HzNBDe-h3fwcZJfnM_lRuVdk-LcSf2Ng3Y4cW7fXjJJwW9fMyDbw3i8MrlKDU2EcL6tKHEMygNtFcnhkNjb0du33FwmZalC1papcN52nfw-4s4x-BH-Apo96P2dBmzGYvFyD1xhYz1VjQN0xP34wICHhsn3wxM0TlP1TitMLJqA6PeIhuFnT5Rsu-69O0EAjTH8N-Z4VDlYRA2EE6T0QMToAQ2ueK4_FgKanThZNDWl-Dfu39fzE1u3XebTYzkFX48BwntwCrJCx-0zev0CZU5_N_BCwoUub578wYbO9q4ueZR9Q-wtLcWAiuPV48KJgs4ZfTlmZoxZ5yCjtDCV8vdvxPMA4uG7OHfabVofNGXvC55_QoBWqjuwnj70ugsuHKJdbOt-a27tW4LeozN0l56TPk7uRhUInOdNuLvmMfwrFRgd7Qywaq3WJ_3_M-ry1jUb_yphcevL91wfxvkjYqcKiiUzr4FRkdmty0DiSmg4Ci55Zh_7AC6rplpstNy1BH6UYnBzG-bGuaV8iHgktK7JTWH4ojFBx7_cTZIoCr9SkFVOB5TE06_GGkQ4PCAdWWj9eHpi-xnAFGkG9-6oMPjnI4THYPKMcCq0Ueh32vJG3UXBNF9FmSUfgWnOTScvQfwxCBrtKp1Y1vtdvYgRZ6_SYyG8t6AhX2Liwzuox-0vAY3qlsiilmu5utCCLqPxvMLJqKZv1gw==",
+      "summary": []
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ee1d9d487d29432e936f8280ce6",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"at fr.pomona\"}",
+      "call_id": "call_HqM66LUp3DOrl2MNVYaCnmeg",
+      "name": "search_log"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": "resp_02cc5b90b0ecfab2006abe8ed7f50487d2936639a99543a16d",
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "in_memory",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "description": "Recherche un texte dans le fichier de log. Utilise cet outil lorsque tu dois v\u00e9rifier la pr\u00e9sence d'un message, d'une exception ou d'un autre \u00e9l\u00e9ment dans le log afin d'obtenir des \u00e9l\u00e9ments de preuve.",
+      "name": "search_log",
+      "output_schema": null,
+      "parameters": {
+        "required": [
+          "searchTerm"
+        ],
+        "type": "object",
+        "properties": {
+          "searchTerm": {
+            "description": "Texte \u00e0 rechercher dans le log.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 1.0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 7999,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 6528
+    },
+    "output_tokens": 216,
+    "output_tokens_details": {
+      "reasoning_tokens": 128
+    },
+    "total_tokens": 8215
+  },
+  "user": null,
+  "metadata": {}
+}
+2026-10-01T18:48:35.714+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_HqM66LUp3DOrl2MNVYaCnmeg
+2026-10-01T18:48:35.714+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI continuation response received - toolCount=1, totalToolCalls=8, responseType=FUNCTION_CALL
+2026-10-01T18:48:35.714+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_HqM66LUp3DOrl2MNVYaCnmeg
+2026-10-01T18:48:35.714+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_HqM66LUp3DOrl2MNVYaCnmeg
+2026-10-01T18:48:35.715+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_HqM66LUp3DOrl2MNVYaCnmeg
+2026-10-01T18:48:35.719+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_HqM66LUp3DOrl2MNVYaCnmeg, resultCount=28
+2026-10-01T18:48:35.719+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_HqM66LUp3DOrl2MNVYaCnmeg
+2026-10-01T18:48:35.719+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Calling AI for continuation after tool executions - toolCount=1, totalToolCalls=9, model=gpt-5-mini
+2026-10-01T18:48:35.720+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : Calling OpenAI Responses API with tool outputs - toolCount=1, previousResponseId=resp_02cc5b90b0ecfab2006abe8edd75f487d2bfda7d69fba44295
+2026-10-01T18:48:39.600+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI Responses API continuation returned HTTP 200
+2026-10-01T18:48:39.600+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI continuation response body: {
+  "id": "resp_02cc5b90b0ecfab2006abe8ee3e9d087d2bd71257fdc959327",
+  "object": "response",
+  "created_at": 1790873316,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1790873318,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "model": "gpt-5-mini-2025-08-07",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_02cc5b90b0ecfab2006abe8ee4cb5087d284fa3798ac960616",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvo7nAZWkLZijNChiyc_OHhdnIQRr0wmk3_g8GbX4WXQ6fHOP8awPN5ZeFE1OdBYeYbAgqceUjiy0Hc0RKiKuWwbuLs93fv58abl4lnlkNl8HvbUu3cbcVNJ9SBuH6QMl8t0X9OSqu5UqvQGMsxvtQ3ZZ_vYPTUkxoqR9gEO0znQYqvaT_uh5RxGQxglWc_6hSodMJazUDMkK6JPaQbw2muL3KdBT25bFGJkhGNNNfjmdgKvCBJyxXkSJ5VlCF2vjVa4NeQv5pomiTAtOHKueG9HM5jmrHNnmB0iR-OelKbBHO1NsJKrYFwj0APfFVuQOE8BWQ0OZ3lxS9XdGourKHC4UpXgJz_nffx3gpAx4neBHuY8xBtHL-BmbEI6u_QA_fVThftmF26Arpl4zXGywuvWwZzOvU8H3l0c6F4-Ii46ub3aEkX1KdQnvHIoaBASZSjSBX49I82NuiDJKv2ePMZQ9EnDKt8xoWN72JhgEGuj5vE-5IFXrHVMYpweNLc8dYjVJH2xpul2zbtZzLgDbqXNgK-vh2JXBAsuisLaRs6RF0tZAis6KyuWXujArmdGJbl0lfWtgvjQ5H_Z_Ts4xW2OGez3oww5E-O9T6sci0ZjV1Ek7fxm5hp3Sp-mJJGdecdEwzGYldHrBkulQ8WcwCIFXIGiYr5JBP6iKGzF9owoSvIGr66F0Va58e_pYrEvv4AnPm2y2JSIyc0w2KPs0Z-AkgOPVAyNU0kB3YLg08yAqCYlojuBdNin4Ptv2rCbig05IyiAuKIroO8aEU1T9uBy9TMXWRKzdtETnl_GKrJrHouUB2rm70fk2WQaaZPGnVuVoNtpxXblVOL-B-SKdJSlr-t71-OW8ppwjmXcV84-4HodyA9pKk0iG3ui0gClUITYTfersFEusZG3NP8r7LQLZ42tZ09R-YoXI9u5-SvO9TlNBh0jU9KLfWDuU4J0piPRE0tO-3y7DU0VyCPxcim6Zzu0So6VrxVuRsRzmrwBZ4UrluBhxaS9SC_Fzbbua36emx1o3dMhNyShS9VbzIQtBSXFWfaFkcjDFaWdXpjXycn55XYDpaFLDvDxdSVNAkAjYgs9wsEIKzJf-YYGaYPLpXZl-WL-lKUoW94mknIBBw53mrBNQnDimZE-N67dYouX9Uivi0SMvJaqQYz8gumZlh5QVOqUjfVghhwu6cUVvwAoU1C-BTCYk74HyZXzYpZz_V0ZYtdptr633pxlHGAOVcqn29d2tw5RZ9KZO14NFcOtVeanrSD0zwCl7-EL7RiWeimwoJBXU7EQeBMWVFuNMr3y16jVNcn_caZLFh8dIbtDXlLgsQzFb1yLbOrpKEMaS5nta9GB_-Zc7GledlCJUl3SK58nMQJ-OHM9h0clnC5x7y9iQra1paeZm-7rJHRDIY9evRrszt81KIcWBOBbMJ-Pko7iq2nSXq0EZUOcXE4avwnrFpXiru8LSHh_YmuLrt5dXAJ_h77XuBXEkhY-Iba51FCox5Nc1r4qFjyVuoJP2SyL8jGDmNcyijNt1cvDM--E_W7cMOJOpRvGG7-rq_btjC-3fMmhkFnSvpA2hY2Hivtgwe0qZhma2xNkAtSeZfXhNCAueI4FA_Wsv09gwafRtFrpFzd1yUE0okWFtnSUWFM-uS3zAu_Rt8XYWMn9nhzLixkw3ub1Vk72W0VQ09icgTaR-gurc5Z1v-t2KtWS1wKIYJLXCupISUXcxUKln5Mls5lbM5WEnl7yOaXDcG94vj6s2x3FL36B1mch0cl4gYyxrHdKhaFT9O8ivvR-n9u_dEnDLWnF6FXOc4wilsH0DDW3HcW5E5cRvep_ZRdUVoBSLPnVGd5uDd9EOI8vsSgbi-ypN6_1ELYX1g4a8gbvmD8DrQFckBdf9ujpMt3g=",
+      "summary": []
+    },
+    {
+      "id": "fc_02cc5b90b0ecfab2006abe8ee5daa087d2bba562c9f64f151f",
+      "type": "function_call",
+      "status": "completed",
+      "arguments": "{\"searchTerm\":\"CustomOAuth2AccessTokenResponseClient\"}",
+      "call_id": "call_23pyWpviclzD7G2aS3ECbvK7",
+      "name": "search_log"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": "resp_02cc5b90b0ecfab2006abe8edd75f487d2bfda7d69fba44295",
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "in_memory",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "description": "Recherche un texte dans le fichier de log. Utilise cet outil lorsque tu dois v\u00e9rifier la pr\u00e9sence d'un message, d'une exception ou d'un autre \u00e9l\u00e9ment dans le log afin d'obtenir des \u00e9l\u00e9ments de preuve.",
+      "name": "search_log",
+      "output_schema": null,
+      "parameters": {
+        "required": [
+          "searchTerm"
+        ],
+        "type": "object",
+        "properties": {
+          "searchTerm": {
+            "description": "Texte \u00e0 rechercher dans le log.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 1.0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 9275,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 8192
+    },
+    "output_tokens": 136,
+    "output_tokens_details": {
+      "reasoning_tokens": 64
+    },
+    "total_tokens": 9411
+  },
+  "user": null,
+  "metadata": {}
+}
+2026-10-01T18:48:39.601+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI requested function 'search_log' - callId=call_23pyWpviclzD7G2aS3ECbvK7
+2026-10-01T18:48:39.601+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI continuation response received - toolCount=1, totalToolCalls=9, responseType=FUNCTION_CALL
+2026-10-01T18:48:39.601+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI requested tool execution - function=search_log, callId=call_23pyWpviclzD7G2aS3ECbvK7
+2026-10-01T18:48:39.601+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Executing tool 'search_log' - callId=call_23pyWpviclzD7G2aS3ECbvK7
+2026-10-01T18:48:39.602+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Executing tool 'search_log' - callId=call_23pyWpviclzD7G2aS3ECbvK7
+2026-10-01T18:48:39.604+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.tools.ToolExecutor            : Tool 'search_log' completed - callId=call_23pyWpviclzD7G2aS3ECbvK7, resultCount=10
+2026-10-01T18:48:39.604+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Tool execution completed - function=search_log, callId=call_23pyWpviclzD7G2aS3ECbvK7
+2026-10-01T18:48:39.605+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : Calling AI for continuation after tool executions - toolCount=1, totalToolCalls=10, model=gpt-5-mini
+2026-10-01T18:48:39.605+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : Calling OpenAI Responses API with tool outputs - toolCount=1, previousResponseId=resp_02cc5b90b0ecfab2006abe8ee3e9d087d2bd71257fdc959327
+2026-10-01T18:49:02.095+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI Responses API continuation returned HTTP 200
+2026-10-01T18:49:02.095+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI continuation response body: {
+  "id": "resp_02cc5b90b0ecfab2006abe8ee7cbcc87d2af7ae5c1a905870a",
+  "object": "response",
+  "created_at": 1790873320,
+  "status": "completed",
+  "access_programs": null,
+  "background": false,
+  "billing": {
+    "payer": "developer"
+  },
+  "completed_at": 1790873340,
+  "error": null,
+  "frequency_penalty": 0.0,
+  "incomplete_details": null,
+  "instructions": null,
+  "max_output_tokens": null,
+  "max_tool_calls": null,
+  "model": "gpt-5-mini-2025-08-07",
+  "moderation": null,
+  "output": [
+    {
+      "id": "rs_02cc5b90b0ecfab2006abe8ee89a0887d28c36e1c735da9930",
+      "type": "reasoning",
+      "content": [],
+      "encrypted_content": "gAAAAABqvo7-u9hMK3Y52QVB8UiJDuxIY1Gw-zalzB92E870e1T5_D8G0kS8sTkH29ZsvYbGaXHx6EfQdRVlqvqn9OhT63nXVdnKf0SGZXIjKOFenHCuSzRkVzkpxYetoVLzRhOT3yeDo5eACX7KS-iX5wfbPpuX9NZYJLlQ7uA82QrRiq_EhbBmVify_NSKWQtqCyesxY9TyUr85GjI2r0vgEGw9fP3zCiiKUvv1euuwWVDNdDRO22BdYu5T9ofjKO-HwAGQ3kjI_doiyuRvN82rpvq1F1RX3QTXvakKEJML02ffHtBfQ9IJNukWQaOq04qAoX9t7AfC_RO4mltKhlK-3HfmQFz6z9sLffaMHTDCqvjNLfaLtfn0fF8WlhS6XVzQm-_220Hth21j51SL9ikDzjVdhbM62m8hCYL1cVJjq_2_f3Y3rdSmCYc5qHJUo8Fq3_rKpmNYpJ1lNVO6KBbnk3EQmvc5jMTzTC02i42OYRugWsd8wWtmf1FsCT6dQuSQv8OvhEJhMZ3WAydw6FRx58BMZPcon5EHZbNMX-BfPBsS_s3FRGApm2YRLqsQa4F9fq5PdNnziwLSvCLX9m2Vv6GzyLoudHD_iVPH1mdfBKlMuXWG72IeOXx_1gYXfCwCBGiTkPpNUdS6LyZW2Ha4PYqJKwV27wweDx9G2jNdXfARJXcx2SF5egDsSrkrFTybMAVNYeRccx2B_l1Lj8miXlIXQBEvEc0subC87-Nhul174MxSdNNDNQSYSgIVEL-GOpl4Y6oBEe2cR9Iqd8QiC_sNogSiY3k_W7yWnFVRZEJ4ACXngRiRNyR3rSIWnY_I_mChrhDZnqCdHw4JR3L8dbW4vs6Qn0ZDEq9UUFStGND6d21xKn1GZ4pAAiqoWieq0dxUuSUBqIeUxjl2dgIAd_QUYD3jxASZiDga-W4DfbGZxiNxWBkCCWRk2Tysfx-iQOF2coP-Ogi_7BGXD6mymcGC-Pu_bum7crHixIBeCmlwA2gsde0haoV-Ydv1LrzuFIG0E-4WMyUg_F6Q-atS85S_hDcC7CK8eqNb7k9EhOOD5hBiwLN8GN6UbRuppP99eE8IA9dL8H9EjNnsC4YNUa_4xvn13Ml370nqqmxK0i2r_watQA2ENCGxYjAJLayyqVHBDgQmdxb6Y8JLDt-ONQwvE0Vin9TgZXleMy65MmUKBYnLGGKN7nllTV_9_Or3EcPVWd6Ypm3JVNwyKeoDHwwasOfVBUvO9o5tyQzZpvdjtlAYRhoTLPpBMSQao_Z66tErugBfXGu6SfjUBtXS1pDfmWBjruG1J9E8ut_pGZYgLZ7_l8_lilJzomUqU-JoAVRAF23zCtH4FpOjm6omKLicYxFj2R8PJE_-pXpuosoDBZcRIvqdRmtmqb3JXrkb4UiC1EeKtWOjsCz_0XSJ5IKCHXVR6k9lDft6N6CMG4Kr3QGgNfisZkDY6ea_oecxmO5JHO5bs8E8KbNuCa4DkWFrh84fXR3KGpa6hwYFf6mW9h6OAeyWaFKWsOUplvc_9pQT0zYtaPGOBmd-7rSAgg0-JUp3hOG66V4wQfoYxvoaBsVoBc6jxoPkD26Sw8uozE_hkIeEDWb3Gh6M1tblDxs_ohC0NOVYY-L8Xj57To6183glvBntq0wlF69mJevecVwnOOvrxT8KqOHbIvrbSqYXC7ZYxgkxL9p2ljxAKl97cDw81ZE9l1LkTw0nULp_PxaEGkuNen9JQId4JxfFdSZu_iOh1knGWsR5Z57NNkXav7pgxomuTk1GTWUtjVSG8qKbV2K0Yym-D07WR7uUdzilYp2h4LTzr0h05cDV-28pHi3bYwlNWWuKMUwLFpUYnqBaFUJC_-eLXjvha4pR7pWgYfC2X6WCR5zaNPrJxJAXwhLu6v9G9svrYAlIuND_JYcfC5hWQfQIjIowj8VC3zyPKxcOY6cyamWcZlFs-zoEYLaNlf1H8GwZ4W4q_-MotIUAMzJh4uAbK3iWPwrQ62cMsiyx67CVAqHfuHcAgtfoiLP4LVm2OdM6AwYYEoKkqjzMKEEdKpoBBIQm5dbeP542UHtl1cWNbxGehTUfk4-f6q2jnf38x2IxnjMVZ73otGrNchAoQ-rFMsFLkfmmoypjK_t0kPqD6p0pcPI6vLBL4I2cmQPP2XXTVRcUZjH5PBmjq2x9JFcohijocTF-xpapi-46dI_pcNjq_vjDwvar5964X0QBWn6rcYjQSpDN3g9EGbQNnEv-qnM5po0kSzm6-dAHOdPx1ZEZNGZFP2YNqYybpp38-JIwymadgL5N3vtIa6KBuuItTKwav3Ga0_iulU58mmmH_WG3SOvy6kCIbqjHuKPmK8F4J6UNn0YJlc1ux9OYTTACJX5WVd-zbq0z9VdaMEbjJX1kd_RL1JiLOvMZ0-0VMxwpi9r4llstwBG4_H5Fy8hWkekmudYrWx-WovY9EJT7-7t8P5XoKZGQspfJgU1O_jzVq3fEIubXXGxjIS1JWu7EDe3lYQ3zF0wtftKMmw6Q8dUxidZ7foRG80sT3bDxofT5kfONN5JMb9t05o5vIwkznUB3QQSFifGLpxPcD6C6XYrFxlpBDhsTjVZCAdW5qx9v7n3OpkE14Vieyuw4alMRWNQpLOBM2q1xM9aONbjOBBS0G0F4NbJ3XHuaZu5wzdEV1kl7kW5K0cmcgKdj7gnDa34LELbhjSeXMnbyPv958MhxZhkHKmP97WUZbAA_cq5qGEQuED-n7QtrF4g5Qe-QJZXo8OrrrR324SU-cpp8ev28eNpl2lw1mk83lbZdhiP2Jb5jvlUDKXtb3QVQHU7mfepRFz4GZGOv6H0O1LcVcoSCwraTbNgCWaB7vknrJaIPRU9Pz_KIPr35jcKu3o1HzQ30hApOczpBJx5MUcuSLGggID9X2xq7_KG9Aq_UIWt7VYQdIaAVLI7Mh8pYMMGzrVknlU4Kz8boqqES6gTT6nmW03a0Dn1hYVG8V0-8xUmCt0jKYi-98PYpM7kW70xSeAcYSWxJ87UdGDKGKNbVBpxTKYTrQ7mlAEDfatYjT-h-BauSixOiQLqnH2wMSpWdBaVMcMRzlf3vWCLWh9jcm7zwI_OLStHci4XpeNUK2tPvtKQbGVosQ3UgUT31hvPLP9i_Lua6SQL758R3ap-VXSjoxz951AiNZSQZuDDXrR2M-i8hyNaY_tXQ-hbAPJ5wNM3OfA5G8U6M3RCsICYpGMGWX8e9rq4EXsMz5jGd86qNVAN2tYG0aABk53fg9sIj5oD1WfpqCWmnUoNPuhVF7P9yEQ8W1ONORF6G9KV3LNB535bh-d1C3nUXQxbmcGeuN9M5iTnMs9Jjr1L1R6DuWS9YYZ6NwyiaCm_CX4CSuYXm6LL2x603C_hnclX3JLeFeYDRqQeu9vksgA4ZJ0DdIHL0kcbEXPrOCfiz0ip8DyHmUjaOoXuTj1oekBGbnaCShxnmK4N3TDj3ek7ao2kJEiL6OoyBtz63rJK3WT0VTGQiwjF4SU93tuO_CaXchrPmsPY8wlQ7WEgzN6u6W3tFgIQyCfFJfxUjHrwDwtbg9pEnzWSFinGOv2KUQpEbMXv2fbPEAJZaooFblI2A0nywMKFjiO8wImN9Gr8jDicVHilHv09MCYwiHUF4rbii26TNFAuQlIxVYUt2ublE9tEOXH1KCuMxGLR1dntbHuZW1mfv3YXIjeESdyR5AKs1CLcA9yT_VcKzvZM8STiv_cI3BMq2OhcQwQVCVdEUKhdx9DjX6Pj28cUdaTqnjPwG4LznHUguIJ03aH1UMs2DWqCHSVWgUxOqyo7IGMjmdzVSziXnp0Y4GBsRXc_fYhU8hW4m7t34MaYGu66442pnYcYr-vTh72pUKK6v1Y06JsdBX9XetPQr7kZ8vdz1d3o_QP4w8mLBaj8nsnua35ow7FJN0RXIZ1CuvtNqfyurvovHqHJM4VYtogJH1o6NletHqcQ4vH_ZOFOTa-p5zDusB6MT3WSrDRRFaRKo75iRKvNQwAusmTpcZh7YwDbAqt2aHTf-5c63SWlc9WVO27hSFdJLld75iG9NlgMLnQAh-nSf8YSpivl5u-Ljk9znmI7oNCzbSeDA-uOASoIzM4wAAMdCHRWktPxRDUEG341QbGot5N1ITlFBBup13mCD6MyEAy6h7K7ua0jSqZsv8_wDp1zwHtnNwN5Wl48dVIwJVwCqYUAtxu9aOmE-Wq3_lD8CW5KOwJsWmXTivu8d_ykftUcoYHxJ-lFoNs0GXoftPVVIOxC_TfGgxsZj1f5dDNlIDLst14bVMLe63Y4mWbSiyU7MrQInEotK33qnAZ-k-emq3vQmzw-9wDMm0oxvrj1y5s75o5CNmV468C8eGSMtPC8oAUjIeRAAdtv7sPFaM00l81b5NtL3KDcXKTAp_D-FqE3VgSvrbDCS0BzttUSGlOgdwIHFTfMoFLvBV6h72nMVXHrmUWclFVAVpQROK2KndjbKfu-Vi_1GJjNDwF0V6d5QLR8vKW68RJdkyxaU2HH2lZUnZh900GYBEkEsD5dSo8pQrRX_tfwFeb0iX8cG2MOJjv0bqpohZa1iR-MsR_7SsXTJ_dRpS7vq2EPDqdtgU5uXHkG7t_hA4pF84kF3IBnbzBMukEMPpx-i3hcq_jXAn74Xg0H1qLOGXm6aSicaN1w4m-Xq7mTHUUSZu19eegNSyjbwEzRfUl1rWoqq6CqrcJ6NwVn8edWoxg4Xiqie10sjcXizCJAwjZ8yYB1KQEnuXPCxdF1pVlQp0rT0pDfuLH1p6wLtfvKWuqofKYUzy-wGknXNCuBZk3Mjfu7y-ILlKCS3QUm0O2_UAVgQ4nxzk52OKUq9rDhJCH-ijFAUGvv6yg44yAyx2QXaByn8IfbZJJ_t9VIduTvWEFSTsCON6-1i0OnncOi8OutffR7Xb661Z1r91RDy6ISYaKN8gGridZ1IotEufYWET0fby2pSMT0c3JQb2eULBrF2YuLhFe_GVe_pR9ToxyNCEo3UlZYpNlHwpUhgGDQXk_vrz3bCCM-zPbjHUmBj8ZNncyhDMbFErEbGC-hbeg_SeR1Q0BpyEC9wwhMpwONn6RKfaJNRZ4cfPTk8sayj75uHwytumJoalZ_AFUEVP3nY636JlLgVFTT2L3ZouOWFvp9LIctJ6VDZL1gO-x8pof7aYnoGHbWY7JrvY_WCW6FTkVEkP4fzR_di7pKrodsO7U3NZDYIFrybDkefAgRPwCFj5Fba1RJefaUXQ4KAIBEQZzNxDYrc1sywHCR5_3sb53bwpBHcs84T9-cqLPl3t3aqb5cpl5Jw-vZAncfgkc5QW4XdbqyaKW7cCc3dUVimDWy8AGAVhU9LOYDOL8J2Q6VgoF5AT_eglFtHuLQURbQWFa1OMSiACggdTTO569Z9gn0wAkrM-ikbSFk7R_X4fD5yyeW0_kEJfDUiS27SQ2Q27wEm4PUS1iCvZ8jnApczEZreGo2whyGEAQlwhFj-7BzN3HYlSOFnN4ASecNIQ3MN2O_YiljxvOm_rPrZb6u4bJkS_SoVUnPSHLWufykFwQOO_sZ03dQtipVOAqlseP-vfgACvfmTlrFxO_fB-kzTQsLVwSIO4I-UlItSe2TEbn9v1WrR0o2ZkUqHOQSEVs-HYZo2M53M6otGHw-7xMch5D2W5EFalfqY_Zk9bo1_rBsT_pC3zljmuUxJ6bVDg2sFdG2l22WIXgV_Em5zMFn795CBR_X4lZfZkxHhInbCMje61Hpl5aj3uryi554OZrEimc0aZTbwso-BnPv6pZK408SKs4VVEzNcFWgIl9DMXwmFhFbFOp0p6DGdvEGtbtX4ZUJaCHL3GnDlnqnqKjXXLh6QLsyWMJx5YQjYeSxjVUO-UpgBTir5g6Ccb-NV42Q8opc4oEefWUYLA9nEoqxk9Wc4oUvxDgE5uwhyZHD6hrY55i31_qhS0AyZB1nM4bCxTmW7PRpjL0_gKhCUS6_zvVFXjVtRjJhFdXuZCGA2HIHucatpWiWSPqDraloO8HmEKuwcVcZestohkOAGq763jjGVrTy30gidSC5jMpgBELSGgbvvPQq9cwHtZj75AIcoFLWCodMt8Y_zLNCvykIf0czyoaAS3bbVWUFLibnXGbN2dqZDM4PUla41Xeezj4_aIadiQtOP5JqIgctpgxDMFI4Shmb3isOlWX0ggTUC562tNr8_JyCKCPTvXzrdclb2_a8DuXSPsJCGAa4lywnDMw8o1KE_G3QHNP3uiWsQ82F9kBOOkZhAG1zvs1ur8z-jHu6lY5ZQoiM73WEyOtmh7b1XJNBn_RirL4FWXQpEx7KrqfD8o0RByLKXwP8SamQGRfkkcJDL5Lr2xrROBcuUnDkoKs=",
+      "summary": []
+    },
+    {
+      "id": "msg_02cc5b90b0ecfab2006abe8eef1ca487d2a382f35a94499c2e",
+      "type": "message",
+      "status": "completed",
+      "content": [
+        {
+          "type": "output_text",
+          "annotations": [],
+          "logprobs": [],
+          "text": "R\u00e9sum\u00e9 du probl\u00e8me principal\n- Cinq erreurs HTTP 400 (BAD_REQUEST) ont \u00e9t\u00e9 lev\u00e9es c\u00f4t\u00e9 serveur et encapsul\u00e9es dans fr.pomona.manageo.web.security.CustomHttpResponseException. Les traces montrent que ces 400 surviennent lors de l'\u00e9change de code pour token (flux OAuth2) \u2014 donc tr\u00e8s probablement lors d'un appel au endpoint /token g\u00e9r\u00e9 via un client OAuth2/Cognito personnalis\u00e9.\n\nCauses probables\n1. Requ\u00eate invalide vers le endpoint token de Cognito (param\u00e8tres manquants/malform\u00e9s) \u2014 ex. code d'autorisation invalide, redirect_uri non conforme, client_id/secret incorrects, scope non attendu.\n2. Mauvaise configuration du client OAuth2/Cognito dans l'application (URL du token, proxy, en-t\u00eates ou param\u00e8tres incorrects).\n3. Probl\u00e8me de proxy / r\u00e9solution d'h\u00f4te (configuration de RestTemplate / proxy mang\u00e9e ou host null) pouvant alt\u00e9rer l'URL cible ou l'en-t\u00eate Host.\n4. Impl\u00e9mentation personnalis\u00e9e (CustomOAuth2AccessTokenResponseClient / CustomHttpResponseErrorHandler) qui convertit toute r\u00e9ponse 4xx du token endpoint en CustomHttpResponseException \u2014 donc l'erreur remonte c\u00f4t\u00e9 applicatif sans d\u00e9tail du corps de r\u00e9ponse.\n\n\u00c9l\u00e9ments de preuve (extraits du log brut)\n- L'exception CustomHttpResponseException{httpStatus=400 BAD_REQUEST} est pr\u00e9sente \u00e0 plusieurs reprises :\n  - fr.pomona.manageo.web.security.CustomHttpResponseException{httpStatus=400 BAD_REQUEST} (Lignes rep\u00e9r\u00e9es : 189, 271, 358, 445, 532)\n- La pile montre que l'erreur provient directement du client d'\u00e9change de token OAuth2 personnalis\u00e9 :\n  - at fr.pomona.manageo.web.security.CustomHttpResponseErrorHandler.handleError(CustomHttpResponseErrorHandler.java:27) (Lignes : 190, 272, 359, 446, 533)\n  - at fr.pomona.manageo.web.security.cognito.proxy.oauth2.CustomOAuth2AccessTokenResponseClient.getTokenResponse(CustomOAuth2AccessTokenResponseClient.java:35) (Lignes : 195\u2013196, 277\u2013278, 364\u2013365, 451\u2013452, 538\u2013539)\n- Le RestTemplate est impliqu\u00e9 dans l'\u00e9change HTTP :\n  - at org.springframework.web.client.RestTemplate.exchange(RestTemplate.java:666) et au traitement de r\u00e9ponse (RestTemplate.doExecute / handleResponse) (Lignes : 192\u2013194, 274\u2013276, 361\u2013363, 448\u2013450, 535\u2013537)\n  => Conclusion directe : le code qui appelle le endpoint /token (CustomOAuth2AccessTokenResponseClient) utilise RestTemplate ; la ResponseErrorHandler (CustomHttpResponseErrorHandler) a d\u00e9tect\u00e9 un 400 et a lev\u00e9 CustomHttpResponseException. Ceci \u00e9tablit clairement que les 400 sont li\u00e9s \u00e0 l'\u00e9change OAuth2 (Cognito proxy/client personnalis\u00e9).\n- Indice de configuration/proxy probl\u00e9matique au d\u00e9marrage :\n  - Erreur de cr\u00e9ation de bean li\u00e9e \u00e0 CognitoSecurityConfiguration.oauth2ClientRestOperations avec java.lang.IllegalArgumentException: Host name may not be null (pr\u00e9sent dans la pile de d\u00e9marrage, Lignes rep\u00e9r\u00e9es : 4, 115, 132, 141). Ceci montre qu'il existe aussi un probl\u00e8me de configuration qui peut affecter RestTemplate/proxy.\n\nRecommandations concr\u00e8tes\n1. R\u00e9cup\u00e9rer le corps de la r\u00e9ponse du endpoint token (Cognito) :\n   - Modifier CustomHttpResponseErrorHandler pour loguer (au moins en DEBUG) le statut HTTP complet et le corps de r\u00e9ponse renvoy\u00e9 par Cognito quand c'est un 4xx. Sans le corps (message d'erreur de Cognito), on ne peut pas d\u00e9terminer la raison exacte du 400.\n2. Activer/debugger les logs HTTP sortants :\n   - Activer logging DEBUG pour org.springframework.web.client.RestTemplate et pour votre package fr.pomona.manageo.web.security.cognito.proxy.oauth2 afin de capturer la requ\u00eate envoy\u00e9e (URL, param\u00e8tres form, en-t\u00eates) et la r\u00e9ponse du serveur.\n3. V\u00e9rifier la configuration OAuth2/Cognito :\n   - Valider client_id, client_secret, token_uri, redirect_uri, scopes et la configuration du proxy (si utilis\u00e9).\n   - V\u00e9rifier que l'URL du token n'est pas nulle et que le host est correctement d\u00e9fini (le d\u00e9marrage montre une IllegalArgumentException \"Host name may not be null\" dans CognitoSecurityConfiguration.oauth2ClientRestOperations).\n4. Tester manuellement le endpoint token :\n   - Reproduire l'appel token (avec les m\u00eames param\u00e8tres que le client) via curl/postman pour voir la r\u00e9ponse d\u00e9taill\u00e9e de Cognito.\n5. Inspecter les logs Cognito (AWS) si possible :\n   - V\u00e9rifier c\u00f4t\u00e9 Cognito les requ\u00eates re\u00e7ues et raisons des rejets (mauvais code, redirect_uri mismatch, client non autoris\u00e9, etc.).\n6. Corriger la cr\u00e9ation/initialisation du RestTemplate/proxy :\n   - Examiner CognitoSecurityConfiguration.oauth2ClientRestOperations et AuthHeaderGenerator.createProxyConfiguration (ligne indiqu\u00e9e dans le log) : s'assurer que le host/proxy ne soit pas null et que la configuration soit fournie via propri\u00e9t\u00e9s.\n7. Ajouter m\u00e9triques/traces :\n   - Si possible, instrumenter l'\u00e9change d'auth code\u2192token pour capturer code/redirect_uri (sanitiser les secrets) afin de faciliter le debug.\n\nIncertitudes et limites\n- Le log ne contient pas (au moins dans les extraits retrouv\u00e9s) le corps de la r\u00e9ponse HTTP 400 renvoy\u00e9e par Cognito ni l'URL exacte du token utilis\u00e9. Sans ces informations, on ne peut pas affirmer la cause pr\u00e9cise du 400 (ex. code invalide vs redirect_uri mismatch vs credentials).\n- Il existe une erreur de d\u00e9marrage diff\u00e9rente (Host name may not be null) li\u00e9e \u00e0 la cr\u00e9ation du RestTemplate pour Cognito ; elle indique un probl\u00e8me de configuration qui pourrait \u00eatre reli\u00e9 aux 400 (par ex. host mal construit), mais le lien de causalit\u00e9 n'est pas prouv\u00e9 directement par les logs fournis : il faut v\u00e9rifier les timestamps/ordre d'occurrence et la configuration effective utilis\u00e9e au runtime.\n- On ne voit pas ici les logs c\u00f4t\u00e9 Cognito/AWS ; ces logs pourraient montrer la raison exacte du rejet (information n\u00e9cessaire pour une conclusion d\u00e9finitive).\n\nR\u00e9sum\u00e9 bref et priorit\u00e9s d'action\n- Preuve claire : les 400 sont li\u00e9s \u00e0 l'appel token OAuth2 (CustomOAuth2AccessTokenResponseClient \u2192 RestTemplate \u2192 CustomHttpResponseErrorHandler). Action prioritaire : loguer le corps de la r\u00e9ponse 400 et les param\u00e8tres de la requ\u00eate token, puis v\u00e9rifier la configuration client (token URI, host/proxy, client_id/secret, redirect_uri). Corriger aussi l'erreur de d\u00e9marrage \"Host name may not be null\" qui sugg\u00e8re une configuration de proxy/host manquante ou erron\u00e9e."
+        }
+      ],
+      "role": "assistant"
+    }
+  ],
+  "parallel_tool_calls": true,
+  "presence_penalty": 0.0,
+  "previous_response_id": "resp_02cc5b90b0ecfab2006abe8ee3e9d087d2bd71257fdc959327",
+  "prompt_cache_key": null,
+  "prompt_cache_retention": "in_memory",
+  "reasoning": {
+    "context": "current_turn",
+    "effort": "medium",
+    "mode": "standard",
+    "summary": null
+  },
+  "safety_identifier": null,
+  "service_tier": "default",
+  "store": true,
+  "temperature": 1.0,
+  "text": {
+    "format": {
+      "type": "text"
+    },
+    "verbosity": "medium"
+  },
+  "tool_choice": "auto",
+  "tool_usage": {
+    "image_gen": {
+      "input_tokens": 0,
+      "input_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "output_tokens": 0,
+      "output_tokens_details": {
+        "image_tokens": 0,
+        "text_tokens": 0
+      },
+      "total_tokens": 0
+    },
+    "web_search": {
+      "num_requests": 0
+    }
+  },
+  "tools": [
+    {
+      "type": "function",
+      "description": "Recherche un texte dans le fichier de log. Utilise cet outil lorsque tu dois v\u00e9rifier la pr\u00e9sence d'un message, d'une exception ou d'un autre \u00e9l\u00e9ment dans le log afin d'obtenir des \u00e9l\u00e9ments de preuve.",
+      "name": "search_log",
+      "output_schema": null,
+      "parameters": {
+        "required": [
+          "searchTerm"
+        ],
+        "type": "object",
+        "properties": {
+          "searchTerm": {
+            "description": "Texte \u00e0 rechercher dans le log.",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "strict": true
+    }
+  ],
+  "top_logprobs": 0,
+  "top_p": 1.0,
+  "truncation": "disabled",
+  "usage": {
+    "input_tokens": 9832,
+    "input_tokens_details": {
+      "cache_write_tokens": 0,
+      "cached_tokens": 9344
+    },
+    "output_tokens": 2231,
+    "output_tokens_details": {
+      "reasoning_tokens": 704
+    },
+    "total_tokens": 12063
+  },
+  "user": null,
+  "metadata": {}
+}
+2026-10-01T18:49:02.096+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.i.ai.openai.OpenAiClient           : OpenAI returned final text response
+2026-10-01T18:49:02.096+02:00  INFO 17976 --- [ai-log-analyzer] [restartedMain] c.b.a.d.ai.analyzer.DefaultAiAnalyzer    : AI continuation response received - toolCount=1, totalToolCalls=10, responseType=TEXT

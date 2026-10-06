@@ -1,6 +1,6 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.tools;
 
-import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
+import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -39,45 +39,39 @@ public class ToolExecutor {
     }
 
     public ToolExecutionResult execute(
-            AiResponse aiResponse,
+            AiFunctionCall functionCall,
             Path logFile) throws IOException {
 
         if (logFile == null) {
-            throw new IllegalArgumentException("logFile must not be null");
-        }
-
-        if (aiResponse == null) {
             throw new IllegalArgumentException(
-                    "aiResponse must not be null"
+                    "logFile must not be null"
             );
         }
 
-        if (aiResponse.getType()
-                != AiResponse.Type.FUNCTION_CALL) {
-
+        if (functionCall == null) {
             throw new IllegalArgumentException(
-                    "AiResponse must be a FUNCTION_CALL"
+                    "functionCall must not be null"
             );
         }
 
         if (!"search_log".equals(
-                aiResponse.getFunctionName())) {
+                functionCall.getFunctionName())) {
 
             throw new IllegalArgumentException(
                     "Unsupported function: "
-                            + aiResponse.getFunctionName()
+                            + functionCall.getFunctionName()
             );
         }
 
         logger.info(
                 "Executing tool '{}' - callId={}",
-                aiResponse.getFunctionName(),
-                aiResponse.getCallId()
+                functionCall.getFunctionName(),
+                functionCall.getCallId()
         );
 
         JsonNode arguments =
                 objectMapper.readTree(
-                        aiResponse.getArguments()
+                        functionCall.getArguments()
                 );
 
         String searchTerm =
@@ -113,13 +107,13 @@ public class ToolExecutor {
 
         logger.info(
                 "Tool '{}' completed - callId={}, resultCount={}",
-                aiResponse.getFunctionName(),
-                aiResponse.getCallId(),
+                functionCall.getFunctionName(),
+                functionCall.getCallId(),
                 results.size()
         );
 
         return new ToolExecutionResult(
-                aiResponse.getCallId(),
+                functionCall.getCallId(),
                 output
         );
     }

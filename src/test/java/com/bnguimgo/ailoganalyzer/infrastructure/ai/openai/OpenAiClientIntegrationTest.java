@@ -1,5 +1,6 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.openai;
 
+import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -104,19 +105,21 @@ class OpenAiClientIntegrationTest {
                 functionCall.getResponseId()
         );
 
+        AiFunctionCall aiFunctionCall = functionCall.getFunctionCalls().getFirst();
+
         assertEquals(
                 "call_test_123",
-                functionCall.getCallId()
+                aiFunctionCall.getCallId()
         );
 
         assertEquals(
                 "search_log",
-                functionCall.getFunctionName()
+                aiFunctionCall.getFunctionName()
         );
 
         assertEquals(
                 "{\"searchTerm\":\"Host name may not be null\"}",
-                functionCall.getArguments()
+                aiFunctionCall.getArguments()
         );
 
         /*
@@ -186,7 +189,7 @@ class OpenAiClientIntegrationTest {
 
         ToolExecutionResult toolResult =
                 new ToolExecutionResult(
-                        functionCall.getCallId(),
+                        aiFunctionCall.getCallId(),
                         "Host name may not be null"
                 );
 
@@ -199,7 +202,7 @@ class OpenAiClientIntegrationTest {
         AiResponse finalResponse =
                 client.continueAnalysis(
                         functionCall,
-                        toolResult,
+                        List.of(toolResult),
                         MODEL
                 );
 

@@ -11,3 +11,7 @@ ai:
     api-key: ${AI_API_KEY:}
     api-url: ${AI_API_URL:https://api.openai.com/v1/responses}
     model: ${AI_MODEL:mock-model}
+
+logging:
+  file:
+    name: logs/ai-log-analyzer.log

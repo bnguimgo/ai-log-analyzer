@@ -23,6 +23,36 @@ public class AiPromptBuilder {
                 .append("causes probables, les éléments de preuve et les ")
                 .append("recommandations.\n\n");
 
+        prompt.append("=== RÈGLE D'UTILISATION DE SEARCH_LOG ===\n");
+
+        prompt.append("Si une conclusion ou une affirmation nécessite de vérifier ")
+                .append("un élément qui n'est pas suffisamment démontré par le ")
+                .append("contexte structuré fourni, utilise search_log pour rechercher ")
+                .append("les preuves correspondantes dans le contenu brut du log ")
+                .append("avant de conclure.\n");
+
+        prompt.append("Lorsque search_log est nécessaire, appelle directement l'outil ")
+                .append("sans demander confirmation à l'utilisateur et sans simplement ")
+                .append("annoncer que tu vas effectuer la recherche.\n");
+
+        prompt.append("N'affirme pas comme un fait une information qui n'est pas ")
+                .append("démontrée par le contexte structuré ou par les résultats ")
+                .append("de search_log.\n");
+
+        prompt.append("Utilise search_log notamment lorsque tu dois vérifier ")
+                .append("le message exact d'une erreur, rechercher une exception ")
+                .append("ou sa cause, vérifier les détails d'une requête ou d'une ")
+                .append("réponse HTTP, confirmer un enchaînement d'événements, ")
+                .append("ou rechercher un élément nécessaire pour étayer une hypothèse.\n");
+
+        prompt.append("Si les informations disponibles sont suffisantes pour établir ")
+                .append("une conclusion, n'utilise pas search_log inutilement.\n\n");
+
+        prompt.append("Une fois que tu disposes de suffisamment d'éléments de preuve ")
+                .append("pour répondre à la question, arrête les recherches et produis ")
+                .append("directement l'analyse finale. Ne multiplie pas les recherches ")
+                .append("pour explorer le log sans objectif précis.\n\n");
+
         prompt.append("=== INCIDENTS ===\n");
 
         for (int i = 0; i < context.incidents().size(); i++) {
@@ -133,6 +163,11 @@ public class AiPromptBuilder {
                     relation.getReason()
             );
         }
+
+        prompt.append("\n=== QUESTION SPÉCIFIQUE ===\n");
+        prompt.append("Analyse les erreurs HTTP 400 et détermine, à partir des logs bruts, ")
+                .append("si elles sont liées à OAuth2/Cognito et quels éléments précis ")
+                .append("permettent de l'établir.\n\n");
 
         prompt.append("\n=== ATTENDU ===\n");
         prompt.append("1. Résume le problème principal.\n");

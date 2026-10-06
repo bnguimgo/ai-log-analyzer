@@ -1,6 +1,6 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.tools;
 
-import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
+import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -30,28 +30,24 @@ class ToolExecutorTest {
                         new ObjectMapper()
                 );
 
-        AiResponse aiResponse =
-                new AiResponse();
+        AiFunctionCall functionCall =
+                new AiFunctionCall();
 
-        aiResponse.setType(
-                AiResponse.Type.FUNCTION_CALL
-        );
-
-        aiResponse.setCallId(
+        functionCall.setCallId(
                 "call_123"
         );
 
-        aiResponse.setFunctionName(
+        functionCall.setFunctionName(
                 "search_log"
         );
 
-        aiResponse.setArguments(
+        functionCall.setArguments(
                 "{\"searchTerm\":\"Host name may not be null\"}"
         );
 
         ToolExecutionResult result =
                 executor.execute(
-                        aiResponse,
+                        functionCall,
                         LOG_FILE_PATH
                 );
 
@@ -84,32 +80,6 @@ class ToolExecutorTest {
     }
 
     @Test
-    void shouldRejectTextResponse() {
-
-        ToolExecutor executor =
-                new ToolExecutor(
-                        new DefaultLogSearchTool(),
-                        new ObjectMapper()
-                );
-
-        AiResponse aiResponse =
-                new AiResponse();
-
-        aiResponse.setType(
-                AiResponse.Type.TEXT
-        );
-
-        aiResponse.setText(
-                "Analyse terminée"
-        );
-
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> executor.execute(aiResponse, LOG_FILE_PATH)
-        );
-    }
-
-    @Test
     void shouldRejectUnsupportedFunction() {
 
         ToolExecutor executor =
@@ -118,24 +88,20 @@ class ToolExecutorTest {
                         new ObjectMapper()
                 );
 
-        AiResponse aiResponse =
-                new AiResponse();
+        AiFunctionCall functionCall =
+                new AiFunctionCall();
 
-        aiResponse.setType(
-                AiResponse.Type.FUNCTION_CALL
-        );
-
-        aiResponse.setFunctionName(
+        functionCall.setFunctionName(
                 "unknown_tool"
         );
 
-        aiResponse.setArguments(
+        functionCall.setArguments(
                 "{}"
         );
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> executor.execute(aiResponse, LOG_FILE_PATH)
+                () -> executor.execute(functionCall, LOG_FILE_PATH)
         );
     }
 
@@ -148,24 +114,20 @@ class ToolExecutorTest {
                         new ObjectMapper()
                 );
 
-        AiResponse aiResponse =
-                new AiResponse();
+        AiFunctionCall functionCall =
+                new AiFunctionCall();
 
-        aiResponse.setType(
-                AiResponse.Type.FUNCTION_CALL
-        );
-
-        aiResponse.setFunctionName(
+        functionCall.setFunctionName(
                 "search_log"
         );
 
-        aiResponse.setArguments(
+        functionCall.setArguments(
                 "{\"searchTerm\":\"\"}"
         );
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> executor.execute(aiResponse, LOG_FILE_PATH)
+                () -> executor.execute(functionCall, LOG_FILE_PATH)
         );
     }
 
@@ -178,24 +140,20 @@ class ToolExecutorTest {
                         new ObjectMapper()
                 );
 
-        AiResponse aiResponse =
-                new AiResponse();
+        AiFunctionCall functionCall =
+                new AiFunctionCall();
 
-        aiResponse.setType(
-                AiResponse.Type.FUNCTION_CALL
-        );
-
-        aiResponse.setFunctionName(
+        functionCall.setFunctionName(
                 "search_log"
         );
 
-        aiResponse.setArguments(
+        functionCall.setArguments(
                 "INVALID_JSON"
         );
 
         assertThrows(
                 Exception.class,
-                () -> executor.execute(aiResponse, LOG_FILE_PATH)
+                () -> executor.execute(functionCall, LOG_FILE_PATH)
         );
     }
 
@@ -208,27 +166,23 @@ class ToolExecutorTest {
                         new ObjectMapper()
                 );
 
-        AiResponse aiResponse =
-                new AiResponse();
+        AiFunctionCall functionCall =
+                new AiFunctionCall();
 
-        aiResponse.setType(
-                AiResponse.Type.FUNCTION_CALL
-        );
-
-        aiResponse.setCallId(
+        functionCall.setCallId(
                 "call_456"
         );
 
-        aiResponse.setFunctionName(
+        functionCall.setFunctionName(
                 "search_log"
         );
 
-        aiResponse.setArguments(
+        functionCall.setArguments(
                 "{\"searchTerm\":\"Host name may not be null\"}"
         );
 
         ToolExecutionResult result =
-                executor.execute(aiResponse, LOG_FILE_PATH);
+                executor.execute(functionCall, LOG_FILE_PATH);
 
         assertEquals(
                 "call_456",
@@ -251,39 +205,34 @@ class ToolExecutorTest {
     @Test
     void shouldRejectMissingSearchTerm() {
 
-        AiResponse aiResponse = new AiResponse();
-        aiResponse.setType( AiResponse.Type.FUNCTION_CALL );
-        aiResponse.setFunctionName( "search_log" );
-        aiResponse.setArguments( "{}" );
+        AiFunctionCall functionCall = new AiFunctionCall();
+        functionCall.setFunctionName("search_log");
+        functionCall.setArguments("{}");
 
         assertThrows( IllegalArgumentException.class,
-                () -> toolExecutor.execute( aiResponse, LOG_FILE_PATH ) );
+                () -> toolExecutor.execute( functionCall, LOG_FILE_PATH ) );
 
     }
 
     @Test void shouldRejectBlankSearchTerm() {
 
-        AiResponse aiResponse = new AiResponse();
-        aiResponse.setType( AiResponse.Type.FUNCTION_CALL );
-        aiResponse.setFunctionName( "search_log" );
-        aiResponse.setArguments( "{\"searchTerm\":\" \"}" );
+        AiFunctionCall functionCall = new AiFunctionCall();
+        functionCall.setFunctionName( "search_log" );
+        functionCall.setArguments( "{\"searchTerm\":\" \"}" );
         assertThrows( IllegalArgumentException.class,
-                () -> toolExecutor.execute( aiResponse, LOG_FILE_PATH ));
+                () -> toolExecutor.execute( functionCall, LOG_FILE_PATH ));
     }
 
     @Test
     void shouldRejectNullLogFile() {
-        AiResponse response = new AiResponse();
-
-        response.setType(AiResponse.Type.FUNCTION_CALL);
-        response.setResponseId("resp_123");
-        response.setCallId("call_123");
-        response.setFunctionName("search_log");
-        response.setArguments("{\"searchTerm\":\"Host name may not be null\"}");
+        AiFunctionCall functionCall = new AiFunctionCall();
+        functionCall.setCallId("call_123");
+        functionCall.setFunctionName("search_log");
+        functionCall.setArguments("{\"searchTerm\":\"Host name may not be null\"}");
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
-                () -> toolExecutor.execute(response, null)
+                () -> toolExecutor.execute(functionCall, null)
         );
 
         assertEquals("logFile must not be null", exception.getMessage());

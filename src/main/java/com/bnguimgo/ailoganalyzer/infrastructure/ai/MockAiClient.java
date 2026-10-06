@@ -3,6 +3,8 @@ package com.bnguimgo.ailoganalyzer.infrastructure.ai;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 
+import java.util.List;
+
 public class MockAiClient implements AiClient {
 
     @Override
@@ -35,7 +37,7 @@ public class MockAiClient implements AiClient {
     @Override
     public AiResponse continueAnalysis(
             AiResponse functionCall,
-            ToolExecutionResult toolResult,
+            List<ToolExecutionResult> toolResults,
             String model) {
 
         if (functionCall == null) {
@@ -52,9 +54,9 @@ public class MockAiClient implements AiClient {
             );
         }
 
-        if (toolResult == null) {
+        if (toolResults == null || toolResults.isEmpty()) {
             throw new IllegalArgumentException(
-                    "toolResult must not be null"
+                    "toolResults must not be null or empty"
             );
         }
 
@@ -68,8 +70,8 @@ public class MockAiClient implements AiClient {
 
         response.setType(AiResponse.Type.TEXT);
         response.setText(
-                "Analyse IA simulée après exécution du tool : "
-                        + toolResult.output()
+                "Analyse IA simulée après exécution des tools : "
+                        + toolResults.size()
         );
 
         return response;

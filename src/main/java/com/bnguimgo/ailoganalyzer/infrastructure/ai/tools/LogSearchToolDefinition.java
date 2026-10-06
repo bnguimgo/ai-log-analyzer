@@ -9,12 +9,15 @@ public class LogSearchToolDefinition {
 
     public static Map<String, Object> asMap() {
 
-        //NB : Voir la documentation de l'API OpenAI pour valider le format de sortir ci-dessous
+        //NB : Voir la documentation de l'API OpenAI pour valider le format de propriétés ci-dessous
         return Map.of(
                 "type", "function",
                 "name", "search_log",
                 "description",
-                "Recherche un texte dans le fichier de log.",
+                "Recherche un texte dans le fichier de log. "
+                        + "Utilise cet outil lorsque tu dois vérifier la présence "
+                        + "d'un message, d'une exception ou d'un autre élément "
+                        + "dans le log afin d'obtenir des éléments de preuve.",
                 "parameters",
                 Map.of(
                         "type", "object",
