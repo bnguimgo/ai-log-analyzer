@@ -2,6 +2,7 @@ package com.bnguimgo.ailoganalyzer.infrastructure.ai.openai;
 
 import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -187,11 +188,9 @@ class OpenAiClientIntegrationTest {
          * ---------------------------------------------------------
          */
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult(
-                        aiFunctionCall.getCallId(),
-                        "Host name may not be null"
-                );
+        ToolExecutionResult toolResult = createToolResult(
+                aiFunctionCall.getCallId()
+        );
 
         /*
          * ---------------------------------------------------------
@@ -420,5 +419,18 @@ class OpenAiClientIntegrationTest {
                                 )
                 )
                 .toString();
+    }
+
+    private ToolExecutionResult createToolResult(
+            String callId) {
+
+        return new ToolExecutionResult(
+                callId,
+                "Host name may not be null",
+                new SearchRequest(
+                        "Host name may not be null",
+                        "Vérifier cet élément dans le log"
+                )
+        );
     }
 }

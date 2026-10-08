@@ -1,5 +1,6 @@
-package com.bnguimgo.ailoganalyzer.domain.ai;
+package com.bnguimgo.ailoganalyzer.domain.ai.prompt;
 
+import com.bnguimgo.ailoganalyzer.domain.ai.StructuredContext;
 import com.bnguimgo.ailoganalyzer.domain.incident.IncidentRelation;
 import com.bnguimgo.ailoganalyzer.domain.incident.IncidentRelationType;
 import com.bnguimgo.ailoganalyzer.domain.incident.IncidentSeverity;

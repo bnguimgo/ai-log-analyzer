@@ -1,6 +1,11 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.tools;
 
-public record ToolExecutionResult(String callId, String output) {
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
+
+public record ToolExecutionResult(
+        String callId,
+        String output,
+        SearchRequest searchRequest) {
 
     public ToolExecutionResult {
 
@@ -16,5 +21,10 @@ public record ToolExecutionResult(String callId, String output) {
             );
         }
 
+        if (searchRequest == null) {
+            throw new IllegalArgumentException(
+                    "searchRequest must not be null"
+            );
+        }
     }
 }

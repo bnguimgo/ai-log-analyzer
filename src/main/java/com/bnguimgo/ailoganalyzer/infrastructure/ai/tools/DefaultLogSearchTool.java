@@ -1,5 +1,7 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.tools;
 
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,12 +11,19 @@ import java.util.List;
 public class DefaultLogSearchTool implements LogSearchTool {
 
     @Override
-    public List<String> search(Path logFile, String searchTerm) throws IOException {
+    public List<String> search(Path logFile, SearchRequest searchRequest) throws IOException {
 
         if (logFile == null) {
             throw new IllegalArgumentException(
                     "Log file must not be null");
         }
+
+        if (searchRequest == null) {
+            throw new IllegalArgumentException(
+                    "searchRequest must not be null");
+        }
+
+        String searchTerm = searchRequest.searchTerm();
 
         if (searchTerm == null || searchTerm.trim().isEmpty()) {
             throw new IllegalArgumentException(
@@ -22,7 +31,7 @@ public class DefaultLogSearchTool implements LogSearchTool {
         }
 
         List<String> lines = Files.readAllLines(logFile);
-        List<String> results = new ArrayList<String>();
+        List<String> results = new ArrayList<>();
 
         for (int i = 0; i < lines.size(); i++) {
 

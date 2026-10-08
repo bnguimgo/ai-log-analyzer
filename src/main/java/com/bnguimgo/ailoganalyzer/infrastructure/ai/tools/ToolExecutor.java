@@ -1,6 +1,8 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.tools;
 
 import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -69,34 +71,19 @@ public class ToolExecutor {
                 functionCall.getCallId()
         );
 
-        JsonNode arguments =
-                objectMapper.readTree(
-                        functionCall.getArguments()
-                );
-
-        String searchTerm =
-                arguments
-                        .path("searchTerm")
-                        .asText(null);
-
-        if (searchTerm == null
-                || searchTerm.trim().isEmpty()) {
-
-            throw new IllegalArgumentException(
-                    "searchTerm must not be null or empty"
-            );
-        }
+        SearchRequest searchRequest = buildSearchRequest(functionCall);
 
         logger.debug(
-                "Executing search_log - searchTerm='{}', logFile='{}'",
-                searchTerm,
+                "Executing search_log - searchTerm='{}', objective='{}', logFile='{}'",
+                searchRequest.searchTerm(),
+                searchRequest.objective(),
                 logFile
         );
 
         List<String> results =
                 logSearchTool.search(
                         logFile,
-                        searchTerm
+                        searchRequest
                 );
 
         String output =
@@ -114,7 +101,63 @@ public class ToolExecutor {
 
         return new ToolExecutionResult(
                 functionCall.getCallId(),
-                output
+                output,
+                searchRequest
         );
+    }
+
+    private SearchRequest buildSearchRequest(JsonNode arguments) {
+        String searchTerm =
+                arguments
+                        .path("searchTerm")
+                        .asText(null);
+
+        if (searchTerm == null || searchTerm.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "searchTerm must not be null or empty"
+            );
+        }
+
+        String objective =
+                arguments
+                        .path("objective")
+                        .asText(null);
+
+        if (objective == null || objective.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "objective must not be null or empty"
+            );
+        }
+
+        return new SearchRequest(
+                searchTerm,
+                objective
+        );
+    }
+
+    public SearchRequest buildSearchRequest(
+            AiFunctionCall functionCall) throws JsonProcessingException {
+
+        if (functionCall == null) {
+            throw new IllegalArgumentException(
+                    "functionCall must not be null"
+            );
+        }
+
+        if (!"search_log".equals(
+                functionCall.getFunctionName())) {
+
+            throw new IllegalArgumentException(
+                    "Unsupported function: "
+                            + functionCall.getFunctionName()
+            );
+        }
+
+        JsonNode arguments =
+                objectMapper.readTree(
+                        functionCall.getArguments()
+                );
+
+        return buildSearchRequest(arguments);
     }
 }

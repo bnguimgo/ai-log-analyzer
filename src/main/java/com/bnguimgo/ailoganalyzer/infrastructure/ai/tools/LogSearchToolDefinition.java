@@ -1,5 +1,6 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.tools;
 
+import java.util.List;
 import java.util.Map;
 
 public class LogSearchToolDefinition {
@@ -9,7 +10,7 @@ public class LogSearchToolDefinition {
 
     public static Map<String, Object> asMap() {
 
-        //NB : Voir la documentation de l'API OpenAI pour valider le format de propriétés ci-dessous
+        // NB : Voir la documentation de l'API OpenAI pour valider le format de propriétés ci-dessous
         return Map.of(
                 "type", "function",
                 "name", "search_log",
@@ -26,9 +27,17 @@ public class LogSearchToolDefinition {
                                         "type", "string",
                                         "description",
                                         "Texte à rechercher dans le log."
+                                ),
+                                "objective", Map.of(
+                                        "type", "string",
+                                        "description",
+                                        "Objectif de la recherche."
                                 )
                         ),
-                        "required", java.util.List.of("searchTerm"),
+                        "required", List.of(
+                                "searchTerm",
+                                "objective"
+                        ),
                         "additionalProperties", false
                 ),
                 "strict", true

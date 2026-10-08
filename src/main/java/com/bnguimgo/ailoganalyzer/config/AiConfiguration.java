@@ -1,6 +1,6 @@
 package com.bnguimgo.ailoganalyzer.config;
 
-import com.bnguimgo.ailoganalyzer.domain.ai.AiPromptBuilder;
+import com.bnguimgo.ailoganalyzer.domain.ai.prompt.AiPromptBuilder;
 import com.bnguimgo.ailoganalyzer.domain.ai.analyzer.AiAnalyzer;
 import com.bnguimgo.ailoganalyzer.domain.ai.analyzer.DefaultAiAnalyzer;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.AiClient;

@@ -3,7 +3,7 @@ package com.bnguimgo.ailoganalyzer.runner;
 import com.bnguimgo.ailoganalyzer.application.DefaultLogAnalysisService;
 import com.bnguimgo.ailoganalyzer.application.LogAnalysisService;
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
-import com.bnguimgo.ailoganalyzer.domain.ai.AiPromptBuilder;
+import com.bnguimgo.ailoganalyzer.domain.ai.prompt.AiPromptBuilder;
 import com.bnguimgo.ailoganalyzer.domain.ai.StructuredContextBuilder;
 import com.bnguimgo.ailoganalyzer.domain.ai.analyzer.AiAnalyzer;
 import com.bnguimgo.ailoganalyzer.domain.ai.analyzer.DefaultAiAnalyzer;

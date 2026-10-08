@@ -1,6 +1,7 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.tools;
 
 import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +43,8 @@ class ToolExecutorTest {
         );
 
         functionCall.setArguments(
-                "{\"searchTerm\":\"Host name may not be null\"}"
+                "{\"searchTerm\":\"Host name may not be null\","
+                        + "\"objective\":\"Vérifier la présence de cette exception dans le log\"}"
         );
 
         ToolExecutionResult result =
@@ -122,7 +124,8 @@ class ToolExecutorTest {
         );
 
         functionCall.setArguments(
-                "{\"searchTerm\":\"\"}"
+                "{\"searchTerm\":\"\","
+                        + "\"objective\":\"Vérifier la présence de cette exception dans le log\"}"
         );
 
         assertThrows(
@@ -178,7 +181,8 @@ class ToolExecutorTest {
         );
 
         functionCall.setArguments(
-                "{\"searchTerm\":\"Host name may not be null\"}"
+                "{\"searchTerm\":\"Host name may not be null\","
+                        + "\"objective\":\"Vérifier la présence de cette exception dans le log\"}"
         );
 
         ToolExecutionResult result =
@@ -197,7 +201,11 @@ class ToolExecutorTest {
                 IllegalArgumentException.class,
                 () -> new ToolExecutionResult(
                         null,
-                        "résultat"
+                        "résultat",
+                        new SearchRequest(
+                                "Host name may not be null",
+                                "Vérifier cet élément dans le log"
+                        )
                 )
         );
     }
@@ -218,7 +226,9 @@ class ToolExecutorTest {
 
         AiFunctionCall functionCall = new AiFunctionCall();
         functionCall.setFunctionName( "search_log" );
-        functionCall.setArguments( "{\"searchTerm\":\" \"}" );
+        functionCall.setArguments( "{\"searchTerm\":\" \","
+                + "\"objective\":\"Vérifier la présence de cette exception dans le log\"}"
+        );
         assertThrows( IllegalArgumentException.class,
                 () -> toolExecutor.execute( functionCall, LOG_FILE_PATH ));
     }
@@ -228,7 +238,10 @@ class ToolExecutorTest {
         AiFunctionCall functionCall = new AiFunctionCall();
         functionCall.setCallId("call_123");
         functionCall.setFunctionName("search_log");
-        functionCall.setArguments("{\"searchTerm\":\"Host name may not be null\"}");
+        functionCall.setArguments(
+                "{\"searchTerm\":\"Host name may not be null\","
+                        + "\"objective\":\"Vérifier la présence de cette exception dans le log\"}"
+        );
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
@@ -236,5 +249,24 @@ class ToolExecutorTest {
         );
 
         assertEquals("logFile must not be null", exception.getMessage());
+    }
+
+    @Test
+    void shouldRejectMissingObjective() {
+
+        AiFunctionCall functionCall = new AiFunctionCall();
+
+        functionCall.setFunctionName("search_log");
+        functionCall.setArguments(
+                "{\"searchTerm\":\"Host name may not be null\"}"
+        );
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> toolExecutor.execute(
+                        functionCall,
+                        LOG_FILE_PATH
+                )
+        );
     }
 }

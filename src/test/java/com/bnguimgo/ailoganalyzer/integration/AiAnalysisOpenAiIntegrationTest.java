@@ -2,7 +2,7 @@ package com.bnguimgo.ailoganalyzer.integration;
 
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiAnalysisResponse;
-import com.bnguimgo.ailoganalyzer.domain.ai.AiPromptBuilder;
+import com.bnguimgo.ailoganalyzer.domain.ai.prompt.AiPromptBuilder;
 import com.bnguimgo.ailoganalyzer.domain.ai.StructuredContext;
 import com.bnguimgo.ailoganalyzer.domain.ai.analyzer.DefaultAiAnalyzer;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.AiClient;
@@ -52,6 +52,8 @@ class AiAnalysisOpenAiIntegrationTest {
 
     private int requestCount;
 
+    private boolean duplicateSearchScenario;
+
     @BeforeEach
     void setUp() throws IOException {
 
@@ -70,6 +72,7 @@ class AiAnalysisOpenAiIntegrationTest {
         requestCount = 0;
         requestBodies.clear();
         authorizationHeaders.clear();
+        duplicateSearchScenario = false;
     }
 
     @AfterEach
@@ -109,74 +112,7 @@ class AiAnalysisOpenAiIntegrationTest {
          * ---------------------------------------------------------
          */
 
-        AiPromptBuilder promptBuilder =
-                new AiPromptBuilder();
-
-        LogSearchTool logSearchTool =
-                new DefaultLogSearchTool();
-
-        ToolExecutor toolExecutor =
-                new ToolExecutor(
-                        logSearchTool,
-                        objectMapper
-                );
-
-        AiProviderProperties properties =
-                new AiProviderProperties();
-
-        properties.setModel(MODEL);
-
-        DefaultAiAnalyzer analyzer =
-                new DefaultAiAnalyzer(
-                        aiClient,
-                        promptBuilder,
-                        properties,
-                        toolExecutor
-                );
-
-        /*
-         * ---------------------------------------------------------
-         * 3. Contexte réel avec le vrai fichier de log
-         * ---------------------------------------------------------
-         */
-
-        StructuredContext context =
-                new StructuredContext(
-                        Collections.emptyList(),
-                        Collections.emptyList(),
-                        LOG_FILE_PATH
-                );
-
-        /*
-         * ---------------------------------------------------------
-         * 4. Exécution complète de l'agent
-         * ---------------------------------------------------------
-         *
-         * C'est ici que toute la chaîne est réellement exécutée :
-         *
-         * DefaultAiAnalyzer
-         *        ↓
-         * OpenAiClient
-         *        ↓
-         * Mock HTTP OpenAI
-         *        ↓
-         * 2 function_calls
-         *        ↓
-         * ToolExecutor
-         *        ↓
-         * DefaultLogSearchTool
-         *        ↓
-         * vrai fichier de log
-         *        ↓
-         * OpenAiClient
-         *        ↓
-         * Mock HTTP OpenAI
-         *        ↓
-         * réponse TEXT
-         */
-
-        AiAnalysisResponse response =
-                analyzer.analyze(context);
+        AiAnalysisResponse response = getAiAnalysisResponse(aiClient);
 
         /*
          * ---------------------------------------------------------
@@ -358,6 +294,218 @@ class AiAnalysisOpenAiIntegrationTest {
         );
     }
 
+    @Test
+    void shouldReuseResultForDuplicateToolCall()
+            throws IOException {
+
+        duplicateSearchScenario = true;
+
+        String apiUrl =
+                "http://localhost:"
+                        + server.getAddress().getPort()
+                        + "/v1/responses";
+
+        AiClient aiClient =
+                new OpenAiClient(
+                        API_KEY,
+                        apiUrl,
+                        HttpClient.newHttpClient(),
+                        objectMapper
+                );
+
+        AiAnalysisResponse response =
+                getAiAnalysisResponse(aiClient);
+
+        assertNotNull(response);
+
+        assertEquals(
+                "Analyse terminée après une recherche dupliquée.",
+                response.getSummary()
+        );
+
+        /*
+         * Deux appels HTTP :
+         *
+         * 1. OpenAI demande deux recherches identiques
+         * 2. L'application renvoie les deux function_call_output
+         */
+        assertEquals(
+                2,
+                requestCount
+        );
+
+        assertEquals(
+                2,
+                requestBodies.size()
+        );
+
+        /*
+         * Vérification du deuxième appel vers OpenAI.
+         */
+        JsonNode secondRequest =
+                objectMapper.readTree(
+                        requestBodies.get(1)
+                );
+
+        assertEquals(
+                "resp_duplicate",
+                secondRequest
+                        .path("previous_response_id")
+                        .asText()
+        );
+
+        JsonNode input =
+                secondRequest.path("input");
+
+        assertTrue(input.isArray());
+
+        assertEquals(
+                2,
+                input.size()
+        );
+
+        /*
+         * Premier function_call.
+         */
+        JsonNode firstToolOutput =
+                input.get(0);
+
+        assertEquals(
+                "function_call_output",
+                firstToolOutput
+                        .path("type")
+                        .asText()
+        );
+
+        assertEquals(
+                "call_1",
+                firstToolOutput
+                        .path("call_id")
+                        .asText()
+        );
+
+        /*
+         * Deuxième function_call.
+         *
+         * Il doit recevoir le même résultat,
+         * mais avec son propre callId.
+         */
+        JsonNode secondToolOutput =
+                input.get(1);
+
+        assertEquals(
+                "function_call_output",
+                secondToolOutput
+                        .path("type")
+                        .asText()
+        );
+
+        assertEquals(
+                "call_2",
+                secondToolOutput
+                        .path("call_id")
+                        .asText()
+        );
+
+        assertEquals(
+                firstToolOutput
+                        .path("output")
+                        .asText(),
+                secondToolOutput
+                        .path("output")
+                        .asText()
+        );
+
+        /*
+         * Le point essentiel du test :
+         *
+         * les deux function_calls sont identiques,
+         * mais la recherche réelle ne doit être exécutée
+         * qu'une seule fois.
+         */
+        assertTrue(
+                firstToolOutput
+                        .path("output")
+                        .asText()
+                        .contains(
+                                "Host name may not be null"
+                        )
+        );
+    }
+
+    private AiAnalysisResponse getAiAnalysisResponse(AiClient aiClient) throws IOException {
+        DefaultAiAnalyzer analyzer = getDefaultAiAnalyzer(aiClient);
+
+        /*
+         * ---------------------------------------------------------
+         * 3. Contexte réel avec le vrai fichier de log
+         * ---------------------------------------------------------
+         */
+
+        StructuredContext context =
+                new StructuredContext(
+                        Collections.emptyList(),
+                        Collections.emptyList(),
+                        LOG_FILE_PATH
+                );
+
+        /*
+         * ---------------------------------------------------------
+         * 4. Exécution complète de l'agent
+         * ---------------------------------------------------------
+         *
+         * C'est ici que toute la chaîne est réellement exécutée :
+         *
+         * DefaultAiAnalyzer
+         *        ↓
+         * OpenAiClient
+         *        ↓
+         * Mock HTTP OpenAI
+         *        ↓
+         * 2 function_calls
+         *        ↓
+         * ToolExecutor
+         *        ↓
+         * DefaultLogSearchTool
+         *        ↓
+         * vrai fichier de log
+         *        ↓
+         * OpenAiClient
+         *        ↓
+         * Mock HTTP OpenAI
+         *        ↓
+         * réponse TEXT
+         */
+
+        return analyzer.analyze(context);
+    }
+
+    private DefaultAiAnalyzer getDefaultAiAnalyzer(AiClient aiClient) {
+        AiPromptBuilder promptBuilder =
+                new AiPromptBuilder();
+
+        LogSearchTool logSearchTool =
+                new DefaultLogSearchTool();
+
+        ToolExecutor toolExecutor =
+                new ToolExecutor(
+                        logSearchTool,
+                        objectMapper
+                );
+
+        AiProviderProperties properties =
+                new AiProviderProperties();
+
+        properties.setModel(MODEL);
+
+        return new DefaultAiAnalyzer(
+                        aiClient,
+                        promptBuilder,
+                        properties,
+                        toolExecutor
+                );
+    }
+
     private void handleRequest(
             HttpExchange exchange) throws IOException {
 
@@ -391,17 +539,33 @@ class AiAnalysisOpenAiIntegrationTest {
 
             String responseBody;
 
-            if (requestCount == 1) {
-                responseBody =
-                        createMultipleFunctionCallResponse();
-            } else if (requestCount == 2) {
-                responseBody =
-                        createFinalTextResponse();
+            if (duplicateSearchScenario) {
+
+                if (requestCount == 1) {
+                    responseBody = createDuplicateFunctionCallResponse();
+                } else if (requestCount == 2) {
+                    responseBody = createDuplicateFinalTextResponse();
+                } else {
+                    throw new IllegalStateException(
+                            "Unexpected HTTP request count: "
+                                    + requestCount
+                    );
+                }
+
             } else {
-                throw new IllegalStateException(
-                        "Unexpected HTTP request count: "
-                                + requestCount
-                );
+
+                if (requestCount == 1) {
+                    responseBody =
+                            createMultipleFunctionCallResponse();
+                } else if (requestCount == 2) {
+                    responseBody =
+                            createFinalTextResponse();
+                } else {
+                    throw new IllegalStateException(
+                            "Unexpected HTTP request count: "
+                                    + requestCount
+                    );
+                }
             }
 
             byte[] responseBytes =
@@ -441,12 +605,14 @@ class AiAnalysisOpenAiIntegrationTest {
                                 .add(
                                         createFunctionCall(
                                                 "call_1",
-                                                "Host name may not be null"
+                                                "Host name may not be null",
+                                                "Vérifier la présence de cette exception dans le log"
                                         )
                                 )
                                 .add(
                                         createFunctionCall(
                                                 "call_2",
+                                                "CustomHttpResponseException",
                                                 "CustomHttpResponseException"
                                         )
                                 )
@@ -456,7 +622,8 @@ class AiAnalysisOpenAiIntegrationTest {
 
     private JsonNode createFunctionCall(
             String callId,
-            String searchTerm) {
+            String searchTerm,
+            String objective) {
 
         return objectMapper.createObjectNode()
                 .put(
@@ -473,9 +640,7 @@ class AiAnalysisOpenAiIntegrationTest {
                 )
                 .put(
                         "arguments",
-                        "{\"searchTerm\":\""
-                                + searchTerm
-                                + "\"}"
+                        "{\"searchTerm\":\"" + searchTerm + "\", \"objective\":\"" + objective + "\"}"
                 );
     }
 
@@ -516,4 +681,71 @@ class AiAnalysisOpenAiIntegrationTest {
                 )
                 .toString();
     }
+
+    private String createDuplicateFunctionCallResponse() {
+
+        return objectMapper.createObjectNode()
+                .put(
+                        "id",
+                        "resp_duplicate"
+                )
+                .set(
+                        "output",
+                        objectMapper.createArrayNode()
+                                .add(
+                                        createFunctionCall(
+                                                "call_1",
+                                                "Host name may not be null",
+                                                "Vérifier la présence de cette exception dans le log"
+                                        )
+                                )
+                                .add(
+                                        createFunctionCall(
+                                                "call_2",
+                                                "Host name may not be null",
+                                                "Vérifier la présence de cette exception dans le log"
+                                        )
+                                )
+                )
+                .toString();
+    }
+
+    private String createDuplicateFinalTextResponse() {
+
+        return objectMapper.createObjectNode()
+                .put(
+                        "id",
+                        "resp_duplicate_final"
+                )
+                .set(
+                        "output",
+                        objectMapper.createArrayNode()
+                                .add(
+                                        objectMapper.createObjectNode()
+                                                .put(
+                                                        "type",
+                                                        "message"
+                                                )
+                                                .set(
+                                                        "content",
+                                                        objectMapper
+                                                                .createArrayNode()
+                                                                .add(
+                                                                        objectMapper
+                                                                                .createObjectNode()
+                                                                                .put(
+                                                                                        "type",
+                                                                                        "output_text"
+                                                                                )
+                                                                                .put(
+                                                                                        "text",
+                                                                                        "Analyse terminée après une recherche dupliquée."
+                                                                                )
+                                                                )
+                                                )
+                                )
+                )
+                .toString();
+    }
+
 }

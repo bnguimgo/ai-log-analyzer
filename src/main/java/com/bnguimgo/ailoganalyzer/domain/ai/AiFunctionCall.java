@@ -1,5 +1,8 @@
 package com.bnguimgo.ailoganalyzer.domain.ai;
 
+/**
+ * Cette classe contient les données brutes venant du modèle
+ */
 public class AiFunctionCall {
 
     private String callId;

@@ -44,5 +44,17 @@ class LogSearchToolDefinitionTest {
         assertNotNull(
                 definition.get("parameters")
         );
+
+        Map<String, Object> parameters = (Map<String, Object>) definition.get("parameters");
+
+        Map<String, Object> properties = (Map<String, Object>) parameters.get("properties");
+
+        assertNotNull(properties.get("searchTerm"));
+        assertNotNull(properties.get("objective"));
+
+        assertEquals(
+                java.util.List.of("searchTerm", "objective"),
+                parameters.get("required")
+        );
     }
 }

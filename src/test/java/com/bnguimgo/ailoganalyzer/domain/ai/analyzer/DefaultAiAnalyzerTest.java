@@ -2,6 +2,7 @@ package com.bnguimgo.ailoganalyzer.domain.ai.analyzer;
 
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
 import com.bnguimgo.ailoganalyzer.domain.ai.*;
+import com.bnguimgo.ailoganalyzer.domain.ai.prompt.AiPromptBuilder;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.AiClient;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.DefaultLogSearchTool;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.LogSearchTool;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.ArgumentCaptor;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -43,14 +45,6 @@ class DefaultAiAnalyzerTest {
 
     @Test
     void shouldAnalyzeStructuredContext() throws IOException {
-
-        AiClient aiClient = mock(AiClient.class);
-        AiPromptBuilder promptBuilder = mock(AiPromptBuilder.class);
-
-        AiProviderProperties properties =
-                new AiProviderProperties();
-
-        properties.setModel("test-model");
 
         StructuredContext context =
                 new StructuredContext(
@@ -112,15 +106,6 @@ class DefaultAiAnalyzerTest {
     @Test
     void shouldRejectNullContext() {
 
-        AiClient aiClient = mock(AiClient.class);
-        AiPromptBuilder promptBuilder = mock(AiPromptBuilder.class);
-
-        AiProviderProperties properties = new AiProviderProperties();
-
-        properties.setModel("test-model");
-
-        ToolExecutor toolExecutor = createToolExecutor();
-
         DefaultAiAnalyzer analyzer =
                 new DefaultAiAnalyzer(
                         aiClient,
@@ -141,14 +126,6 @@ class DefaultAiAnalyzerTest {
     @Test
     void shouldExecuteToolAndContinueAnalysis() throws IOException {
 
-        AiClient aiClient = mock(AiClient.class);
-        AiPromptBuilder promptBuilder = mock(AiPromptBuilder.class);
-
-        AiProviderProperties properties =
-                new AiProviderProperties();
-
-        properties.setModel("test-model");
-
         StructuredContext context =
                 new StructuredContext(
                         Collections.emptyList(),
@@ -160,30 +137,7 @@ class DefaultAiAnalyzerTest {
                 .thenReturn("PROMPT_TEST");
 
         //Premier appel de l'IA : l'IA demande l'exécution de search_log.
-        AiResponse functionCall =
-                new AiResponse();
-
-        functionCall.setType(
-                AiResponse.Type.FUNCTION_CALL
-        );
-
-        functionCall.setResponseId(
-                "resp_123"
-        );
-
-        AiFunctionCall call = new AiFunctionCall();
-
-        call.setCallId("call_123");
-
-        call.setFunctionName("search_log");
-
-        call.setArguments(
-                "{\"searchTerm\":\"Host name may not be null\"}"
-        );
-
-        functionCall.setFunctionCalls(
-                Collections.singletonList(call)
-        );
+        AiResponse functionCall = createValidFunctionCall("resp_123", "call_123");
 
         /*
          * Deuxième réponse de l'IA :
@@ -271,26 +225,13 @@ class DefaultAiAnalyzerTest {
     @Test
     void shouldExecuteMultipleToolCallsBeforeFinalResponse() throws IOException {
 
-        AiClient aiClient = mock(AiClient.class);
-        AiPromptBuilder promptBuilder = mock(AiPromptBuilder.class);
-        AiProviderProperties properties = createProperties();
         StructuredContext context = createContext();
-
-        when(promptBuilder.build(context))
-                .thenReturn("PROMPT_TEST");
 
         /*
          * Premier appel de l'IA :
          * l'IA demande un premier search_log.
          */
-        AiResponse firstFunctionCall =
-                createValidFunctionCall();
-
-        firstFunctionCall.setResponseId("resp_1");
-        firstFunctionCall.setCallId("call_1");
-        firstFunctionCall.setArguments(
-                "{\"searchTerm\":\"Host name may not be null\"}"
-        );
+        AiResponse firstFunctionCall = createValidFunctionCall("resp_1", "call_1");
 
         AiFunctionCall firstCall = firstFunctionCall.getFunctionCalls().getFirst();
         /*
@@ -298,71 +239,67 @@ class DefaultAiAnalyzerTest {
          * après le premier résultat du tool,
          * l'IA demande un deuxième search_log.
          */
-        AiResponse secondFunctionCall =
-                createValidFunctionCall();
-
-        secondFunctionCall.setResponseId("resp_2");
-        secondFunctionCall.setCallId("call_2");
-        secondFunctionCall.setArguments(
-                "{\"searchTerm\":\"CustomHttpResponseException\"}"
-        );
+        AiResponse secondFunctionCall = createValidFunctionCall("resp_2", "call_2");
 
         AiFunctionCall secondCall = secondFunctionCall.getFunctionCalls().getFirst();
+
         /*
          * Troisième réponse de l'IA :
          * après le deuxième résultat du tool,
          * l'IA fournit enfin son analyse.
          */
-        AiResponse finalResponse =
-                new AiResponse();
+        AiResponse finalResponse = new AiResponse();
 
-        finalResponse.setType(
-                AiResponse.Type.TEXT
-        );
+        finalResponse.setType(AiResponse.Type.TEXT);
 
         finalResponse.setText(
                 "Analyse finale après deux tool calls."
         );
 
         when(aiClient.generateAnalysis(
-                "PROMPT_TEST",
+                "Analyse du log",
                 "test-model"))
                 .thenReturn(firstFunctionCall);
 
         when(aiClient.continueAnalysis(
-                same(firstFunctionCall),
+                any(AiResponse.class),
                 anyList(),
                 eq("test-model")))
-                .thenReturn(secondFunctionCall);
+                .thenReturn(
+                        secondFunctionCall,
+                        finalResponse
+                );
 
-        when(aiClient.continueAnalysis(
-                same(secondFunctionCall),
-                anyList(),
-                eq("test-model")))
-                .thenReturn(finalResponse);
-
-        ToolExecutor toolExecutor =
-                mock(ToolExecutor.class);
-
+        ToolExecutionResult toolExecutionResult = createToolResult(
+                "call_1",
+                "Résultat : Host name may not be null");
         when(toolExecutor.execute(
                 same(firstCall),
                 eq(LOG_FILE_PATH)))
+                .thenReturn(toolExecutionResult);
+
+        ToolExecutionResult toolExecutionResult2 = createToolResult(
+                "call_2",
+                "Résultat : CustomHttpResponseException");
+        when(toolExecutor.buildSearchRequest(same(firstCall)))
                 .thenReturn(
-                        new ToolExecutionResult(
-                                "call_1",
-                                "Résultat : Host name may not be null"
+                        new SearchRequest(
+                                "Host name may not be null",
+                                "Vérifier cet élément dans le log"
                         )
                 );
 
+        when(toolExecutor.buildSearchRequest(same(secondCall)))
+                .thenReturn(
+                        new SearchRequest(
+                                "CustomHttpResponseException",
+                                "Vérifier cet élément dans le log"
+                        )
+                );
         when(toolExecutor.execute(
                 same(secondCall),
                 eq(LOG_FILE_PATH)))
-                .thenReturn(
-                        new ToolExecutionResult(
-                                "call_2",
-                                "Résultat : CustomHttpResponseException"
-                        )
-                );
+                .thenReturn(toolExecutionResult2);
 
         DefaultAiAnalyzer analyzer =
                 new DefaultAiAnalyzer(
@@ -372,8 +309,7 @@ class DefaultAiAnalyzerTest {
                         toolExecutor
                 );
 
-        AiAnalysisResponse response =
-                analyzer.analyze(context);
+        AiAnalysisResponse response = analyzer.analyze(context);
 
         assertNotNull(response);
 
@@ -440,15 +376,26 @@ class DefaultAiAnalyzerTest {
         secondCall.setCallId("call_2");
         secondCall.setFunctionName("search_log");
         secondCall.setArguments("{\"searchTerm\":\"CustomHttpResponseException\"}");
-        functionCallResponse.setFunctionCalls(List.of(firstCall, secondCall)); /* * Résultats produits par les deux outils. */
-        ToolExecutionResult firstResult = new ToolExecutionResult("call_1", "résultat pour Host name may not be null");
-        ToolExecutionResult secondResult = new ToolExecutionResult("call_2", "résultat pour CustomHttpResponseException"); /* * Réponse finale d'OpenAI. */
+        functionCallResponse.setFunctionCalls(List.of(firstCall, secondCall));
+
+        /* * Résultats produits par les deux outils. */
+        ToolExecutionResult toolExecutionResult1 = createToolResult(
+                "call_1",
+                "résultat pour Host name may not be null");
+        ToolExecutionResult toolExecutionResult2 = createToolResult(
+                "call_2",
+                "résultat pour CustomHttpResponseException");
+
         AiResponse finalResponse = new AiResponse();
         finalResponse.setType(AiResponse.Type.TEXT);
-        finalResponse.setText("Analyse terminée après deux function calls"); /* * Configuration des mocks. */
+        finalResponse.setText("Analyse terminée après deux function calls");
+
+        /* * Configuration des mocks. */
+        when(toolExecutor.buildSearchRequest(same(firstCall))).thenReturn(new SearchRequest("Host name may not be null", "Vérifier cet élément dans le log"));
+        when(toolExecutor.buildSearchRequest(same(secondCall))).thenReturn(new SearchRequest("CustomHttpResponseException", "Vérifier cet élément dans le log"));
         when(aiClient.generateAnalysis(anyString(), eq("test-model"))).thenReturn(functionCallResponse);
-        when(toolExecutor.execute(same(firstCall), eq(LOG_FILE_PATH))).thenReturn(firstResult);
-        when(toolExecutor.execute(same(secondCall), eq(LOG_FILE_PATH))).thenReturn(secondResult);
+        when(toolExecutor.execute(same(firstCall), eq(LOG_FILE_PATH))).thenReturn(toolExecutionResult1);
+        when(toolExecutor.execute(same(secondCall), eq(LOG_FILE_PATH))).thenReturn(toolExecutionResult2);
         when(aiClient.continueAnalysis(same(functionCallResponse), anyList(), eq("test-model"))).thenReturn(finalResponse);
 
         /* * Exécution de l'analyse. */
@@ -479,7 +426,11 @@ class DefaultAiAnalyzerTest {
                 IllegalArgumentException.class,
                 () -> new ToolExecutionResult(
                         null,
-                        "Host name may not be null"
+                        "Host name may not be null",
+                        new SearchRequest(
+                                "Host name may not be null",
+                                "Vérifier cet élément dans le log"
+                        )
                 )
         );
     }
@@ -488,12 +439,9 @@ class DefaultAiAnalyzerTest {
     @ValueSource(strings = {"responseId", "callId", "functionName", "arguments"})
     void shouldRejectFunctionCallWhenRequiredFieldIsMissing(String missingField) throws IOException {
 
-        AiClient aiClient = mock(AiClient.class);
-        AiPromptBuilder promptBuilder = mock(AiPromptBuilder.class);
-        AiProviderProperties properties = createProperties();
         StructuredContext context = createContext();
         when(promptBuilder.build(context)).thenReturn("PROMPT_TEST");
-        AiResponse functionCall = createValidFunctionCall();
+        AiResponse functionCall = createValidFunctionCall("resp_1", "call_1");
         clearField(functionCall, missingField);
         when(aiClient.generateAnalysis("PROMPT_TEST", "test-model"))
                 .thenReturn(functionCall);
@@ -508,73 +456,44 @@ class DefaultAiAnalyzerTest {
     @Test
     void shouldStopAfterMaximumNumberOfToolCalls() throws IOException {
 
-        AiClient aiClient = mock(AiClient.class);
-        AiPromptBuilder promptBuilder = mock(AiPromptBuilder.class);
-        ToolExecutor toolExecutor = mock(ToolExecutor.class);
+        AiResponse call1 = createValidFunctionCall("resp_1", "call_1");
 
-        when(promptBuilder.build(any(StructuredContext.class)))
-                .thenReturn("test prompt");
-
-        AiProviderProperties properties = createProperties();
-
-        AiResponse firstFunctionCall = createValidFunctionCall();
-        firstFunctionCall.setResponseId("resp_1");
-        firstFunctionCall.setCallId("call_1");
-
+        when(toolExecutor.buildSearchRequest(any(AiFunctionCall.class)))
+                .thenAnswer(invocation -> {
+                    AiFunctionCall functionCall = invocation.getArgument(0);
+                    return new SearchRequest(functionCall.getCallId(), "Tester le maximum de recherches");
+                });
         when(aiClient.generateAnalysis(anyString(), eq("test-model")))
-                .thenReturn(firstFunctionCall);
+                .thenReturn(call1);
+
+        ToolExecutionResult toolExecutionResult = createToolResult(
+                "call_1",
+                "Résultat du tool");
 
         when(toolExecutor.execute(
                 any(AiFunctionCall.class),
                 eq(LOG_FILE_PATH)))
-                .thenAnswer(invocation -> {
-                    AiFunctionCall functionCall = invocation.getArgument(0);
+                .thenAnswer(invocation -> toolExecutionResult);
 
-                    return new ToolExecutionResult(
-                            functionCall.getCallId(),
-                            "Résultat du tool"
-                    );
-                });
+        AiResponse call2 = createValidFunctionCall("resp_2", "call_2");
 
-        AiResponse call2 = createValidFunctionCall();
-        call2.setResponseId("resp_2");
-        call2.setCallId("call_2");
+        AiResponse call3 = createValidFunctionCall("resp_3", "call_3");
 
-        AiResponse call3 = createValidFunctionCall();
-        call3.setResponseId("resp_3");
-        call3.setCallId("call_3");
+        AiResponse call4 = createValidFunctionCall("resp_4", "call_4");
 
-        AiResponse call4 = createValidFunctionCall();
-        call4.setResponseId("resp_4");
-        call4.setCallId("call_4");
+        AiResponse call5 = createValidFunctionCall("resp_5", "call_5");
 
-        AiResponse call5 = createValidFunctionCall();
-        call5.setResponseId("resp_5");
-        call5.setCallId("call_5");
+        AiResponse call6 = createValidFunctionCall("resp_6", "call_6");
 
-        AiResponse call6 = createValidFunctionCall();
-        call6.setResponseId("resp_6");
-        call6.setCallId("call_6");
+        AiResponse call7 = createValidFunctionCall("resp_7", "call_7");
 
-        AiResponse call7 = createValidFunctionCall();
-        call7.setResponseId("resp_7");
-        call7.setCallId("call_7");
+        AiResponse call8 = createValidFunctionCall("resp_8", "call_8");
 
-        AiResponse call8 = createValidFunctionCall();
-        call8.setResponseId("resp_8");
-        call8.setCallId("call_8");
+        AiResponse call9 = createValidFunctionCall("resp_9", "call_9");
 
-        AiResponse call9 = createValidFunctionCall();
-        call9.setResponseId("resp_9");
-        call9.setCallId("call_9");
+        AiResponse call10 = createValidFunctionCall("resp_10", "call_10");
 
-        AiResponse call10 = createValidFunctionCall();
-        call10.setResponseId("resp_10");
-        call10.setCallId("call_10");
-
-        AiResponse call11 = createValidFunctionCall();
-        call11.setResponseId("resp_11");
-        call11.setCallId("call_11");
+        AiResponse call11 = createValidFunctionCall("resp_11", "call_11");
 
         when(aiClient.continueAnalysis(
                 any(AiResponse.class),
@@ -616,6 +535,95 @@ class DefaultAiAnalyzerTest {
                 );
     }
 
+    @Test
+    @SuppressWarnings("unchecked")
+    void shouldNotExecuteSameSearchTwice() throws IOException {
+
+        AiResponse firstResponse = createValidFunctionCall("resp_1", "call_1");
+
+        AiResponse secondResponse = createValidFunctionCall("resp_2", "call_2");
+
+        AiResponse finalResponse = new AiResponse();
+        finalResponse.setType(AiResponse.Type.TEXT);
+        finalResponse.setResponseId("resp_3");
+        finalResponse.setText("Analyse terminée");
+
+        when(aiClient.generateAnalysis(anyString(), eq("test-model")))
+                .thenReturn(firstResponse);
+
+        when(aiClient.continueAnalysis(
+                any(AiResponse.class),
+                anyList(),
+                eq("test-model")))
+                .thenReturn(secondResponse, finalResponse);
+
+        ToolExecutionResult toolExecutionResult = createToolResult(
+                "call_1",
+                "Résultat du tool");
+
+        SearchRequest searchRequest =
+                new SearchRequest(
+                        "Host name may not be null",
+                        "Vérifier cet élément dans le log"
+                );
+
+        when(toolExecutor.buildSearchRequest(
+                any(AiFunctionCall.class)))
+                .thenReturn(searchRequest);
+
+        when(toolExecutor.execute(
+                any(AiFunctionCall.class),
+                eq(LOG_FILE_PATH)))
+                .thenAnswer(invocation -> toolExecutionResult);
+
+        DefaultAiAnalyzer analyzer = new DefaultAiAnalyzer(
+                aiClient,
+                promptBuilder,
+                properties,
+                toolExecutor
+        );
+
+        analyzer.analyze(createContext());
+
+        verify(toolExecutor, times(1))
+                .execute(
+                        any(AiFunctionCall.class),
+                        eq(LOG_FILE_PATH)
+                );
+
+        ArgumentCaptor<List<ToolExecutionResult>> toolResultsCaptor = ArgumentCaptor.forClass(List.class);
+
+        verify(aiClient, times(2))
+                .continueAnalysis(
+                        any(AiResponse.class),
+                        toolResultsCaptor.capture(),
+                        eq("test-model")
+                );
+
+        List<List<ToolExecutionResult>> allToolResults =
+                toolResultsCaptor.getAllValues();
+
+        assertEquals(2, allToolResults.size());
+
+        List<ToolExecutionResult> firstResults = allToolResults.get(0);
+
+        assertEquals(1, firstResults.size());
+        assertEquals("call_1", firstResults.get(0).callId());
+        assertEquals(
+                "Résultat du tool",
+                firstResults.get(0).output()
+        );
+
+        List<ToolExecutionResult> secondResults = allToolResults.get(1);
+
+        assertEquals(1, secondResults.size());
+        assertEquals("call_2", secondResults.get(0).callId());
+        assertEquals(
+                "Résultat du tool",
+                secondResults.get(0).output()
+        );
+    }
+
     private ToolExecutor createToolExecutor() {
 
         LogSearchTool logSearchTool =
@@ -630,18 +638,19 @@ class DefaultAiAnalyzerTest {
         );
     }
 
-    private AiResponse createValidFunctionCall() {
+    private AiResponse createValidFunctionCall(String responseId, String callId) {
 
         AiResponse functionCall = new AiResponse();
 
         functionCall.setType(AiResponse.Type.FUNCTION_CALL);
-        functionCall.setResponseId("resp_123");
+        functionCall.setResponseId(responseId);
 
         AiFunctionCall call = new AiFunctionCall();
-        call.setCallId("call_123");
+        call.setCallId(callId);
         call.setFunctionName("search_log");
         call.setArguments(
-                "{\"searchTerm\":\"Host name may not be null\"}"
+                "{\"searchTerm\":\"Host name may not be null\","
+                        + "\"objective\":\"Vérifier cet élément dans le log\"}"
         );
 
         functionCall.setFunctionCalls(
@@ -694,6 +703,20 @@ class DefaultAiAnalyzerTest {
             default:
                 throw new IllegalArgumentException("Unknown field: " + field);
         }
+    }
+
+    private ToolExecutionResult createToolResult(
+            String callId,
+            String output) {
+
+        return new ToolExecutionResult(
+                callId,
+                output,
+                new SearchRequest(
+                        "Host name may not be null",
+                        "Vérifier cet élément dans le log"
+                )
+        );
     }
 
 }

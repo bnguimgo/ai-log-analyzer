@@ -12,9 +12,6 @@ public class AiResponse {
     private Type type;
     private String text;
     private String responseId;
-    private String callId;
-    private String functionName;
-    private String arguments;
 
     private List<AiFunctionCall> functionCalls;
 
@@ -37,30 +34,6 @@ public class AiResponse {
     public String getResponseId() { return responseId; }
 
     public void setResponseId(String responseId) { this.responseId = responseId; }
-
-    public String getCallId() {
-        return callId;
-    }
-
-    public void setCallId(String callId) {
-        this.callId = callId;
-    }
-
-    public String getFunctionName() {
-        return functionName;
-    }
-
-    public void setFunctionName(String functionName) {
-        this.functionName = functionName;
-    }
-
-    public String getArguments() {
-        return arguments;
-    }
-
-    public void setArguments(String arguments) {
-        this.arguments = arguments;
-    }
 
     public List<AiFunctionCall> getFunctionCalls() {
         return functionCalls;

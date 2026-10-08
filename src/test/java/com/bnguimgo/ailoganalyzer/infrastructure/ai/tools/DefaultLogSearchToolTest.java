@@ -1,5 +1,6 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai.tools;
 
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
@@ -17,10 +18,13 @@ class DefaultLogSearchToolTest {
     @Test
     void shouldFindMatchingLines() throws Exception {
 
+        SearchRequest searchRequest = new SearchRequest(
+                "Host name may not be null",
+                "Vérifier la présence de cette erreur");
         List<String> results =
                 tool.search(
                         LOG_FILE_PATH,
-                        "Host name may not be null"
+                        searchRequest
                 );
 
         assertEquals(7, results.size());
@@ -29,7 +33,10 @@ class DefaultLogSearchToolTest {
     @Test
     void shouldReturnEmptyListWhenNothingMatches() throws Exception {
 
-        List<String> results = tool.search(LOG_FILE_PATH, "THIS_TEXT_DOES_NOT_EXIST");
+        SearchRequest searchRequest = new SearchRequest(
+                "THIS_TEXT_DOES_NOT_EXIST",
+                "Vérifier la présence de cette erreur");
+        List<String> results = tool.search(LOG_FILE_PATH, searchRequest);
 
         assertEquals(0, results.size());
     }
@@ -37,24 +44,13 @@ class DefaultLogSearchToolTest {
     @Test
     void shouldRejectNullFile() {
 
+        SearchRequest searchRequest = new SearchRequest(
+                "ERROR",
+                "Vérifier la présence de cette erreur");
         assertThrows(
                 IllegalArgumentException.class,
-                () -> tool.search(
-                        null,
-                        "ERROR"
-                )
+                () -> tool.search(null, searchRequest)
         );
     }
 
-    @Test
-    void shouldRejectEmptySearchTerm() {
-
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> tool.search(
-                        LOG_FILE_PATH,
-                        ""
-                )
-        );
-    }
 }

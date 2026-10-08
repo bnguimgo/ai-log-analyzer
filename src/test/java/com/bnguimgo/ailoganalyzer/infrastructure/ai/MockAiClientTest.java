@@ -1,9 +1,12 @@
 package com.bnguimgo.ailoganalyzer.infrastructure.ai;
 
+import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -67,17 +70,18 @@ class MockAiClientTest {
         functionCall.setType(
                 AiResponse.Type.FUNCTION_CALL
         );
-        functionCall.setCallId("call_123");
-        functionCall.setFunctionName("search_log");
-        functionCall.setArguments(
+        AiFunctionCall aiFunctionCall = new AiFunctionCall();
+        aiFunctionCall.setCallId("call_123");
+        aiFunctionCall.setFunctionName("search_log");
+        aiFunctionCall.setArguments(
                 "{\"searchTerm\":\"Host name may not be null\"}"
         );
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult(
-                        "call_123",
-                        "Ligne 42 : Host name may not be null"
-                );
+        functionCall.setFunctionCalls(Collections.singletonList(aiFunctionCall));
+
+        ToolExecutionResult toolResult = createToolResult(
+                "call_123",
+                "Ligne 42 : Host name may not be null");
 
         AiResponse response =
                 client.continueAnalysis(
@@ -100,11 +104,9 @@ class MockAiClientTest {
     @Test
     void shouldRejectNullFunctionCall() {
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult(
-                        "call_123",
-                        "Résultat du tool"
-                );
+        ToolExecutionResult toolResult = createToolResult(
+                "call_123",
+                "Résultat du tool");
 
         assertThrows(
                 IllegalArgumentException.class,
@@ -126,11 +128,9 @@ class MockAiClientTest {
                 AiResponse.Type.TEXT
         );
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult(
-                        "call_123",
-                        "Résultat du tool"
-                );
+        ToolExecutionResult toolResult = createToolResult(
+                "call_123",
+                "Résultat du tool");
 
         assertThrows(
                 IllegalArgumentException.class,
@@ -172,11 +172,9 @@ class MockAiClientTest {
                 AiResponse.Type.FUNCTION_CALL
         );
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult(
-                        "call_123",
-                        "Résultat du tool"
-                );
+        ToolExecutionResult toolResult = createToolResult(
+                "call_123",
+                "Résultat du tool");
 
         assertThrows(
                 IllegalArgumentException.class,
@@ -184,6 +182,20 @@ class MockAiClientTest {
                         functionCall,
                         List.of(toolResult),
                         ""
+                )
+        );
+    }
+
+    private ToolExecutionResult createToolResult(
+            String callId,
+            String output) {
+
+        return new ToolExecutionResult(
+                callId,
+                output,
+                new SearchRequest(
+                        "Host name may not be null",
+                        "Vérifier cet élément dans le log"
                 )
         );
     }

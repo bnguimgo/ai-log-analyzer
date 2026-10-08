@@ -3,6 +3,7 @@ package com.bnguimgo.ailoganalyzer.infrastructure.ai.openai;
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiFunctionCall;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiResponse;
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -110,8 +111,9 @@ class OpenAiClientTest {
         assertEquals( "{\"searchTerm\":\"Host name may not be null\"}", aiFunctionCall.getArguments() );
 
         //Résultat produit par notre ToolExecutor.
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult( aiFunctionCall.getCallId(), "Ligne 42 : Host name may not be null" );
+        ToolExecutionResult toolResult = createToolResult(
+                aiFunctionCall.getCallId(),
+                "Ligne 42 : Host name may not be null");
 
         /* * Deuxième appel :
         *ToolExecutor → OpenAI * * avec function_call_output.
@@ -446,16 +448,27 @@ class OpenAiClientTest {
 
     @Test
     void shouldRejectFunctionCallWithoutResponseId() {
+
         AiResponse functionCall = new AiResponse();
 
         functionCall.setType(AiResponse.Type.FUNCTION_CALL);
         functionCall.setResponseId(null);
-        functionCall.setCallId("call_123");
-        functionCall.setFunctionName("search_log");
-        functionCall.setArguments("{\"searchTerm\":\"test\"}");
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult("call_123", "result");
+        AiFunctionCall aiFunctionCall = new AiFunctionCall();
+
+        aiFunctionCall.setCallId("call_123");
+        aiFunctionCall.setFunctionName("search_log");
+        aiFunctionCall.setArguments(
+                "{\"searchTerm\":\"test\"}"
+        );
+
+        functionCall.setFunctionCalls(
+                List.of(aiFunctionCall)
+        );
+
+        ToolExecutionResult toolResult = createToolResult(
+                "call_123",
+                "result");
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
@@ -484,8 +497,9 @@ class OpenAiClientTest {
         aiFunctionCall.setArguments("{\"searchTerm\":\"test\"}");
         functionCall.setFunctionCalls(List.of(aiFunctionCall));
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult("call_123", "result");
+        ToolExecutionResult toolResult = createToolResult(
+                "call_123",
+                "result");
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
@@ -516,11 +530,9 @@ class OpenAiClientTest {
 
         functionCall.setFunctionCalls(List.of(aiFunctionCall));
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult(
-                        "call_456",
-                        "result"
-                );
+        ToolExecutionResult toolResult = createToolResult(
+                "call_456",
+                "result");
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
@@ -580,11 +592,9 @@ class OpenAiClientTest {
         /*
          * Résultat du premier tool.
          */
-        ToolExecutionResult firstToolResult =
-                new ToolExecutionResult(
-                        aiFunctionCall.getCallId(),
-                        "Résultat recherche erreur 1"
-                );
+        ToolExecutionResult toolResult = createToolResult(
+                aiFunctionCall.getCallId(),
+                "Résultat recherche erreur 1");
 
         /*
          * Deuxième appel :
@@ -594,7 +604,7 @@ class OpenAiClientTest {
         AiResponse secondFunctionCall =
                 openAiClient.continueAnalysis(
                         firstFunctionCall,
-                        List.of(firstToolResult),
+                        List.of(toolResult),
                         "test-model"
                 );
 
@@ -622,11 +632,9 @@ class OpenAiClientTest {
         /*
          * Résultat du deuxième tool.
          */
-        ToolExecutionResult secondToolResult =
-                new ToolExecutionResult(
-                        aiFunctionCall_2.getCallId(),
-                        "Résultat recherche erreur 2"
-                );
+        ToolExecutionResult secondToolResult = createToolResult(
+                aiFunctionCall_2.getCallId(),
+                "Résultat recherche erreur 2");
 
         /*
          * Troisième appel :
@@ -890,17 +898,13 @@ class OpenAiClientTest {
         /*
          * Résultats produits par les deux tools.
          */
-        ToolExecutionResult firstToolResult =
-                new ToolExecutionResult(
-                        "call_123",
-                        "Résultat recherche erreur 1"
-                );
+        ToolExecutionResult firstToolResult = createToolResult(
+                "call_123",
+                "Résultat recherche erreur 1");
 
-        ToolExecutionResult secondToolResult =
-                new ToolExecutionResult(
-                        "call_456",
-                        "Résultat recherche erreur 2"
-                );
+        ToolExecutionResult secondToolResult = createToolResult(
+                "call_456",
+                "Résultat recherche erreur 2");
 
         /*
          * Deuxième appel :
@@ -1044,13 +1048,11 @@ class OpenAiClientTest {
                 "test-model"
         );
 
-        ToolExecutionResult toolResult =
-                new ToolExecutionResult(
-                        functionCall.getFunctionCalls()
-                                .getFirst()
-                                .getCallId(),
-                        "Résultat de recherche"
-                );
+        ToolExecutionResult toolResult = createToolResult(
+                functionCall.getFunctionCalls()
+                        .getFirst()
+                        .getCallId(),
+                "Résultat de recherche");
 
         openAiClient.continueAnalysis(
                 functionCall,
@@ -1065,6 +1067,20 @@ class OpenAiClientTest {
         assertTrue(request.has("parallel_tool_calls"));
         assertFalse(
                 request.get("parallel_tool_calls").asBoolean()
+        );
+    }
+
+    private ToolExecutionResult createToolResult(
+            String callId,
+            String output) {
+
+        return new ToolExecutionResult(
+                callId,
+                output,
+                new SearchRequest(
+                        "Host name may not be null",
+                        "Vérifier cet élément dans le log"
+                )
         );
     }
 }

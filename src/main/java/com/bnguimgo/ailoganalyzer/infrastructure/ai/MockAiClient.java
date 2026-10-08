@@ -27,9 +27,7 @@ public class MockAiClient implements AiClient {
         AiResponse response = new AiResponse();
 
         response.setType(AiResponse.Type.TEXT);
-        response.setText(
-                "Analyse IA simulée avec le modèle : " + model
-        );
+        response.setText("Analyse IA simulée avec le modèle : " + model);
 
         return response;
     }

@@ -2,9 +2,11 @@ package com.bnguimgo.ailoganalyzer.domain.ai.analyzer;
 
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
 import com.bnguimgo.ailoganalyzer.domain.ai.*;
+import com.bnguimgo.ailoganalyzer.domain.ai.prompt.AiPromptBuilder;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.AiClient;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutionResult;
 import com.bnguimgo.ailoganalyzer.infrastructure.ai.tools.ToolExecutor;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +16,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Cette classe est l'orchestrateur, c'est elle qui contrôle la boucle agentique
+ */
 public class DefaultAiAnalyzer implements AiAnalyzer {
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultAiAnalyzer.class);
@@ -36,8 +41,7 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
     }
 
     @Override
-    public AiAnalysisResponse analyze(
-            StructuredContext context) throws IOException {
+    public AiAnalysisResponse analyze(StructuredContext context) throws IOException {
 
         if (context == null) {
             throw new IllegalArgumentException(
@@ -45,13 +49,11 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
             );
         }
 
-        logger.info(
-                "Starting AI log analysis - logFile={}",
-                context.logFile()
-        );
+        logger.info("Starting AI log analysis - logFile={}", context.logFile());
 
-        String prompt =
-                aiPromptBuilder.build(context);
+        SearchHistory searchHistory = new SearchHistory();
+
+        String prompt = aiPromptBuilder.build(context);
 
         logger.debug("Calling AI for initial analysis");
 
@@ -83,7 +85,8 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
             List<ToolExecutionResult> toolResults =
                     executeToolCalls(
                             aiResponse,
-                            context.logFile()
+                            context.logFile(),
+                            searchHistory
                     );
 
             executedToolCalls += toolResults.size();
@@ -117,7 +120,8 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
 
     private List<ToolExecutionResult> executeToolCalls(
             AiResponse aiResponse,
-            Path logFile) {
+            Path logFile,
+            SearchHistory searchHistory) throws JsonProcessingException {
 
         if (aiResponse.getResponseId() == null
                 || aiResponse.getResponseId().trim().isEmpty()) {
@@ -144,6 +148,29 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
 
             validateFunctionCall(functionCall);
 
+            SearchRequest searchRequest = toolExecutor.buildSearchRequest(functionCall);
+
+            if (searchHistory.contains(searchRequest)) {
+
+                ToolExecutionResult previousResult = searchHistory.findResult(searchRequest);
+
+                logger.info(
+                        "Skipping duplicate search and reusing previous result - searchTerm='{}', objective='{}'",
+                        searchRequest.searchTerm(),
+                        searchRequest.objective()
+                );
+
+                toolResults.add(
+                        new ToolExecutionResult(
+                                functionCall.getCallId(),
+                                previousResult.output(),
+                                searchRequest
+                        )
+                );
+
+                continue;
+            }
+
             logger.info(
                     "AI requested tool execution - function={}, callId={}",
                     functionCall.getFunctionName(),
@@ -165,6 +192,7 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
                         );
 
                 toolResults.add(toolResult);
+                searchHistory.add(searchRequest, toolResult);
 
                 logger.info(
                         "Tool execution completed - function={}, callId={}",
@@ -191,25 +219,17 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
         return toolResults;
     }
 
-    private AiAnalysisResponse createResponse(
-            String summary) {
+    private AiAnalysisResponse createResponse(String summary) {
 
-        AiAnalysisResponse response =
-                new AiAnalysisResponse();
+        AiAnalysisResponse response = new AiAnalysisResponse();
 
         response.setSummary(summary);
 
-        response.setProbableCauses(
-                Collections.emptyList()
-        );
+        response.setProbableCauses(Collections.emptyList());
 
-        response.setRecommendations(
-                Collections.emptyList()
-        );
+        response.setRecommendations(Collections.emptyList());
 
-        response.setUncertainties(
-                Collections.emptyList()
-        );
+        response.setUncertainties(Collections.emptyList());
 
         return response;
     }
