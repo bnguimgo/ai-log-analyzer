@@ -78,7 +78,31 @@ class SearchHistoryTest {
 
         history.add(first, result);
 
-        assertFalse(history.contains(differentObjective));
+        assertTrue(history.contains(differentObjective));
+        assertEquals(result, history.findResult(differentObjective));
+    }
+
+    @Test
+    void shouldNotReuseResultForDifferentSearchTerms() {
+
+        SearchHistory history = new SearchHistory();
+
+        SearchRequest first = new SearchRequest(
+                "CustomHttpResponseException",
+                "Trouver les erreurs HTTP 400"
+        );
+
+        SearchRequest differentTerm = new SearchRequest(
+                "Host name may not be null",
+                "Trouver les erreurs de configuration du proxy"
+        );
+
+        ToolExecutionResult result = createToolResult(first);
+
+        history.add(first, result);
+
+        assertFalse(history.contains(differentTerm));
+        assertNull(history.findResult(differentTerm));
     }
 
     private ToolExecutionResult createToolResult(

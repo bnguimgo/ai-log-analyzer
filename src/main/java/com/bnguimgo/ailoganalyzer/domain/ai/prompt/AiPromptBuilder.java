@@ -11,12 +11,14 @@ public class AiPromptBuilder {
     private final IncidentContextPrompt incidentContextPrompt;
     private final DiagnosticQuestionPrompt diagnosticQuestionPrompt;
     private final AnalysisOutputPrompt analysisOutputPrompt;
+    //private final PromptDescription promptDescription;
 
     public AiPromptBuilder() {
         this.searchPolicyPrompt = new SearchPolicyPrompt();
         this.incidentContextPrompt = new IncidentContextPrompt();
         this.diagnosticQuestionPrompt = new DiagnosticQuestionPrompt();
         this.analysisOutputPrompt = new AnalysisOutputPrompt();
+        //this.promptDescription = new PromptDescription();
     }
 
     public String build(StructuredContext context) {
@@ -28,6 +30,9 @@ public class AiPromptBuilder {
         }
 
         StringBuilder prompt = new StringBuilder();
+
+        //=== DESCRIPTION DU PROMPT ===
+        //prompt.append(promptDescription.build(prompt));
 
         prompt.append("Tu es un expert en analyse de logs Java/Spring.\n");
         prompt.append("Analyse les incidents suivants et identifie les ")

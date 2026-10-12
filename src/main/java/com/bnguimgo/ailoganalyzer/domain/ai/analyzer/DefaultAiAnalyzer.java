@@ -44,9 +44,7 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
     public AiAnalysisResponse analyze(StructuredContext context) throws IOException {
 
         if (context == null) {
-            throw new IllegalArgumentException(
-                    "context must not be null"
-            );
+            throw new IllegalArgumentException("context must not be null");
         }
 
         logger.info("Starting AI log analysis - logFile={}", context.logFile());
@@ -57,29 +55,20 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
 
         logger.debug("Calling AI for initial analysis");
 
-        AiResponse aiResponse =
-                aiClient.generateAnalysis(
-                        prompt,
-                        properties.getModel()
-                );
+        AiResponse aiResponse = aiClient.generateAnalysis(prompt, properties.getModel());
 
         int executedToolCalls = 0;
 
         while (aiResponse.getType() == AiResponse.Type.FUNCTION_CALL) {
 
-            List<AiFunctionCall> functionCalls =
-                    aiResponse.getFunctionCalls();
+            List<AiFunctionCall> functionCalls = aiResponse.getFunctionCalls();
 
             if (functionCalls == null || functionCalls.isEmpty()) {
-                throw new IllegalStateException(
-                        "AI function call response contains no function calls"
-                );
+                throw new IllegalStateException("AI function call response contains no function calls");
             }
 
             if (executedToolCalls + functionCalls.size() > MAX_TOOL_CALLS) {
-                throw new IllegalStateException(
-                        "Maximum number of AI tool calls exceeded"
-                );
+                throw new IllegalStateException("Maximum number of AI tool calls exceeded");
             }
 
             List<ToolExecutionResult> toolResults =
@@ -92,8 +81,7 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
             executedToolCalls += toolResults.size();
 
             logger.info(
-                    "Calling AI for continuation after tool executions - " +
-                            "toolCount={}, totalToolCalls={}, model={}",
+                    "Calling AI for continuation after tool executions - toolCount={}, totalToolCalls={}, model={}",
                     toolResults.size(),
                     executedToolCalls,
                     properties.getModel()
@@ -107,8 +95,7 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
                     );
 
             logger.info(
-                    "AI continuation response received - " +
-                            "toolCount={}, totalToolCalls={}, responseType={}",
+                    "AI continuation response received - toolCount={}, totalToolCalls={}, responseType={}",
                     toolResults.size(),
                     executedToolCalls,
                     aiResponse.getType()
@@ -123,23 +110,16 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
             Path logFile,
             SearchHistory searchHistory) throws JsonProcessingException {
 
-        if (aiResponse.getResponseId() == null
-                || aiResponse.getResponseId().trim().isEmpty()) {
+        if (aiResponse.getResponseId() == null || aiResponse.getResponseId().trim().isEmpty()) {
 
-            throw new IllegalStateException(
-                    "AI function call response is missing responseId"
-            );
+            throw new IllegalStateException("AI function call response is missing responseId");
         }
 
-        List<AiFunctionCall> functionCalls =
-                aiResponse.getFunctionCalls();
+        List<AiFunctionCall> functionCalls = aiResponse.getFunctionCalls();
 
-        if (functionCalls == null
-                || functionCalls.isEmpty()) {
+        if (functionCalls == null || functionCalls.isEmpty()) {
 
-            throw new IllegalStateException(
-                    "AI function call response contains no function calls"
-            );
+            throw new IllegalStateException("AI function call response contains no function calls");
         }
 
         List<ToolExecutionResult> toolResults = new ArrayList<>();
@@ -185,11 +165,7 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
                         functionCall.getCallId()
                 );
 
-                ToolExecutionResult toolResult =
-                        toolExecutor.execute(
-                                functionCall,
-                                logFile
-                        );
+                ToolExecutionResult toolResult = toolExecutor.execute(functionCall, logFile);
 
                 toolResults.add(toolResult);
                 searchHistory.add(searchRequest, toolResult);
@@ -209,10 +185,7 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
                         e
                 );
 
-                throw new IllegalStateException(
-                        "Unable to execute AI tool",
-                        e
-                );
+                throw new IllegalStateException("Unable to execute AI tool", e);
             }
         }
 
@@ -237,32 +210,22 @@ public class DefaultAiAnalyzer implements AiAnalyzer {
     private void validateFunctionCall(AiFunctionCall functionCall) {
 
         if (functionCall == null) {
-            throw new IllegalStateException(
-                    "AI function call must not be null"
-            );
+            throw new IllegalStateException("AI function call must not be null");
         }
 
-        if (functionCall.getCallId() == null
-                || functionCall.getCallId().trim().isEmpty()) {
+        if (functionCall.getCallId() == null || functionCall.getCallId().trim().isEmpty()) {
 
-            throw new IllegalStateException(
-                    "AI function call is missing callId"
-            );
+            throw new IllegalStateException("AI function call is missing callId");
         }
 
-        if (functionCall.getFunctionName() == null
-                || functionCall.getFunctionName().trim().isEmpty()) {
+        if (functionCall.getFunctionName() == null || functionCall.getFunctionName().trim().isEmpty()) {
 
-            throw new IllegalStateException(
-                    "AI function call is missing functionName"
-            );
+            throw new IllegalStateException("AI function call is missing functionName");
         }
 
-        if (functionCall.getArguments() == null
-                || functionCall.getArguments().trim().isEmpty()) {
+        if (functionCall.getArguments() == null || functionCall.getArguments().trim().isEmpty()) {
 
-            throw new IllegalStateException(
-                    "AI function call is missing arguments"
+            throw new IllegalStateException("AI function call is missing arguments"
             );
         }
     }

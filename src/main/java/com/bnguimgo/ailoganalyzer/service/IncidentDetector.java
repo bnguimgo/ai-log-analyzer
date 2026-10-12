@@ -1,10 +1,13 @@
 package com.bnguimgo.ailoganalyzer.service;
 
+import com.bnguimgo.ailoganalyzer.config.LogAnalysisProperties;
 import com.bnguimgo.ailoganalyzer.domain.incident.IncidentSeverity;
 import com.bnguimgo.ailoganalyzer.domain.incident.IncidentType;
 import com.bnguimgo.ailoganalyzer.domain.incident.LogIncident;
 import com.bnguimgo.ailoganalyzer.domain.log.LogEvent;
 import com.bnguimgo.ailoganalyzer.domain.log.LogLevel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,6 +17,14 @@ import java.util.regex.Pattern;
 
 @Component
 public class IncidentDetector {
+
+
+    private final LogAnalysisProperties properties;
+    private static final Logger log = LoggerFactory.getLogger(IncidentDetector.class);
+
+    public IncidentDetector(LogAnalysisProperties properties) {
+        this.properties = properties;
+    }
 
     private static final Pattern EXCEPTION_PATTERN =
             Pattern.compile(
@@ -215,6 +226,9 @@ public class IncidentDetector {
     }
 
     private void extractStackFrames(LogEvent event, LogIncident incident) {
+
+        log.info("Configured application packages: {}", properties.getApplicationPackages());
+
         String stackTrace = event.getStackTrace();
 
         if (stackTrace == null) {
@@ -222,6 +236,9 @@ public class IncidentDetector {
         }
 
         String[] lines = stackTrace.split("\\R");
+
+        // Première passe : collecter toutes les classes de la stack trace.
+        List<Matcher> stackFrames = new ArrayList<>();
 
         for (String line : lines) {
             Matcher matcher = STACK_FRAME_PATTERN.matcher(line);
@@ -236,20 +253,43 @@ public class IncidentDetector {
                 incident.getInvolvedClasses().add(className);
             }
 
-            if (incident.getMainClass() == null
-                    && isApplicationClass(className)) {
+            stackFrames.add(matcher);
+        }
 
-                incident.setMainClass(className);
-                incident.setMainMethod(matcher.group(2));
+        // Deuxième passe : priorité aux packages applicatifs configurés.
+        for (Matcher matcher : stackFrames) {
+            String className = matcher.group(1);
 
-                String location = matcher.group(3);
-                extractLineNumber(location, incident);
+            if (isExplicitlyConfiguredApplicationClass(className)) {
+                setMainClassFromStackFrame(matcher, incident);
+                return;
             }
         }
+        log.warn(
+                "No application stack frame matched configured packages: {}",
+                properties.getApplicationPackages()
+        );
     }
 
-    private boolean isApplicationClass(String className) {
-        return className.startsWith("fr.pomona.");
+    private boolean isExplicitlyConfiguredApplicationClass(String className) {
+
+        List<String> applicationPackages = properties.getApplicationPackages();
+
+        return applicationPackages != null
+                && applicationPackages.stream()
+                .filter(packageName ->
+                        packageName != null && !packageName.isBlank())
+                .anyMatch(className::startsWith);
+    }
+
+    private void setMainClassFromStackFrame(
+            Matcher matcher,
+            LogIncident incident) {
+
+        incident.setMainClass(matcher.group(1));
+        incident.setMainMethod(matcher.group(2));
+
+        extractLineNumber(matcher.group(3), incident);
     }
 
     private void extractLineNumber(

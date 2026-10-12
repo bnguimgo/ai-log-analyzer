@@ -135,8 +135,7 @@ public class ToolExecutor {
         );
     }
 
-    public SearchRequest buildSearchRequest(
-            AiFunctionCall functionCall) throws JsonProcessingException {
+    public SearchRequest buildSearchRequest(AiFunctionCall functionCall) throws JsonProcessingException {
 
         if (functionCall == null) {
             throw new IllegalArgumentException(

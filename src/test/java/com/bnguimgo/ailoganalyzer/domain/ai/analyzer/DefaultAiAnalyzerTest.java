@@ -561,15 +561,25 @@ class DefaultAiAnalyzerTest {
                 "call_1",
                 "Résultat du tool");
 
-        SearchRequest searchRequest =
-                new SearchRequest(
-                        "Host name may not be null",
-                        "Vérifier cet élément dans le log"
-                );
-
         when(toolExecutor.buildSearchRequest(
                 any(AiFunctionCall.class)))
-                .thenReturn(searchRequest);
+                .thenAnswer(invocation -> {
+
+                    AiFunctionCall functionCall =
+                            invocation.getArgument(0);
+
+                    if ("call_1".equals(functionCall.getCallId())) {
+                        return new SearchRequest(
+                                "Host name may not be null",
+                                "Vérifier la présence de l'erreur"
+                        );
+                    }
+
+                    return new SearchRequest(
+                            "Host name may not be null",
+                            "Identifier la stacktrace associée"
+                    );
+                });
 
         when(toolExecutor.execute(
                 any(AiFunctionCall.class),
@@ -605,22 +615,22 @@ class DefaultAiAnalyzerTest {
 
         assertEquals(2, allToolResults.size());
 
-        List<ToolExecutionResult> firstResults = allToolResults.get(0);
+        List<ToolExecutionResult> firstResults = allToolResults.getFirst();
 
         assertEquals(1, firstResults.size());
-        assertEquals("call_1", firstResults.get(0).callId());
+        assertEquals("call_1", firstResults.getFirst().callId());
         assertEquals(
                 "Résultat du tool",
-                firstResults.get(0).output()
+                firstResults.getFirst().output()
         );
 
         List<ToolExecutionResult> secondResults = allToolResults.get(1);
 
         assertEquals(1, secondResults.size());
-        assertEquals("call_2", secondResults.get(0).callId());
+        assertEquals("call_2", secondResults.getFirst().callId());
         assertEquals(
                 "Résultat du tool",
-                secondResults.get(0).output()
+                secondResults.getFirst().output()
         );
     }
 

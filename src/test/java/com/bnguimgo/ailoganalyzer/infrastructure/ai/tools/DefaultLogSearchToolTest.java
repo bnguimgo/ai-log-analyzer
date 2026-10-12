@@ -53,4 +53,25 @@ class DefaultLogSearchToolTest {
         );
     }
 
+    @Test
+    void shouldReturnSameResultsForSameSearchTermWithDifferentObjectives()
+            throws Exception {
+
+        SearchRequest firstRequest = new SearchRequest(
+                "CustomHttpResponseException",
+                "Trouver les erreurs HTTP 400"
+        );
+
+        SearchRequest secondRequest = new SearchRequest(
+                "CustomHttpResponseException",
+                "Trouver la stacktrace complète"
+        );
+
+        List<String> firstResults = tool.search(LOG_FILE_PATH, firstRequest);
+
+        List<String> secondResults = tool.search(LOG_FILE_PATH, secondRequest);
+
+        assertEquals(firstResults, secondResults);
+    }
+
 }

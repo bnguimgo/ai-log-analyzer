@@ -2,6 +2,7 @@ package com.bnguimgo.ailoganalyzer.integration;
 
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiAnalysisResponse;
+import com.bnguimgo.ailoganalyzer.domain.ai.SearchRequest;
 import com.bnguimgo.ailoganalyzer.domain.ai.prompt.AiPromptBuilder;
 import com.bnguimgo.ailoganalyzer.domain.ai.StructuredContext;
 import com.bnguimgo.ailoganalyzer.domain.ai.analyzer.DefaultAiAnalyzer;
@@ -53,6 +54,8 @@ class AiAnalysisOpenAiIntegrationTest {
     private int requestCount;
 
     private boolean duplicateSearchScenario;
+
+    private CountingLogSearchTool countingLogSearchTool;
 
     @BeforeEach
     void setUp() throws IOException {
@@ -431,6 +434,8 @@ class AiAnalysisOpenAiIntegrationTest {
                                 "Host name may not be null"
                         )
         );
+
+        assertEquals(1, countingLogSearchTool.getExecutionCount());
     }
 
     private AiAnalysisResponse getAiAnalysisResponse(AiClient aiClient) throws IOException {
@@ -480,30 +485,49 @@ class AiAnalysisOpenAiIntegrationTest {
         return analyzer.analyze(context);
     }
 
+    private static class CountingLogSearchTool implements LogSearchTool {
+
+        private final LogSearchTool delegate;
+        private int executionCount;
+
+        private CountingLogSearchTool(LogSearchTool delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public List<String> search(Path logFile, SearchRequest searchRequest) throws IOException {
+
+            executionCount++;
+            return delegate.search(logFile, searchRequest);
+        }
+
+        int getExecutionCount() {
+            return executionCount;
+        }
+
+
+    }
+
     private DefaultAiAnalyzer getDefaultAiAnalyzer(AiClient aiClient) {
-        AiPromptBuilder promptBuilder =
-                new AiPromptBuilder();
+        AiPromptBuilder promptBuilder = new AiPromptBuilder();
 
-        LogSearchTool logSearchTool =
-                new DefaultLogSearchTool();
+        LogSearchTool delegate = new DefaultLogSearchTool();
+        countingLogSearchTool = new CountingLogSearchTool(delegate);
 
-        ToolExecutor toolExecutor =
-                new ToolExecutor(
-                        logSearchTool,
-                        objectMapper
-                );
+        ToolExecutor toolExecutor = new ToolExecutor(
+                countingLogSearchTool,
+                objectMapper
+        );
 
-        AiProviderProperties properties =
-                new AiProviderProperties();
-
+        AiProviderProperties properties = new AiProviderProperties();
         properties.setModel(MODEL);
 
         return new DefaultAiAnalyzer(
-                        aiClient,
-                        promptBuilder,
-                        properties,
-                        toolExecutor
-                );
+                aiClient,
+                promptBuilder,
+                properties,
+                toolExecutor
+        );
     }
 
     private void handleRequest(
@@ -685,10 +709,7 @@ class AiAnalysisOpenAiIntegrationTest {
     private String createDuplicateFunctionCallResponse() {
 
         return objectMapper.createObjectNode()
-                .put(
-                        "id",
-                        "resp_duplicate"
-                )
+                .put("id", "resp_duplicate")
                 .set(
                         "output",
                         objectMapper.createArrayNode()
@@ -703,7 +724,7 @@ class AiAnalysisOpenAiIntegrationTest {
                                         createFunctionCall(
                                                 "call_2",
                                                 "Host name may not be null",
-                                                "Vérifier la présence de cette exception dans le log"
+                                                "Identifier la stacktrace associée à cette exception"
                                         )
                                 )
                 )

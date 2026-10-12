@@ -1,0 +1,8 @@
+git remote set-url origin https://github.com/bnguimgo/ai-log-analyzer.git
+
+# Pour tester uniquement une classe, exemple DefaultLogSearchToolTest
+mvn -Dtest=DefaultLogSearchToolTest test
+mvn -Dtest=IncidentDetectorTest test
+
+# Pour tester spécifiquement une méthode de la classe DefaultAiAnalyzerTest, exemple méthode shouldNotExecuteSameSearchTwice
+mvn -Dtest=DefaultAiAnalyzerTest#shouldNotExecuteSameSearchTwice test

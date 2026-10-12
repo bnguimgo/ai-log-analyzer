@@ -1,6 +1,7 @@
 package com.bnguimgo.ailoganalyzer.application;
 
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
+import com.bnguimgo.ailoganalyzer.config.LogAnalysisProperties;
 import com.bnguimgo.ailoganalyzer.domain.ai.AiAnalysisResponse;
 import com.bnguimgo.ailoganalyzer.domain.ai.prompt.AiPromptBuilder;
 import com.bnguimgo.ailoganalyzer.domain.ai.StructuredContextBuilder;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -72,11 +74,22 @@ class DefaultLogAnalysisServiceWithAiTest {
         return new DefaultLogAnalysisService(
                 new LogReader(),
                 new LogParser(),
-                new IncidentDetector(),
+                createDetector(),
                 new IncidentGrouper(),
                 new IncidentCorrelator(),
                 new StructuredContextBuilder(),
                 aiAnalyzer
         );
+    }
+
+    private static IncidentDetector createDetector() {
+        LogAnalysisProperties properties = new LogAnalysisProperties();
+
+        properties.setApplicationPackages(Arrays.asList(
+                "fr.pomona.",
+                "com.acme.orders."
+        ));
+
+        return new IncidentDetector(properties);
     }
 }

@@ -50,27 +50,19 @@ public class OpenAiClient implements AiClient {
             ObjectMapper objectMapper) {
 
         if (apiKey == null || apiKey.trim().isEmpty()) {
-            throw new IllegalArgumentException(
-                    "apiKey must not be null or empty"
-            );
+            throw new IllegalArgumentException("apiKey must not be null or empty");
         }
 
         if (apiUrl == null || apiUrl.trim().isEmpty()) {
-            throw new IllegalArgumentException(
-                    "apiUrl must not be null or empty"
-            );
+            throw new IllegalArgumentException("apiUrl must not be null or empty");
         }
 
         if (httpClient == null) {
-            throw new IllegalArgumentException(
-                    "httpClient must not be null"
-            );
+            throw new IllegalArgumentException("httpClient must not be null");
         }
 
         if (objectMapper == null) {
-            throw new IllegalArgumentException(
-                    "objectMapper must not be null"
-            );
+            throw new IllegalArgumentException("objectMapper must not be null");
         }
 
         this.apiKey = apiKey;
@@ -85,21 +77,14 @@ public class OpenAiClient implements AiClient {
             String model) {
 
         if (prompt == null || prompt.trim().isEmpty()) {
-            throw new IllegalArgumentException(
-                    "prompt must not be null or empty"
-            );
+            throw new IllegalArgumentException("prompt must not be null or empty");
         }
 
         if (model == null || model.trim().isEmpty()) {
-            throw new IllegalArgumentException(
-                    "model must not be null or empty"
-            );
+            throw new IllegalArgumentException("model must not be null or empty");
         }
 
-        logger.info(
-                "Calling OpenAI Responses API - model={}",
-                model
-        );
+        logger.info("Calling OpenAI Responses API - model={}", model);
 
         try {
             String requestBody =
@@ -107,92 +92,40 @@ public class OpenAiClient implements AiClient {
                             .put("model", model)
                             .put("input", prompt)
                             .put("parallel_tool_calls", false)
-                            .set(
-                                    "tools",
-                                    objectMapper.valueToTree(
-                                            List.of(
-                                                    LogSearchToolDefinition
-                                                            .asMap()
-                                            )
-                                    )
-                            )
+                            .set("tools", objectMapper.valueToTree(List.of(LogSearchToolDefinition.asMap())))
                             .toString();
 
-            HttpRequest request =
-                    HttpRequest.newBuilder()
+            HttpRequest request = HttpRequest
+                    .newBuilder()
                             .uri(URI.create(apiUrl))
-                            .header(
-                                    "Authorization",
-                                    "Bearer " + apiKey
-                            )
-                            .header(
-                                    "Content-Type",
-                                    "application/json"
-                            )
-                            .POST(
-                                    HttpRequest.BodyPublishers.ofString(
-                                            requestBody,
-                                            StandardCharsets.UTF_8
-                                    )
-                            )
+                            .header("Authorization", "Bearer " + apiKey)
+                            .header("Content-Type", "application/json")
+                            .POST(HttpRequest.BodyPublishers.ofString(requestBody, StandardCharsets.UTF_8))
                             .build();
 
-            HttpResponse<String> response =
-                    httpClient.send(
-                            request,
-                            HttpResponse.BodyHandlers.ofString(
-                                    StandardCharsets.UTF_8
-                            )
-                    );
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
 
-            logger.info(
-                    "OpenAI Responses API returned HTTP {}",
-                    response.statusCode()
-            );
+            logger.info("OpenAI Responses API returned HTTP {}", response.statusCode());
 
-            logger.info(
-                    "OpenAI response body: {}",
-                    response.body()
-            );
-
-            if (response.statusCode() < 200
-                    || response.statusCode() >= 300) {
-
-                throw new IllegalStateException(
-                        "OpenAI API returned HTTP "
-                                + response.statusCode()
-                                + ": "
-                                + response.body()
-                );
+            if (response.statusCode() < 200 || response.statusCode() >= 300) {
+                throw new IllegalStateException("OpenAI API returned HTTP " + response.statusCode());
             }
 
             return extractResponse(response.body());
 
         } catch (IOException e) {
 
-            logger.error(
-                    "Unable to call OpenAI Responses API",
-                    e
-            );
+            logger.error("Unable to call OpenAI Responses API", e);
 
-            throw new IllegalStateException(
-                    "Unable to call OpenAI API",
-                    e
-            );
+            throw new IllegalStateException("Unable to call OpenAI API", e);
 
         } catch (InterruptedException e) {
 
             Thread.currentThread().interrupt();
 
-            logger.error(
-                    "OpenAI API call was interrupted",
-                    e
-            );
+            logger.error("OpenAI API call was interrupted", e);
 
-            throw new IllegalStateException(
-                    "OpenAI API call was interrupted",
-                    e
-            );
+            throw new IllegalStateException("OpenAI API call was interrupted",e);
         }
     }
 
@@ -203,33 +136,22 @@ public class OpenAiClient implements AiClient {
             String model) {
 
         if (functionCall == null) {
-            throw new IllegalArgumentException(
-                    "functionCall must not be null"
-            );
+            throw new IllegalArgumentException("functionCall must not be null");
         }
 
-        if (functionCall.getType()
-                != AiResponse.Type.FUNCTION_CALL) {
+        if (functionCall.getType() != AiResponse.Type.FUNCTION_CALL) {
 
-            throw new IllegalArgumentException(
-                    "functionCall must be of type FUNCTION_CALL"
-            );
+            throw new IllegalArgumentException("functionCall must be of type FUNCTION_CALL");
         }
 
-        if (toolResults == null
-                || toolResults.isEmpty()) {
+        if (toolResults == null || toolResults.isEmpty()) {
 
-            throw new IllegalArgumentException(
-                    "toolResults must not be null or empty"
-            );
+            throw new IllegalArgumentException("toolResults must not be null or empty");
         }
 
-        if (functionCall.getResponseId() == null
-                || functionCall.getResponseId().trim().isEmpty()) {
+        if (functionCall.getResponseId() == null || functionCall.getResponseId().trim().isEmpty()) {
 
-            throw new IllegalArgumentException(
-                    "functionCall.responseId must not be null or empty"
-            );
+            throw new IllegalArgumentException("functionCall.responseId must not be null or empty");
         }
 
         List<AiFunctionCall> functionCalls = getAiFunctionCalls(functionCall);
@@ -237,17 +159,12 @@ public class OpenAiClient implements AiClient {
         for (ToolExecutionResult toolResult : toolResults) {
 
             if (toolResult == null) {
-                throw new IllegalArgumentException(
-                        "toolResults must not contain null elements"
-                );
+                throw new IllegalArgumentException("toolResults must not contain null elements");
             }
 
-            if (toolResult.callId() == null
-                    || toolResult.callId().trim().isEmpty()) {
+            if (toolResult.callId() == null || toolResult.callId().trim().isEmpty()) {
 
-                throw new IllegalArgumentException(
-                        "toolResult callId must not be null or empty"
-                );
+                throw new IllegalArgumentException("toolResult callId must not be null or empty");
             }
 
             boolean callIdMatches = functionCalls.stream()
@@ -258,78 +175,41 @@ public class OpenAiClient implements AiClient {
 
             if (!callIdMatches) {
 
-                throw new IllegalArgumentException(
-                        "functionCall.callId and toolResult.callId must match"
-                );
+                throw new IllegalArgumentException("functionCall.callId and toolResult.callId must match");
             }
         }
 
         if (model == null || model.trim().isEmpty()) {
 
-            throw new IllegalArgumentException(
-                    "model must not be null or empty"
-            );
+            throw new IllegalArgumentException("model must not be null or empty");
         }
 
-        ArrayNode input =
-                objectMapper.createArrayNode();
+        ArrayNode input = objectMapper.createArrayNode();
 
         for (ToolExecutionResult toolResult : toolResults) {
 
-            input.add(
-                    objectMapper.createObjectNode()
-                            .put(
-                                    "type",
-                                    "function_call_output"
-                            )
-                            .put(
-                                    "call_id",
-                                    toolResult.callId()
-                            )
-                            .put(
-                                    "output",
-                                    toolResult.output()
-                            )
+            input.add(objectMapper.createObjectNode()
+                            .put("type", "function_call_output")
+                            .put("call_id", toolResult.callId())
+                            .put("output", toolResult.output())
             );
         }
 
-        ObjectNode requestNode =
-                objectMapper.createObjectNode();
+        ObjectNode requestNode = objectMapper.createObjectNode();
 
-        requestNode.put(
-                "model",
-                model
-        );
+        requestNode.put("model", model);
 
-        requestNode.put(
-                "previous_response_id",
-                functionCall.getResponseId()
-        );
+        requestNode.put("previous_response_id", functionCall.getResponseId());
 
-        requestNode.put(
-                "parallel_tool_calls",
-                false
-        );
+        requestNode.put("parallel_tool_calls", false);
 
-        requestNode.set(
-                "input",
-                input
-        );
+        requestNode.set("input", input);
 
-        requestNode.set(
-                "tools",
-                objectMapper.valueToTree(
-                        List.of(
-                                LogSearchToolDefinition.asMap()
-                        )
-                )
-        );
+        requestNode.set("tools", objectMapper.valueToTree(List.of(LogSearchToolDefinition.asMap())));
 
         String requestBody = requestNode.toString();
 
-        logger.info(
-                "Calling OpenAI Responses API with tool outputs - " +
-                        "toolCount={}, previousResponseId={}",
+        logger.info("Calling OpenAI Responses API with tool outputs - " + "toolCount={}, previousResponseId={}",
                 toolResults.size(),
                 functionCall.getResponseId()
         );
@@ -339,78 +219,34 @@ public class OpenAiClient implements AiClient {
             HttpRequest request =
                     HttpRequest.newBuilder()
                             .uri(URI.create(apiUrl))
-                            .header(
-                                    "Authorization",
-                                    "Bearer " + apiKey
-                            )
-                            .header(
-                                    "Content-Type",
-                                    "application/json"
-                            )
-                            .POST(
-                                    HttpRequest.BodyPublishers.ofString(
-                                            requestBody,
-                                            StandardCharsets.UTF_8
-                                    )
-                            )
+                            .header("Authorization", "Bearer " + apiKey)
+                            .header("Content-Type", "application/json")
+                            .POST(HttpRequest.BodyPublishers.ofString(requestBody, StandardCharsets.UTF_8))
                             .build();
 
-            HttpResponse<String> response =
-                    httpClient.send(
-                            request,
-                            HttpResponse.BodyHandlers.ofString(
-                                    StandardCharsets.UTF_8
-                            )
-                    );
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
 
-            logger.info(
-                    "OpenAI Responses API continuation returned HTTP {}",
-                    response.statusCode()
-            );
+            logger.info("OpenAI Responses API continuation returned HTTP {}", response.statusCode());
 
-            logger.info(
-                    "OpenAI continuation response body: {}",
-                    response.body()
-            );
-
-            if (response.statusCode() < 200
-                    || response.statusCode() >= 300) {
-
-                throw new IllegalStateException(
-                        "OpenAI API returned HTTP "
-                                + response.statusCode()
-                                + ": "
-                                + response.body()
-                );
+            if (response.statusCode() < 200 || response.statusCode() >= 300) {
+                throw new IllegalStateException("OpenAI API returned HTTP " + response.statusCode());
             }
 
             return extractResponse(response.body());
 
         } catch (IOException e) {
 
-            logger.error(
-                    "Unable to call OpenAI Responses API",
-                    e
-            );
+            logger.error("Unable to call OpenAI Responses API", e);
 
-            throw new IllegalStateException(
-                    "Unable to call OpenAI API",
-                    e
-            );
+            throw new IllegalStateException("Unable to call OpenAI API", e);
 
         } catch (InterruptedException e) {
 
             Thread.currentThread().interrupt();
 
-            logger.error(
-                    "OpenAI API call was interrupted",
-                    e
-            );
+            logger.error("OpenAI API call was interrupted", e);
 
-            throw new IllegalStateException(
-                    "OpenAI API call was interrupted",
-                    e
-            );
+            throw new IllegalStateException("OpenAI API call was interrupted", e);
         }
     }
 
@@ -419,25 +255,18 @@ public class OpenAiClient implements AiClient {
         List<AiFunctionCall> functionCalls = functionCall.getFunctionCalls();
 
         if (functionCalls == null || functionCalls.isEmpty()) {
-            throw new IllegalArgumentException(
-                    "functionCall must contain at least one function call"
-            );
+            throw new IllegalArgumentException("functionCall must contain at least one function call");
         }
 
         for (AiFunctionCall aiFunctionCall : functionCalls) {
 
             if (aiFunctionCall == null) {
-                throw new IllegalArgumentException(
-                        "functionCall must not contain null elements"
-                );
+                throw new IllegalArgumentException("functionCall must not contain null elements");
             }
 
-            if (aiFunctionCall.getCallId() == null
-                    || aiFunctionCall.getCallId().trim().isEmpty()) {
+            if (aiFunctionCall.getCallId() == null || aiFunctionCall.getCallId().trim().isEmpty()) {
 
-                throw new IllegalArgumentException(
-                        "functionCall.callId must not be null or empty"
-                );
+                throw new IllegalArgumentException("functionCall.callId must not be null or empty");
             }
         }
         return functionCalls;
@@ -461,17 +290,11 @@ public class OpenAiClient implements AiClient {
 
                 AiFunctionCall functionCall = new AiFunctionCall();
 
-                functionCall.setCallId(
-                        outputItem.path("call_id").asText(null)
-                );
+                functionCall.setCallId(outputItem.path("call_id").asText(null));
 
-                functionCall.setFunctionName(
-                        outputItem.path("name").asText(null)
-                );
+                functionCall.setFunctionName(outputItem.path("name").asText(null));
 
-                functionCall.setArguments(
-                        outputItem.path("arguments").asText(null)
-                );
+                functionCall.setArguments(outputItem.path("arguments").asText(null));
 
                 functionCalls.add(functionCall);
             }
@@ -482,14 +305,8 @@ public class OpenAiClient implements AiClient {
 
                 for (JsonNode contentItem : content) {
 
-                    if ("output_text".equals(
-                            contentItem.path("type").asText())) {
-
+                    if ("output_text".equals(contentItem.path("type").asText())) {
                         outputText = contentItem.path("text").asText();
-
-                        logger.info(
-                                "OpenAI returned final text response"
-                        );
                     }
                 }
             }
@@ -500,6 +317,20 @@ public class OpenAiClient implements AiClient {
          * OpenAI peut retourner un message avant les function calls.
          */
         if (!functionCalls.isEmpty()) {
+
+            logger.info(
+                    "OpenAI response parsed - responseId={}, type=FUNCTION_CALL, toolCallCount={}",
+                    responseId,
+                    functionCalls.size()
+            );
+
+            for (AiFunctionCall functionCall : functionCalls) {
+                logger.info(
+                        "OpenAI tool call received - function={}, callId={}",
+                        functionCall.getFunctionName(),
+                        functionCall.getCallId()
+                );
+            }
 
             AiResponse response = new AiResponse();
 
@@ -512,6 +343,8 @@ public class OpenAiClient implements AiClient {
 
         if (outputText != null) {
 
+            logger.info("OpenAI response parsed - responseId={}, type=TEXT", responseId);
+
             AiResponse response = new AiResponse();
 
             response.setType(AiResponse.Type.TEXT);
@@ -520,8 +353,6 @@ public class OpenAiClient implements AiClient {
             return response;
         }
 
-        throw new IllegalStateException(
-                "OpenAI response does not contain text or function call"
-        );
+        throw new IllegalStateException("OpenAI response does not contain text or function call");
     }
 }

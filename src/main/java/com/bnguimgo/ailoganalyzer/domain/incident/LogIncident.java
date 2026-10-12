@@ -30,7 +30,7 @@ public class LogIncident {
 
     private String exceptionMessage;
 
-    private final List<String> involvedClasses = new ArrayList<String>();
+    private final List<String> involvedClasses = new ArrayList<>();
 
     public IncidentType getType() {
         return type;

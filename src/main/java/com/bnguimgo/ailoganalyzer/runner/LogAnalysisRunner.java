@@ -3,6 +3,7 @@ package com.bnguimgo.ailoganalyzer.runner;
 import com.bnguimgo.ailoganalyzer.application.DefaultLogAnalysisService;
 import com.bnguimgo.ailoganalyzer.application.LogAnalysisService;
 import com.bnguimgo.ailoganalyzer.config.AiProviderProperties;
+import com.bnguimgo.ailoganalyzer.config.LogAnalysisProperties;
 import com.bnguimgo.ailoganalyzer.domain.ai.prompt.AiPromptBuilder;
 import com.bnguimgo.ailoganalyzer.domain.ai.StructuredContextBuilder;
 import com.bnguimgo.ailoganalyzer.domain.ai.analyzer.AiAnalyzer;
@@ -36,33 +37,23 @@ public class LogAnalysisRunner {
 
         properties.setModel("test-model");
 
-        MockAiClient mockAiClient =
-                new MockAiClient();
+        MockAiClient mockAiClient = new MockAiClient();
 
-        AiPromptBuilder prompt =
-                new AiPromptBuilder();
+        AiPromptBuilder prompt = new AiPromptBuilder();
 
         LogAnalysisService analysisService =
                 getLogAnalysisService(
                         properties,
                         mockAiClient,
-                        prompt
-                );
+                        prompt);
 
-        IncidentReportPrinter reportPrinter =
-                new IncidentReportPrinter();
+        IncidentReportPrinter reportPrinter = new IncidentReportPrinter();
 
-        System.out.println(
-                "Analyse du fichier : "
-                        + logFile.toAbsolutePath()
-        );
+        System.out.println("Analyse du fichier : " + logFile.toAbsolutePath());
 
-        LogAnalysisReport report =
-                analysisService.analyze(logFile);
+        LogAnalysisReport report = analysisService.analyze(logFile);
 
-        reportPrinter.print(
-                report.analysisResult()
-        );
+        reportPrinter.print(report.analysisResult());
     }
 
     private static LogAnalysisService getLogAnalysisService(
@@ -70,17 +61,14 @@ public class LogAnalysisRunner {
             MockAiClient mockAiClient,
             AiPromptBuilder prompt) {
 
-        LogSearchTool logSearchTool =
-                new DefaultLogSearchTool();
+        LogSearchTool logSearchTool = new DefaultLogSearchTool();
 
-        ObjectMapper objectMapper =
-                new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper();
 
         ToolExecutor toolExecutor =
                 new ToolExecutor(
                         logSearchTool,
-                        objectMapper
-                );
+                        objectMapper);
 
         AiAnalyzer aiAnalyzer =
                 new DefaultAiAnalyzer(
@@ -93,7 +81,7 @@ public class LogAnalysisRunner {
         return new DefaultLogAnalysisService(
                 new LogReader(),
                 new LogParser(),
-                new IncidentDetector(),
+                createIncidentDetector(),
                 new IncidentGrouper(),
                 new IncidentCorrelator(),
                 new StructuredContextBuilder(),
@@ -111,5 +99,18 @@ public class LogAnalysisRunner {
         }
 
         return LOG_FILE_PATH;
+    }
+
+    private static IncidentDetector createIncidentDetector() {
+        LogAnalysisProperties properties = new LogAnalysisProperties();
+
+        properties.setApplicationPackages(
+                java.util.Arrays.asList(
+                        "fr.pomona.",
+                        "com.acme.orders."
+                )
+        );
+
+        return new IncidentDetector(properties);
     }
 }

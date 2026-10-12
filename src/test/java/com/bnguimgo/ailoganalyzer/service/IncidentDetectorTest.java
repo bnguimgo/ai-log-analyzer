@@ -1,5 +1,6 @@
 package com.bnguimgo.ailoganalyzer.service;
 
+import com.bnguimgo.ailoganalyzer.config.LogAnalysisProperties;
 import com.bnguimgo.ailoganalyzer.domain.incident.IncidentType;
 import com.bnguimgo.ailoganalyzer.domain.incident.LogIncident;
 import com.bnguimgo.ailoganalyzer.domain.log.LogEvent;
@@ -7,6 +8,7 @@ import com.bnguimgo.ailoganalyzer.domain.log.LogLevel;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +21,7 @@ class IncidentDetectorTest {
 
         LogEvent event = getLogEvent();
 
-        IncidentDetector detector = new IncidentDetector();
+        IncidentDetector detector = createDetector();
 
         List<LogIncident> incidents =
                 detector.detect(Collections.singletonList(event));
@@ -120,7 +122,7 @@ class IncidentDetectorTest {
                         \tat fr.pomona.manageo.web.security.cognito.proxy.oauth2.CustomOAuth2AccessTokenResponseClient.getTokenResponse(CustomOAuth2AccessTokenResponseClient.java:35)"""
         );
 
-        IncidentDetector detector = new IncidentDetector();
+        IncidentDetector detector = createDetector();
 
         List<LogIncident> incidents =
                 detector.detect(Collections.singletonList(event));
@@ -149,7 +151,7 @@ class IncidentDetectorTest {
         event.setLevel(LogLevel.INFO);
         event.setMessage("Application started");
 
-        IncidentDetector detector = new IncidentDetector();
+        IncidentDetector detector = createDetector();
 
         List<LogIncident> incidents =
                 detector.detect(Collections.singletonList(event));
@@ -174,7 +176,7 @@ class IncidentDetectorTest {
                         + "$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:408)"
         );
 
-        IncidentDetector detector = new IncidentDetector();
+        IncidentDetector detector = createDetector();
 
         List<LogIncident> incidents =
                 detector.detect(Collections.singletonList(event));
@@ -188,7 +190,7 @@ class IncidentDetectorTest {
     void shouldSelectFirstApplicationStackFrameAsMainClass() {
         LogEvent event = getEvent();
 
-        IncidentDetector detector = new IncidentDetector();
+        IncidentDetector detector = createDetector();
 
         List<LogIncident> incidents =
                 detector.detect(Collections.singletonList(event));
@@ -217,7 +219,7 @@ class IncidentDetectorTest {
     void shouldExtractStructuredHttpException() {
         LogEvent event = extractLogEvent();
 
-        IncidentDetector detector = new IncidentDetector();
+        IncidentDetector detector = createDetector();
 
         List<LogIncident> incidents =
                 detector.detect(Collections.singletonList(event));
@@ -235,6 +237,167 @@ class IncidentDetectorTest {
                 Integer.valueOf(400),
                 incident.getHttpStatus()
         );
+    }
+
+    @Test
+    void shouldSelectApplicationStackFrameFromAnotherPackage() {
+        LogEvent event = new LogEvent();
+
+        event.setTimestamp(LocalDateTime.of(2026, 9, 16, 14, 45, 36));
+        event.setLevel(LogLevel.ERROR);
+        event.setThread("main");
+        event.setLogger("test");
+        event.setMessage("Application error");
+
+        event.setStackTrace("""
+            java.lang.IllegalStateException: Unexpected state
+            \tat com.acme.orders.OrderService.process(OrderService.java:42)
+            \tat org.springframework.beans.factory.BeanFactory.getBean(BeanFactory.java:100)""");
+
+        IncidentDetector detector = createDetector();
+
+        List<LogIncident> incidents =
+                detector.detect(Collections.singletonList(event));
+
+        assertEquals(1, incidents.size());
+
+        LogIncident incident = incidents.getFirst();
+
+        assertEquals(
+                "com.acme.orders.OrderService",
+                incident.getMainClass()
+        );
+
+        assertEquals("process", incident.getMainMethod());
+        assertEquals(Integer.valueOf(42), incident.getMainLine());
+    }
+
+    @Test
+    void shouldLeaveMainClassUnsetWhenPackageIsNotConfigured() {
+
+        LogEvent event = new LogEvent();
+
+        event.setTimestamp(LocalDateTime.of(2026, 9, 16, 14, 45, 36));
+        event.setLevel(LogLevel.ERROR);
+        event.setThread("main");
+        event.setLogger("test");
+        event.setMessage("Application error");
+
+        String stackTrace = """
+            java.lang.RuntimeException: Erreur
+                at com.bnguimgo.demo.OrderService.process(OrderService.java:42)
+                at org.springframework.beans.factory.BeanFactory.getBean(BeanFactory.java:100)
+            """;
+
+        event.setStackTrace(stackTrace);
+
+        IncidentDetector detector = createDetector();
+
+        List<LogIncident> incidents = detector.detect(Collections.singletonList(event));
+
+        assertEquals(1, incidents.size());
+
+        LogIncident incident = incidents.getFirst();
+        // Assert
+        assertNull(incident.getMainClass());
+        assertNull(incident.getMainMethod());
+        assertNull(incident.getMainLine());
+
+        assertTrue(incident.getInvolvedClasses()
+                .contains("com.bnguimgo.demo.OrderService"));
+    }
+
+    @Test
+    void shouldPreferApplicationClassOverUnknownThirdPartyLibrary() {
+        LogEvent event = new LogEvent();
+
+        event.setTimestamp(
+                LocalDateTime.of(2026, 9, 16, 14, 45, 36)
+        );
+        event.setLevel(LogLevel.ERROR);
+        event.setThread("main");
+        event.setLogger("test");
+        event.setMessage("Application error");
+
+        event.setStackTrace("""
+            java.lang.IllegalStateException: Unexpected state
+            \tat org.vendor.unknown.LibraryExecutor.execute(LibraryExecutor.java:15)
+            \tat fr.pomona.orders.OrderService.process(OrderService.java:42)
+            \tat org.springframework.beans.factory.BeanFactory.getBean(BeanFactory.java:100)""");
+
+        IncidentDetector detector = createDetector();
+
+        List<LogIncident> incidents =
+                detector.detect(Collections.singletonList(event));
+
+        assertEquals(1, incidents.size());
+
+        LogIncident incident = incidents.getFirst();
+
+        assertEquals(
+                "fr.pomona.orders.OrderService",
+                incident.getMainClass()
+        );
+        assertEquals("process", incident.getMainMethod());
+        assertEquals(Integer.valueOf(42), incident.getMainLine());
+    }
+
+    @Test
+    void shouldLeaveMainClassUnsetWhenOnlyUnknownLibraryFramesArePresent() {
+        LogEvent event = new LogEvent();
+
+        event.setTimestamp(LocalDateTime.of(2026, 9, 16, 14, 45, 36));
+        event.setLevel(LogLevel.ERROR);
+        event.setThread("main");
+        event.setLogger("test");
+        event.setMessage("Application error");
+
+        event.setStackTrace("""
+            java.lang.IllegalStateException: Unexpected state
+            \tat org.vendor.unknown.LibraryExecutor.execute(LibraryExecutor.java:15)
+            \tat org.springframework.beans.factory.BeanFactory.getBean(BeanFactory.java:100)""");
+
+        IncidentDetector detector = createDetector();
+
+        List<LogIncident> incidents =
+                detector.detect(Collections.singletonList(event));
+
+        assertEquals(1, incidents.size());
+
+        LogIncident incident = incidents.getFirst();
+
+        assertNull(incident.getMainClass());
+        assertNull(incident.getMainMethod());
+        assertNull(incident.getMainLine());
+    }
+
+    @Test
+    void shouldLeaveMainClassUnsetWhenUnknownLibraryClassEndsWithService() {
+        LogEvent event = new LogEvent();
+
+        event.setTimestamp(LocalDateTime.of(2026, 9, 16, 14, 45, 36));
+        event.setLevel(LogLevel.ERROR);
+        event.setThread("main");
+        event.setLogger("test");
+        event.setMessage("Application error");
+
+        event.setStackTrace("""
+            java.lang.IllegalStateException: Unexpected state
+            \tat org.vendor.payment.PaymentService.process(PaymentService.java:42)
+            \tat org.springframework.beans.factory.BeanFactory.getBean(BeanFactory.java:100)""");
+
+        IncidentDetector detector = createDetector();
+
+        List<LogIncident> incidents =
+                detector.detect(Collections.singletonList(event));
+
+        assertEquals(1, incidents.size());
+
+        LogIncident incident = incidents.getFirst();
+
+        assertNull(incident.getMainClass());
+        assertNull(incident.getMainMethod());
+        assertNull(incident.getMainLine());
     }
 
     private static LogEvent extractLogEvent() {
@@ -275,5 +438,16 @@ class IncidentDetectorTest {
                         \tat fr.pomona.manageo.web.security.cognito.config.CognitoSecurityConfiguration.oauth2ClientRestOperations(CognitoSecurityConfiguration.java:120)"""
         );
         return event;
+    }
+
+    private static IncidentDetector createDetector() {
+        LogAnalysisProperties properties = new LogAnalysisProperties();
+
+        properties.setApplicationPackages(Arrays.asList(
+                "fr.pomona.",
+                "com.acme.orders."
+        ));
+
+        return new IncidentDetector(properties);
     }
 }

@@ -23,23 +23,18 @@ public class SpringLogAnalysisRunner {
         try (ConfigurableApplicationContext context = new SpringApplicationBuilder(AiLogAnalyzerApplication.class)
                 .web(WebApplicationType.NONE)
                 .run(args)) {
-            LogAnalysisService analysisService =
-                    context.getBean(LogAnalysisService.class);
+            LogAnalysisService analysisService = context.getBean(LogAnalysisService.class);
 
-            IncidentReportPrinter reportPrinter =
-                    context.getBean(IncidentReportPrinter.class);
+            IncidentReportPrinter reportPrinter = context.getBean(IncidentReportPrinter.class);
 
-            System.out.println(
-                    "Analyse du fichier : " + logFile.toAbsolutePath()
-            );
+            System.out.println("Analyse du fichier : " + logFile.toAbsolutePath());
 
             LogAnalysisReport report = analysisService.analyze(logFile);
 
             reportPrinter.print(report.analysisResult());
 
             System.out.println();
-            System.out.println(
-                    "Analyse IA : " + report.aiAnalysisResponse().getSummary());
+            System.out.println("Analyse IA : " + report.aiAnalysisResponse().getSummary());
 
         } catch (IOException e) {
             throw new RuntimeException(e);
